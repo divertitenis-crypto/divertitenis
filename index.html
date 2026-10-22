@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="es" style="background-color: #FFF8F0 !important;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light only">
+  <title>Divertitenis - Sistema Oficial Integral</title>
+  <style>
+    :root {--orange-primary: #FF7A00; --orange-dark: #D95D00; --blue-accent: #0284C7; --blue-dark: #0369A1; --green-grass: #10B981; --green-dark: #059669; --bg-tennis: #FFF8F0; --card-bg: #FFFFFF; --text-dark: #1E293B; --warmup-color: #EF4444; --warmup-dark: #B91C1C;}
+    * {box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;}
+    html, body {background-color: #FFF8F0 !important; color: var(--text-dark); padding: 16px 12px 40px; min-height: 100vh; display: flex; flex-direction: column; align-items: center;}
+    .master-switcher {display: flex; background: #1E293B; padding: 6px; border-radius: 30px; margin-bottom: 14px; border: 2px solid #334155; width: 100%; max-width: 750px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); flex-wrap: wrap;}
+    .master-btn {flex: 1; border: none; background: transparent; padding: 11px 8px; border-radius: 25px; font-size: 13px; font-weight: 900; color: #94A3B8; cursor: pointer; transition: all 0.2s ease; text-align: center; min-width: 100px;}
+    .master-btn.active {background: var(--orange-primary); color: #FFFFFF; box-shadow: 0 4px 14px rgba(255, 122, 0, 0.45);}
+    .app-container {width: 100%; max-width: 960px; background-color: #FFF8F0 !important; border-radius: 28px; border: 4px solid #334155; box-shadow: 0 20px 40px rgba(0,0,0,0.5); overflow: hidden; display: flex; flex-direction: column; position: relative;}
+    .app-header {background: #FFFFFF; padding: 16px 20px; text-align: center; border-bottom: 4px solid #FFEDD5;}
+    .logo-frame {max-width: 300px; margin: 0 auto;}
+    .logo-frame img {width: 100%; height: auto; display: block; object-fit: contain;}
+    .warmup-bar {background: #FFFFFF; padding: 10px 16px; border-bottom: 2px dashed #CBD5E1; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;}
+    .warmup-master-btn {flex: 1 1 300px; background: #FEF2F2; border: 2px solid #FCA5A5; border-bottom: 4px solid var(--warmup-dark); border-radius: 16px; padding: 10px 16px; font-size: 14px; font-weight: 900; color: var(--warmup-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.15s ease;}
+    .warmup-master-btn.active {background: var(--warmup-color); color: #FFFFFF; border-color: #B91C1C; transform: translateY(-1px);}
+    .progression-strip {display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 16px; background: #FFFFFF; border-bottom: 2px solid #FED7AA; justify-content: center;}
+    .stage-badge {flex: 1 1 130px; display: flex; flex-direction: column; align-items: center; padding: 8px 10px; border-radius: 14px; background: #F8FAFC; border: 2px solid #CBD5E1; border-bottom: 4px solid #94A3B8; cursor: pointer; opacity: 0.65; transition: all 0.15s ease; text-align: center;}
+    .stage-badge.active {opacity: 1; background: #FFF7ED; border-color: var(--orange-primary); border-bottom: 4px solid var(--orange-dark); transform: translateY(-2px);}
+    .stage-badge .title {font-size: 13px; font-weight: 900; color: #0F172A;}
+    .screen-content {padding: 18px; display: flex; flex-direction: column; gap: 14px;}
+    .student-hero {background: linear-gradient(135deg, #FF7A00, #EA580C); color: white; border-radius: 20px; padding: 14px 18px; border-bottom: 5px solid #C2410C; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; margin: 16px 18px 0;}
+    .student-selector-box {display: flex; align-items: center; flex-wrap: wrap; gap: 10px;}
+    .student-selector-box select {background: #FFFFFF; border: none; font-size: 16px; font-weight: 900; color: #EA580C; padding: 6px 12px; border-radius: 10px; outline: none; cursor: pointer;}
+    .eval-mode-toggle-btn, .btn-new-student, .btn-streak {background: #FFFFFF; border: none; border-bottom: 3px solid #C2410C; padding: 6px 14px; border-radius: 12px; font-size: 13px; font-weight: 900; color: #EA580C; cursor: pointer;}
+    .btn-streak {color: #DC2626; border-color: #991B1B;}
+    .eval-mode-toggle-btn.active {background: #0284C7; border-color: #0369A1; color: #FFFFFF;}
+    .student-hero .subtitle {font-size: 12px; font-weight: 700; background: rgba(255,255,255,0.25); padding: 4px 10px; border-radius: 10px; display: inline-block;}
+    .xp-pill {background: #FFFFFF; color: #EA580C; font-weight: 900; font-size: 17px; padding: 8px 16px; border-radius: 16px; border-bottom: 3px solid #FDBA74; cursor: pointer;}
+    .card-3d {background-color: #FFFFFF !important; border-radius: 20px; padding: 16px; border: 3px solid #FFEDD5; border-bottom: 6px solid #FDBA74;}
+    .card-title {font-size: 14px; font-weight: 900; color: var(--orange-primary); text-transform: uppercase; margin-bottom: 10px; text-align: center;}
+    .triangle-box {position: relative; width: 100%; max-width: 420px; margin: 0 auto 10px; display: flex; justify-content: center; align-items: center;}
+    svg.tri-svg {width: 100%; height: 200px; overflow: visible;}
+    .tri-node {cursor: pointer; transition: transform 0.15s ease;}
+    .tri-node:hover {transform: scale(1.06);}
+    .tri-label {font-size: 10px; font-weight: 900; text-anchor: middle; fill: #0F172A;}
+    .tri-level {font-size: 8.5px; font-weight: 800; text-anchor: middle; fill: #D95D00;}
+    .skills-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px; margin-bottom: 14px;}
+    .filter-pill {background: #F8FAFC; border: 2px solid #E2E8F0; border-bottom: 4px solid #CBD5E1; border-radius: 14px; padding: 9px 8px; font-size: 11.5px; font-weight: 800; color: #64748B; cursor: pointer; text-align: center;}
+    .filter-pill.active {background: #EFF6FF; border-color: #38BDF8; border-bottom: 4px solid var(--blue-accent); color: var(--blue-dark); transform: translateY(-2px);}
+    .activity-row {background: #FFFFFF; border: 2px solid #E2E8F0; border-bottom: 4px solid #CBD5E1; border-radius: 16px; padding: 12px 14px; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 12px; position: relative;}
+    .activity-row.done {background: #F0FDF4; border-color: #86EFAC; border-bottom-color: #4ADE80;}
+    .glowing-reto {border-color: #FBBF24; border-bottom-color: #D97706; background: #FFFBEB; box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);}
+    .glowing-reto::before {content: '🎯 RETO DEL DÍA (Doble 🌟)'; position: absolute; top: -10px; right: 15px; background: #F59E0B; color: white; font-size: 9px; font-weight: 900; padding: 2px 8px; border-radius: 10px;}
+    .cocarda-btn {width: 44px; height: 44px; border-radius: 50%; border: 3px solid; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; cursor: pointer; flex-shrink: 0; margin-top: 2px; user-select: none;}
+    .cocarda-btn:active {transform: scale(0.9);}
+    .act-content {flex: 1;}
+    .act-top {display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; flex-wrap: wrap; gap:4px;}
+    .act-title {font-size: 13.5px; font-weight: 900; color: #0F172A;}
+    .act-xp {background: #FFF7ED; color: var(--orange-primary); border: 1.5px solid #FFEDD5; font-weight: 800; font-size: 10.5px; padding: 2px 7px; border-radius: 8px;}
+    .act-meta {font-size: 9.5px; font-weight: 800; color: #9A3412; background: #FFEDD5; padding: 2px 7px; border-radius: 6px; display: inline-block; margin-bottom: 3px;}
+    .act-tech {font-size: 11.5px; font-weight: 600; color: #475569; line-height: 1.35; margin-bottom: 5px;}
+    .act-pedagogy {font-size: 10.5px; font-weight: 700; color: #0369A1; background: #F0F9FF; border: 1px solid #BAE6FD; padding: 3px 9px; border-radius: 10px; display: inline-block;}
+    .notification-container {position: fixed; top: 20px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 10px; pointer-events: none;}
+    .toast-push {background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-left: 6px solid #10B981; border-radius: 16px; padding: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.25); width: 320px; transform: translateX(150%); transition: transform 0.4s ease; display: flex; gap: 14px; align-items: center; pointer-events: auto;}
+    .toast-push.show {transform: translateX(0);}
+    .toast-icon {font-size: 28px;}
+    .toast-text {display: flex; flex-direction: column; gap: 4px;}
+    .toast-title {font-size: 12px; font-weight: 900; color: #64748B;}
+    .toast-desc {font-size: 14px; font-weight: 800; color: #0F172A;}
+    .btn-share {background: #128C7E; color: #FFFFFF; border: none; border-bottom: 4px solid #075E54; border-radius: 10px; padding: 8px 14px; font-size: 12px; font-weight: 900; cursor: pointer; margin-top: 6px;}
+    .round-banner {background: #EFF6FF; border: 2px solid #BAE6FD; border-bottom: 4px solid var(--blue-accent); border-radius: 18px; padding: 14px 16px; margin-bottom: 12px;}
+    .round-selector-row {display: flex; gap: 8px; align-items: center; margin-top: 8px;}
+    .round-selector-row select {flex: 1; padding: 8px 12px; border-radius: 10px; border: 2px solid #38BDF8; font-size: 13px; font-weight: 800; outline: none;}
+    .round-all-btn {background: var(--green-grass); border: none; border-bottom: 3px solid var(--green-dark); padding: 8px 14px; border-radius: 10px; color: white; font-weight: 900; font-size: 13px; cursor: pointer;}
+    .group-students-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 12px;}
+    .group-student-card {background: #FFFFFF; border: 2px solid #E2E8F0; border-bottom: 4px solid #CBD5E1; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px;}
+    .group-student-card.done {background: #F0FDF4; border-color: #86EFAC; border-bottom-color: #4ADE80;}
+    .group-avatar {font-size: 32px;}
+    .group-check-btn {width: 100%; padding: 8px 0; border-radius: 10px; border: 2px solid #CBD5E1; border-bottom: 3px solid #94A3B8; background: #F8FAFC; font-size: 13px; font-weight: 900; color: #64748B; cursor: pointer;}
+    .group-student-card.done .group-check-btn {background: var(--green-grass); border-color: #34D399; border-bottom-color: #4ADE80; color: white;}
+    .warmup-selector-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px; margin-bottom: 14px;}
+    .warmup-pill {background: #FFF; border: 2px solid #FECACA; border-bottom: 4px solid #F87171; border-radius: 14px; padding: 10px 12px; font-size: 11.5px; font-weight: 800; color: #991B1B; cursor: pointer;}
+    .warmup-pill.active {background: #FEF2F2; border-color: #EF4444; border-bottom: 4px solid #B91C1C; color: #7F1D1D; font-weight: 900;}
+    .cards-comic-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px;}
+    .comic-card {background: #FFFFFF; border: 3.5px solid #1E293B; border-bottom: 7px solid #0F172A; border-radius: 20px; padding: 14px; display: flex; flex-direction: column; gap: 8px; transition: all 0.3s ease;}
+    .card-used-state {filter: grayscale(85%) brightness(75%); opacity: 0.5; transform: scale(0.98);}
+    .locked-card {filter: grayscale(100%); opacity: 0.55;}
+    .comic-card-head {display: flex; justify-content: space-between; align-items: center;}
+    .comic-level-tag {font-size: 11px; font-weight: 900; padding: 3px 8px; border-radius: 8px; background: #FEF08A; color: #854D0E;}
+    .comic-icon {font-size: 22px;}
+    .comic-card-title {font-size: 15px; font-weight: 1000; color: #0F172A; text-transform: uppercase; border-bottom: 2px solid #E2E8F0; padding-bottom: 4px;}
+    .comic-rule-box {background: #F8FAFC; border: 2px dashed #94A3B8; border-radius: 12px; padding: 9px; font-size: 12px; font-weight: 700; color: #334155; min-height: 48px;}
+    .btn-card-give, .btn-card-play, .btn-card-used {color: white; border: none; padding: 9px; border-radius: 12px; font-weight: 900; font-size: 12px; cursor: pointer; width: 100%;}
+    .btn-card-give {background: #8B5CF6; border-bottom: 4px solid #6D28D9;}
+    .btn-card-play {background: #10B981; border-bottom: 4px solid #059669;}
+    .btn-card-used {background: #64748B; border-bottom: 4px solid #334155;}
+    .tienda-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;}
+    .tienda-item {background: #F8FAFC; border: 3px solid #CBD5E1; border-bottom: 6px solid #94A3B8; border-radius: 16px; padding: 14px; text-align: center;}
+    .tienda-icon {font-size: 40px; margin-bottom: 4px;}
+    .btn-buy {background: #F59E0B; color: white; border: none; border-bottom: 4px solid #D97706; width: 100%; padding: 8px; border-radius: 10px; font-weight: 900; font-size: 13px; cursor: pointer; margin-top: 6px;}
+    .desafio-panel {background: #F8FAFC; border: 2px solid #E2E8F0; border-radius: 16px; padding: 16px; margin-bottom: 16px;}
+    .desafio-header {display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 900; color: #0F172A; margin-bottom: 12px; text-transform: uppercase;}
+    .selector-row {display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;}
+    .selector-row select {padding: 8px 12px; border-radius: 10px; border: 2px solid #CBD5E1; font-weight: 900; outline: none; flex: 1;}
+    .naval-battlefield {display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px;}
+    .naval-side {background: #FFFFFF; border: 3px solid #CBD5E1; border-radius: 16px; padding: 12px; flex: 1; min-width: 180px; display: flex; flex-direction: column; align-items: center;}
+    .team-selector {text-align: left; width: 100%; max-height: 90px; overflow-y: auto; background: #F8FAFC; border: 2px solid #94A3B8; border-radius: 8px; padding: 6px; margin-bottom: 12px;}
+    .naval-grid {display: grid; gap: 6px; width: 100%; aspect-ratio: 1; margin-bottom: 12px;}
+    .n-cell {background: #FFFFFF; border: 3px solid #94A3B8; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
+    .btn-win-naval {width: 100%; background: #10B981; color: white; border: none; border-bottom: 4px solid #059669; padding: 10px; border-radius: 10px; font-weight: 900; cursor: pointer; margin-top: auto;}
+    .progress-box {background: white; border: 2px solid #E2E8F0; border-radius: 14px; padding: 12px; margin-bottom: 10px;}
+    .progress-track {height: 18px; background: #E2E8F0; border-radius: 10px; overflow: hidden; border: 1px solid #CBD5E1;}
+    .progress-fill {height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 11px; font-weight: 900; color: #fff;}
+    .fill-oro {background: linear-gradient(90deg, #FACC15, #EAB308);}
+    .fill-plata {background: linear-gradient(90deg, #94A3B8, #64748B);}
+    .fill-bronce {background: linear-gradient(90deg, #D97706, #B45309);}
+    .modal-overlay {position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.85); z-index: 9999; display: none; justify-content: center; align-items: center; padding: 16px;}
+    .modal-card-box {background: #FFFFFF; border: 5px solid #1E293B; border-radius: 26px; max-width: 380px; width: 100%; padding: 20px; display: flex; flex-direction: column; gap: 12px;}
+    .btn-close-modal {background: #EF4444; border: none; border-bottom: 4px solid #991B1B; color: white; padding: 10px; border-radius: 12px; font-weight: 900; cursor: pointer;}
+  </style>
+</head>
+<body>
+
+  <div id="notification-container" class="notification-container"></div>
+
+  <!-- NAVEGACIÓN -->
+  <div class="master-switcher">
+    <button class="master-btn active" id="btnModeProfe" onclick="setMasterMode('profe')">📋 Profe</button>
+    <button class="master-btn" id="btnModeFamily" onclick="setMasterMode('family')">👨‍👩‍👧 Familia</button>
+    <button class="master-btn" id="btnModeDesafios" onclick="setMasterMode('desafios')" style="color: #38BDF8;">🎯 Desafíos</button>
+    <button class="master-btn" id="btnModeCopa" onclick="setMasterMode('copa')" style="color: #F59E0B;">🏆 Copa</button>
+    <button class="master-btn" id="btnModeTienda" onclick="setMasterMode('tienda')" style="color: #10B981;">🏪 Tienda</button>
+  </div>
+
+  <div class="app-container">
+    <header class="app-header">
+      <div class="logo-frame">
+        <img src="https://i.postimg.cc/vTMhkSR4/logo.png" alt="Divertitenis Oficial" style="width: 100%; height: auto; display: block; object-fit: contain;">
+      </div>
+    </header>
+
+    <div class="progression-strip" id="progressionStrip">
+      <div class="stage-badge active" id="stg-blanca" onclick="setStage('blanca', '⚪ Blanca', 'stg-blanca')"><span class="title">⚪ Blanca</span></div>
+      <div class="stage-badge" id="stg-celeste" onclick="setStage('celeste', '🩵 Celeste', 'stg-celeste')"><span class="title">🩵 Celeste</span></div>
+      <div class="stage-badge" id="stg-roja" onclick="setStage('roja', '🔴 Roja', 'stg-roja')"><span class="title">🔴 Roja</span></div>
+      <div class="stage-badge" id="stg-naranja" onclick="setStage('naranja', '🟠 Naranja', 'stg-naranja')"><span class="title">🟠 Naranja</span></div>
+      <div class="stage-badge" id="stg-verde" onclick="setStage('verde', '🟢 Verde', 'stg-verde')"><span class="title">🟢 Verde</span></div>
+      <div class="stage-badge" id="stg-amarilla" onclick="setStage('amarilla', '🟡 Amarilla', 'stg-amarilla')"><span class="title">🟡 Amarilla</span></div>
+    </div>
+
+    <!-- BARRA DEL ALUMNO -->
+    <div class="student-hero" id="heroBar">
+      <div class="student-selector-box">
+        <div id="singleStudentControls">
+          <select id="selectStudent" onchange="changeActiveStudent()"></select>
+        </div>
+        <button class="btn-new-student" onclick="openNewStudentModal()">➕ Nuevo Alumno</button>
+        <button class="btn-streak" onclick="addStreak()">🔥 Racha</button>
+        <button class="eval-mode-toggle-btn" id="btnToggleGroupMode" onclick="toggleGroupRoundMode()">👥 Ronda Grupal</button>
+        <span class="subtitle" id="currentStageText">⚪ Blanca</span>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <span class="student-card-badge" id="lblCardCount" style="background: #FACC15; color: #713F12; font-size: 12px; font-weight: 900; padding: 7px 12px; border-radius: 14px; border-bottom: 3px solid #CA8A04; cursor: pointer;" onclick="toggleCardsView(); setCardFilter('inventory');">🃏 0 Cartas</span>
+        <div class="xp-pill" id="totalXpDisplay" style="cursor:pointer;" onclick="setMasterMode('tienda')">0 🌟</div>
+      </div>
+    </div>
+
+    <!-- BOTONERA WARMUPS / CARTAS -->
+    <div class="warmup-bar" id="masterWarmupBar" style="gap: 8px; flex-wrap: wrap;">
+      <button class="warmup-master-btn" id="btnWarmupMaster" style="flex: 1 1 340px;" onclick="toggleWarmupView()">
+        <span>🔥 BANCO DE ENTRADAS EN CALOR</span>
+      </button>
+      <button class="warmup-master-btn" id="btnCardsMaster" style="flex: 1 1 260px; background: #F5F3FF; border-color: #DDD6FE; border-bottom: 4px solid #6D28D9; color: #6D28D9;" onclick="toggleCardsView()">
+        <span id="txtAlbumMazo">🎴 MAZO DE CARTAS EXTREMAS</span>
+      </button>
+    </div>
+
+    <!-- PANTALLA PRINCIPAL -->
+    <div class="screen-content" id="viewTechnical">
+      <div class="card-3d">
+        <div class="card-title">🔺 Triángulo de Coordinación</div>
+        <div class="triangle-box">
+          <svg class="tri-svg" viewBox="0 0 280 190">
+            <line x1="140" y1="36" x2="48" y2="152" stroke="#CBD5E1" stroke-width="4" stroke-dasharray="5,5"/>
+            <line x1="140" y1="36" x2="232" y2="152" stroke="#CBD5E1" stroke-width="4" stroke-dasharray="5,5"/>
+            <line x1="48" y1="152" x2="232" y2="152" stroke="#CBD5E1" stroke-width="4" stroke-dasharray="5,5"/>
+            <g class="tri-node" onclick="selectFirstCategoryOf('manip')">
+              <circle cx="140" cy="36" r="30" fill="#FFFFFF" stroke="#F59E0B" stroke-width="3.5"/>
+              <text x="140" y="32" font-size="15" text-anchor="middle">🧲</text><text x="140" y="46" class="tri-label">MANIPULAR</text><text x="140" y="58" class="tri-level" id="tri-stat-manip">0 🌟</text>
+            </g>
+            <g class="tri-node" onclick="selectFirstCategoryOf('recib')">
+              <circle cx="48" cy="152" r="30" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3.5"/>
+              <text x="48" y="148" font-size="15" text-anchor="middle">🛑</text><text x="48" y="162" class="tri-label">RECIBIR</text><text x="48" y="174" class="tri-level" id="tri-stat-recib">0 🌟</text>
+            </g>
+            <g class="tri-node" onclick="selectFirstCategoryOf('proy')">
+              <circle cx="232" cy="152" r="30" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3.5"/>
+              <text x="232" y="148" font-size="15" text-anchor="middle">🎯</text><text x="232" y="162" class="tri-label">PROYECTAR</text><text x="232" y="174" class="tri-level" id="tri-stat-proy">0 🌟</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="card-3d">
+        <div class="card-title" id="mainSectionTitle">📋 PLANILLA DE HABILIDADES PRETENISTICAS</div>
+        <div id="groupRoundView" style="display: none;">
+          <div class="round-banner">
+            <h3 style="font-size: 15px; font-weight: 900; color: #0369A1; margin-bottom: 4px;">🎯 Consigna de la Clase</h3>
+            <div class="round-selector-row">
+              <select id="roundDrillSelect" onchange="onRoundDrillChange()"></select>
+              <button class="round-all-btn" onclick="markRoundAllDone()">🌟 ¡Logrado por Todos!</button>
+            </div>
+          </div>
+          <div class="group-students-grid" id="groupStudentsGrid"></div>
+        </div>
+        <div id="individualView">
+          <div class="skills-grid" id="filtersGrid"></div>
+          <div id="activitiesList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANTALLAS EXTRAS -->
+    <div class="screen-content" id="viewDesafios" style="display: none;">
+      <div class="desafio-panel" style="border-color: #BAE6FD; background: #F0F9FF;">
+        <div class="desafio-header"><span class="desafio-icon">⚙️</span> Configurador de Competencia</div>
+        <div class="selector-row">
+          <select id="desafioNivel"><option value="bronce">🥉 Nivel Bronce (x1 🌟)</option><option value="plata">🥈 Nivel Plata (x2 🌟)</option><option value="oro">🥇 Nivel Oro (x3 🌟)</option></select>
+          <select id="desafioModo"><option value="individual">👤 Individual</option><option value="parejas">👥 En Parejas</option><option value="grupos">🫂 Equipos</option></select>
+        </div>
+      </div>
+      <div class="desafio-panel" style="border-color: #FCA5A5; background: #FEF2F2;">
+        <div class="desafio-header"><span class="desafio-icon">🚢</span> Batalla Naval: Campo a Campo</div>
+        <div class="selector-row" style="justify-content: center;">
+          <select id="navalGrid" onchange="dibujarBatallaNaval()" style="max-width: 250px;">
+            <option value="2">2 Bloques (Cancha partida)</option><option value="4">4 Bloques (Cuadrantes)</option><option value="6">6 Bloques</option><option value="9">9 Bloques (Precisión)</option>
+          </select>
+        </div>
+        <div class="naval-battlefield">
+          <div class="naval-side"><div style="font-size:12px;font-weight:900;margin-bottom:4px;color:#1E293B;">EQUIPO A</div><div class="team-selector" id="team1List"></div><div id="gridP1" class="naval-grid"></div><button class="btn-win-naval" onclick="winNaval(1)">🏆 ¡Hundió la flota!</button></div>
+          <div class="naval-side"><div style="font-size:12px;font-weight:900;margin-bottom:4px;color:#1E293B;">EQUIPO B</div><div class="team-selector" id="team2List"></div><div id="gridP2" class="naval-grid"></div><button class="btn-win-naval" onclick="winNaval(2)">🏆 ¡Hundió la flota!</button></div>
+        </div>
+      </div>
+      <div class="desafio-panel" style="border-color: #FCD34D; background: #FFFBEB;">
+        <div class="desafio-header"><span class="desafio-icon">📊</span> Clasificaciones Evolutivas</div>
+        <h3 style="font-size: 13px; font-weight: 900; color: #92400E; margin: 14px 0 8px;">🏆 Clasificación Individual</h3><div id="rankingIndividual"></div>
+        <h3 style="font-size: 13px; font-weight: 900; color: #92400E; margin: 18px 0 8px;">🛡️ Clasificación por Casas</h3><div id="rankingCasas"></div>
+      </div>
+    </div>
+
+    <div class="screen-content" id="viewCards" style="display: none;">
+      <div class="card-3d" style="border-color: #DDD6FE; border-bottom-color: #6D28D9;">
+        <div class="card-title" id="tituloMazo" style="color: #6D28D9;">Mazo Oficial de Cartas</div>
+        
+        <!-- PANEL DE SORTEO ALEATORIO JUSTO -->
+        <div style="background: linear-gradient(135deg, #F5F3FF, #EDE9FE); border: 2.5px solid #8B5CF6; border-radius: 16px; padding: 14px; margin-bottom: 16px; text-align: center;">
+          <h3 style="font-size: 14px; font-weight: 900; color: #6D28D9; margin-bottom: 6px;">🎲 Sorteo Aleatorio Transparente</h3>
+          <p style="font-size: 11px; font-weight: 700; color: #5B21B6; margin-bottom: 10px;">Garantiza cero favoritismos seleccionando una carta al azar para el desafío actual.</p>
+          <div id="resultadoSorteoAlAzar" style="font-size: 14px; font-weight: 900; color: #1E293B; background: #FFFFFF; padding: 10px; border-radius: 12px; border: 2px solid #C4B5FD; margin-bottom: 10px; min-height: 42px; display: flex; align-items: center; justify-content: center;">
+            Presioná el botón para sortear una carta al azar 🃏
+          </div>
+          <button onclick="sortearCartaJusta()" style="background: #7C3AED; color: white; border: none; border-bottom: 4px solid #5B21B6; padding: 10px 20px; border-radius: 12px; font-weight: 900; font-size: 13px; cursor: pointer;">✨ Sortear Carta Justa</button>
+        </div>
+
+        <div class="cards-pills-scroll" id="cardFilterPills" style="margin-bottom:14px; display:flex; gap:8px; overflow-x:auto;">
+          <button class="filter-pill active" id="cbtn-all" onclick="setCardFilter('all')">🌟 Todas</button>
+          <button class="filter-pill" id="cbtn-inventory" onclick="setCardFilter('inventory')">🎒 Del Alumno</button>
+        </div>
+        <div class="cards-comic-grid" id="cardsGrid"></div>
+      </div>
+    </div>
+
+    <div class="screen-content" id="viewWarmup" style="display: none;">
+      <div class="card-3d" style="border-color: #FECACA; border-bottom-color: #F87171;">
+        <div class="card-title" id="warmupSectionTitle" style="color: var(--warmup-dark);">🔥 BANCO DE ENTRADAS EN CALOR</div>
+        <div class="warmup-selector-grid" id="warmupTitlesGrid"></div>
+      </div>
+      <div class="card-3d" style="border-color: #FECACA; border-bottom-color: #F87171;">
+        <div class="card-title" id="warmupActiveTitle" style="color: var(--warmup-dark); text-align: left;"></div>
+        <div id="warmupSubList"></div>
+      </div>
+    </div>
+
+    <div class="screen-content" id="viewCopa" style="display: none;">
+      <div class="card-3d" style="border-color: #FCD34D; border-bottom-color: #F59E0B;">
+        <div class="card-title" style="color: #D97706; font-size: 18px;">🏆 LA COPA DIVERTITENIS 🏆</div>
+        <div id="copaRankingGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px;"></div>
+      </div>
+    </div>
+
+    <div class="screen-content" id="viewTienda" style="display: none;">
+      <div class="card-3d" style="border-color: #34D399; border-bottom-color: #10B981;">
+        <div class="card-title" style="color: #047857; font-size: 18px;">🏪 Tienda Oficial y Recompensas</div>
+        <div style="text-align: center; margin-bottom: 18px; background: #ECFDF5; padding: 12px; border-radius: 16px; border: 2px dashed #10B981;">
+          <p style="font-size: 12px; font-weight: 800; color: #065F46; margin-bottom: 4px;">Saldo actual de <span id="tiendaStudentName"></span></p>
+          <span id="tiendaSaldoDisplay" class="xp-pill" style="font-size: 24px; padding: 10px 20px;">0 🌟</span>
+        </div>
+        <h3 style="margin-bottom: 12px; color: #0F172A; font-size: 15px;">🔮 Bienes Virtuales</h3><div class="tienda-grid" id="gridBienesVirtuales"></div>
+        <h3 style="margin-top: 24px; margin-bottom: 12px; color: #0F172A; font-size: 15px;">🎁 Premios Físicos</h3><div class="tienda-grid" id="gridPremiosFisicos"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+  <div class="modal-overlay" id="newStudentModal">
+    <div class="modal-card-box">
+      <h3 style="color: #0F172A; font-weight: 1000;">Ingreso a la Escuela</h3>
+      <input type="text" id="newStudentName" placeholder="Nombre del jugador" style="padding: 10px; border-radius: 10px; border: 2px solid #CBD5E1; font-weight: 800; outline: none;">
+      <select id="newStudentAvatar" style="padding: 10px; border-radius: 10px; border: 2px solid #CBD5E1; font-weight: 800; outline: none; margin-top: 10px;"><option value="🦁">🦁 León</option><option value="🐯">🐯 Tigre</option><option value="🦊">🦊 Zorro</option><option value="🐼">🐼 Panda</option><option value="🎾">🎾 Tenis</option></select>
+      <select id="newStudentHouse" style="padding: 10px; border-radius: 10px; border: 2px solid #CBD5E1; font-weight: 800; outline: none; margin-top: 10px;"><option value="Águilas">🦅 Casa Águilas</option><option value="Leones">🦁 Casa Leones</option><option value="Osos">🐻 Casa Osos</option><option value="Dragones">🐉 Casa Dragones</option></select>
+      <button style="background: var(--orange-primary); color: white; border: none; margin-top: 10px; padding: 10px; border-radius: 10px; font-weight: 900; cursor: pointer;" onclick="saveNewStudent()">💾 Inscribir</button>
+      <button class="btn-close-modal" onclick="closeNewStudentModal()">Cancelar</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="cardModal"><div class="modal-card-box"><div id="cardModalBody"></div><button class="btn-close-modal" onclick="closeCardModal()">Cerrar</button></div></div>
+
+  <script>
+    window.onerror = function(msg, url, lineNo) { alert("⚠️ ALERTA DIVERTITENIS ⚠️\nError línea: " + lineNo + "\n" + msg); return false; };
+
+    let currentMode = 'profe', currentStage = 'blanca', currentFilter = 'manip1', activeStudent = 'Ayson';
+    let activeWarmupKey = 'ec1', isGroupRoundMode = false, currentRoundDrillId = 'm1_1', retoDelDiaId = 'm1_6', activeCardFilter = 'all';
+
+    let students = {
+      Ayson: { name: "Ayson", avatar: "🦁", house: "Leones", streak: 2, skillLevels: {"m1_1":3, "m1_2":3}, spentStars: 0, cards: ["xxs1_1"], warmupDone: [], bonusStars: 0, usedCards: [] },
+      Milove: { name: "Milove", avatar: "🦅", house: "Águilas", streak: 0, skillLevels: {"m1_1":3}, spentStars: 0, cards: ["xxs2_3"], warmupDone: [], bonusStars: 0, usedCards: [] },
+      Milu: { name: "Milu", avatar: "🐻", house: "Osos", streak: 1, skillLevels: {}, spentStars: 0, cards: ["xxs2_2"], warmupDone: [], bonusStars: 0, usedCards: [] },
+      Mia: { name: "Mia", avatar: "🐉", house: "Dragones", streak: 0, skillLevels: {}, spentStars: 0, cards: ["xxs3_2"], warmupDone: [], bonusStars: 0, usedCards: [] }
+    };
+
+    try { const ld = localStorage.getItem('dt_final_v65'); if (ld) { let pd = JSON.parse(ld); if(pd && Object.keys(pd).length > 0) students = pd; } } catch (e) {}
+    function saveState() { try { localStorage.setItem('dt_final_v65', JSON.stringify(students)); } catch (e) {} updateCardCount(); }
+
+    function getStudentEarnedStars(st) {
+      let estrellas = st.bonusStars || 0;
+      if (st.skillLevels) { Object.keys(st.skillLevels).forEach(key => { if (st.skillLevels[key] === 3) estrellas++; }); }
+      return estrellas;
+    }
+    
+    function getStudentBalance(stKey) { return getStudentEarnedStars(students[stKey]) - (students[stKey].spentStars || 0); }
+
+    function notifyFamily(studentName, skillName, state) {
+      const toast = document.createElement('div'); toast.className = 'toast-push';
+      toast.innerHTML = `<div class="toast-icon">⌚</div><div class="toast-text"><span class="toast-title">Aviso Preparado</span><span class="toast-desc">Abriendo WhatsApp... 🎾</span></div>`;
+      document.getElementById('notification-container').appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 50); setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 3000);
+      let msj = state===1 ? `Empezó a practicar: ${skillName}` : state===2 ? `Casi logra: ${skillName}!` : `¡LOGRÓ: ${skillName}! 🌟`;
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent('🎾 '+studentName+': '+msj)}`, '_blank');
+    }
+
+    window.clickCocarda = function(itemId) {
+      if (currentMode === 'family') return alert("Modo Familia: Solo de lectura.");
+      const st = students[activeStudent]; if (!st.skillLevels) st.skillLevels = {};
+      let val = st.skillLevels[itemId] || 0; val = (val + 1) % 4; st.skillLevels[itemId] = val;
+      let mul = (st.streak >= 3) ? 2 : 1; if (itemId === retoDelDiaId) mul *= 2;
+      if (val === 3 && mul > 1) { st.bonusStars = (st.bonusStars || 0) + (mul - 1); alert('¡Combo Fuego x' + mul + '!'); }
+      saveState(); renderActivities();
+    };
+
+    const tiendaDB = {
+      virtuales: [ { id: "v1", name: "3 Saques Extras en Torneo", cost: 10, icon: "🎾" }, { id: "v2", name: "Ayudar a compañero (Comodín)", cost: 15, icon: "🤝" }, { id: "v3", name: "Elegir juego de cierre", cost: 20, icon: "🎮" } ],
+      fisicos: [ { id: "f1", name: "Antivibrador Pro", cost: 20, icon: "🎯", sponsor: "Wilson" }, { id: "f2", name: "Cubregrip Extra Tacky", cost: 30, icon: "🩹", sponsor: "Wilson" }, { id: "f3", name: "Tubo de Pelotas (3)", cost: 50, icon: "🟡", sponsor: "Babolat" }, { id: "f4", name: "Remera Divertitenis", cost: 100, icon: "👕", sponsor: "Divertitenis" } ]
+    };
+
+    const warmupDatabase = {
+      ec1: { title: "EC #1 – PARE!!! Desarrollando el equilibrio", items: [ { letter: "A", desc: "Correr evitando a los demás, y parar en una posición preparada a la orden del entrenador" }, { letter: "B", desc: "... corriendo a diferentes velocidades (lento, medio, rápido)" }, { letter: "C", desc: "... luego hacer un salto a la orden del profesor y aterrizar en una posición de alerta" }, { letter: "D", desc: ".... Luego detenerse, pasar a una línea y balancearse sobre un pie, o un pie y una mano, o parte inferior, una mano, más un pie, la rodilla etc." }, { letter: "E", desc: "Al detenerse que sea en un pie" }, { letter: "F", desc: "Al detenerse hacer una sombra (volea baja, smash, volea alta)" }, { letter: "G", desc: "…luego detenerse en una pierna y equilibrarse hacer un golpe de drive o un revés a la orden del entrenador." }, { letter: "H", desc: "... luego de caer en un Split step correr 4 pasos y parar equilibrado en un pie" }, { letter: "I", desc: "luego de caer en un split caer en posición alerta, picar 4 pasos, detenerse en un pie y hacer un swing de un golpe de base" }, { letter: "J", desc: "... . luego de caer en un split ir para atrás 4 pasos y hacer una sombra de smash caer correr hacia delante 2 pasos y hacer una sombra de volea baja" } ] },
+      ec2: { title: "EC #2 – Cambio: Desarrollar los desplazamientos hacia los costados", items: [ { letter: "A", desc: "Desde la posición de alerta se mueve (usando pasos laterales) 6 pasos y luego 6 pasos hacia atrás a la posición original" }, { letter: "B", desc: "... luego haga esto como un movimiento continuo" }, { letter: "C", desc: "... luego cambiar de dirección a la orden del entrenador" }, { letter: "D", desc: "... luego empujar con el pie exterior (suavemente)" }, { letter: "E", desc: "... luego una sombra de un golpe a la orden del entrenador antes de cambiar de dirección" }, { letter: "F", desc: "... luego hacer un paso cruzado con el otro pie en el cambio de dirección" }, { letter: "G", desc: "... luego haga un Split step siempre que cruce la línea central" }, { letter: "H", desc: "... luego del espacio hacia fuera debe seguir la pelota soltada por la mano del entrenador, hacia los lados, hacia adelante, hacia atrás (de ambos laterales)" }, { letter: "I", desc: "... luegos en parejas los jugadores uno sigue la pelota en poder del otro jugador (alrededor de 2,5mts. de distancia) .. en cualquier punto el jugador puede dejar caer la pelota y el otro debe picar para tratar de atraparla antes de que pique dos veces" }, { letter: "J", desc: ".... como (I), pero alrededor de 4 mts de distancia el jugador en movimiento tiene una raqueta y debe tratar de golpear la pelota después de un pique" } ] },
+      ec3: { title: "EC #3 – Zig Zag: Desarrollo del movimiento multidireccional", items: [ { letter: "A", desc: "Ubicar 12 conos en dos filas líneas paralelas de 6, espaciadas alrededor de 1,5mts. de distancia y 2,5 mts. entre cada línea. En una línea tiene una bola en cada cono. Mover a través de los conos de tomar la bola de un cono y transferirla al otro." }, { letter: "B", desc: ".. recoger con una mano y ponerlo abajo del otro" }, { letter: "C", desc: "... recoger con la mano opuesta y colocar hacia abajo con la mano opuesta (rotación)" }, { letter: "D", desc: "... agarrarla con una mano y dejarla con la mano coincidente al pie mas próximo del lado del cono." }, { letter: "E", desc: "... coloque un punto en el centro de la línea entre los conos 3 y 4. Corra de nuevo al primer cono pero después de intercambiar cada vuelta LA PELOTA al punto central" }, { letter: "F", desc: "... como el nivel 3, pero mantener la cara todo el tiempo hacia adelante" }, { letter: "G", desc: "... cambiar la distancia entre los conos para que algunos estén separados más de 1,5 mts y algunos estén más juntos" }, { letter: "H", desc: "... tienen 2 conos de cada color con una pelota colocada en un cono de cada color. Un compañero le dice un color y el jugador debe mover la bola de ese color al otro cono de ese color. Recuperando su posición hacia atrás con la cara hacia adelante." }, { letter: "I", desc: ".. como (G) pero antes de recoger la pelota el jugador debe correr alrededor del cono usando pequeños pasos" }, { letter: "J", desc: "... un jugador se encuentra al final de la línea de los conos y hay una bola en cada cono. J1 correr alrededor del cono luego tomar las pelotas alternativamente y lanza dos manos, y con una mano, al 2do o mas próximo jugador de la fila." } ] },
+      ec4: { title: "EC #4 – Correr alrededor: Movimiento alrededor de la pelota", items: [ { letter: "A", desc: "Trabajo en parejas. Uno parado el otro corre alrededor de su compañero 4 veces y luego cambian." }, { letter: "B", desc: "... luego cambia de dirección a la orden del profesor y cambia sólo cuando el profesor dice" }, { letter: "C", desc: "... entonces como (B) pero siempre mirando hacia delante" }, { letter: "D", desc: "... entonces alrededor de un cono con un jugador que da la orden del cambio al otro" }, { letter: "E", desc: "... entonces en una figura 8 alrededor de dos conos" }, { letter: "F", desc: "... luego 360° alrededor de cada cono, en el sentido de las agujas del reloj, luego en sentido antihorario" }, { letter: "G", desc: "... entonces cuando el compañero le dice ahora, el jugador necesita correr a través del centro de los conos hasta donde está su compañero" }, { letter: "H", desc: "... entonces el compañero lanza una pelota al jugador en movimiento y luego la alcanza con golpe de D o R por afuera de los conos, que debe pegarle volver hacia atrás y seguir con el ejercicio" }, { letter: "I", desc: "... entonces la pelota puede ser lanzada en cualquier punto cuando el jugador se mueve alrededor de los conos" }, { letter: "J", desc: "... entonces jugador lleva una raqueta y debe golpear la bola detrás con control (de voleas), manteniendo patrones del trabajo de pie realizado siempre" } ] },
+      ec5: { title: "EC #5 – Reacción: Velocidad de reacción", items: [ { letter: "A", desc: "Los jugadores comienzan a sentarse con las piernas cruzadas en el suelo. Con los ojos cerrados. Cuando el entrenador aplaude deben levantarse lo más rápido posible." }, { letter: "B", desc: ".. a continuación, empezar con una posición de frente, con los brazos y las piernas hacia fuera de la cancha" }, { letter: "C", desc: "... luego permitir que los jugadores tengan los ojos abiertos, y elegir diferentes posiciones para comenzar desde" }, { letter: "D", desc: "... a continuación, llamar por el nombre de un jugador y lanzar una pelota en el aire. Deben levantarse para recogerlo antes de que pique dos veces" }, { letter: "E", desc: "... luego llamar por el nombre y soltar una pelota, para que ellos persigan" }, { letter: "F", desc: "... haga que los jugadores trabajen en parejas para la siguiente serie. Un jugador se coloca con una pelota sostenida con los brazos extendidos a la altura del hombro el otro se coloca 3mts. alejado. Cuando la bola cae, el jugador debe perseguirla y atraparla después de un pique" }, { letter: "G", desc: "... entonces el jugador tiene dos pelotas pero solo cae una y el jugador debe reaccionar" }, { letter: "H", desc: "... luego se mueven y se acercan mas entre ellos y el jugador trata de agarrar una pelota antes de que toque el suelo" } ] },
+      ec6: { title: "EC #6 – Pequeña o gran pelota: Desarrollo de la Rotación", items: [ { letter: "A", desc: "Los jugadores se alinean a ambos lados de la cancha, 2 jugadores de cada lado .. el primer jugador lanza una pelota a la otra línea y luego corre a través de la cancha para unirse a la otra línea .. el otro jugador recolecta la pelota lo lanza y corre como el primer jugador" }, { letter: "B", desc: ".. entonces los jugadores hacen lo mismo pero lanzan debajo de la cintura a un cono .. el otro jugador recoge (puede ser después de más de un rebote) entonces lanza detrás" }, { letter: "C", desc: "... luego tirar un mini baloncesto dos manos para rebotar una vez antes de que el otro jugador capture y lance" }, { letter: "D", desc: "... luego lanzando desde el lado del revés de un lado de la cancha y del lado derecho del otro. Los jugadores también deben atrapar al lado de su cuerpo y no directamente al frente" }, { letter: "E", desc: "... luego coloque un tiro hacia abajo de la línea 2 MTS. delante de cada línea. Después de la carrera de captura a la línea de detener y lanzar" }, { letter: "F", desc: "... como por E, pero los jugadores paso de lado para el centro de la cancha a continuación pique en velocidad a la parte posterior de la otra línea" }, { letter: "G", desc: "... los jugadores tratan de lanzar y atrapar en un movimiento, recuperarse a una marca central y luego pique en velocidad a través de la cancha" }, { letter: "H", desc: "... los jugadores ahora trabajan en parejas un lanzador y un receptor .. comienzan en una marca central ... uno lanza la pelota y el otro corre a ella, se equilibra, captura después de un rebote y lanza atrás, luego se recupera .. Lanzar 10 bolas luego cambiar roles" }, { letter: "I", desc: "... entonces, la bola puede ser rodada o lanzada a un rebote, los jugadores deben recoger y lanzar la bola en un movimiento de nuevo al alimentador (rodado debe ser lanzado desde el suelo en un movimiento)" }, { letter: "J", desc: "... entonces el alimentador puede lanzar alto (sin rebote), rodado o con un rebote. Los jugadores deben recolectar de nuevo y tirar de nuevo en un movimiento (bola alta debe mantenerse a la altura del hombro como los jugadores giran para lanzarla)" } ] },
+      ec7: { title: "EC #7 – CÓPIAME: Habilidades rítmicas y bilaterales", items: [ { letter: "A", desc: "Los jugadores están de pie frente a un compañero, ambos brazos al frente con palmas casi tocando. Uno es el líder y mientras se mueven hacia los lados el compañero debe moverse al mismo ritmo que el líder" }, { letter: "B", desc: ".. luego hacer dos palmas manos entre sí mientras se mueve" }, { letter: "C", desc: "... aplaudir un patrón (aplauso, aplauso, mano izquierda, mano derecha, etc.)" }, { letter: "D", desc: ".. entonces un jugador tiene una pelota sostenida detrás de su espalda y mientras se mueven toma ambas manos de detrás y el socio debe alcanzar a través del cuerpo para tocar la bola con la mano opuesta" }, { letter: "E", desc: "... luego tirar y agarrar una pelota mientras se mueve de lado, trotar junto a la otra" }, { letter: "F", desc: "... luego tirar y agarrar una pelota a diferentes alturas, con o sin rebote: por rodillas, cintura, cabeza, dedos de los pies (rodado)" }, { letter: "G", desc: "... luego agarrar con una mano y tirar con la otra. Cambiar la dirección al mando del entrenador" }, { letter: "H", desc: "... aumentar la distancia tratar de tirar y agarrar two pelotas (una a la vez). Rebote uno y lance el otro por el aire" }, { letter: "I", desc: "... tirar dos pelotas al mismo tiempo (una de cada mano) agarrar y tirar de nuevo, mientras siguen en movimiento" }, { letter: "J", desc: "Patear una pelota hacia adelante y hacia atrás mientras tira el otro" } ] },
+      ec8: { title: "EC #8 – Por encima de la Cabeza: Coordinación sobre la cabeza", items: [ { letter: "A", desc: "Los jugadores trabajan por su cuenta, en un espacio. Comience usando un globo e intente mantenerlo arriba de la cabeza tocando." }, { letter: "B", desc: "... luego usar una pelota, lanzar y agarrar con las dos manos" }, { letter: "C", desc: "... luego agarrarla con las manos estiradas por encima de la cabeza" }, { letter: "D", desc: "... luego lanzar la pelota de una mano a la otra haciendo una forma de arco iris por encima de la cabeza con el vuelo de la pelota" }, { letter: "E", desc: "... luego lanzar con una mano y atrapar con la otra. A continuación, repita el lanzamiento con la otra mano y la captura con la opuesta." }, { letter: "F", desc: "... entonces como (D), pero asegúrese de que el jugador comienza desde una posición lateral. Asegúrese de lanzar y agarrar con cada mano." }, { letter: "G", desc: "... lanzar la pelota y tocar con diferentes partes de la mano (palma, espalda y de costado)" }, { letter: "H", desc: ".. luego con dos pelotas lanzar arriba y agarrar, agarrar" }, { letter: "I", desc: "... luego lanzar la pelota y saltar del suelo para atrapar la pelota con ambos pies fuera del suelo" }, { letter: "J", desc: "... luego con una pelota en cada mano lanzar una pelota hacia arriba y luego la segunda lanzada golpear la primera." } ] },
+      ec9: { title: "EC #9 – Chocar en el aterrizar: Agilidad y equilibrio", items: [ { letter: "A", desc: "Los jugadores se mueven en el área de la cancha y saltar como diferentes animales .. como una rana, como un conejo, como un canguro" }, { letter: "B", desc: ".. luego tratar de pararse sobre una pierna y saltar y caer en una posición de alerta" }, { letter: "C", desc: "... entonces salto en un pie, salto en el otro, intento para saltar adelante" }, { letter: "D", desc: "... saltar tan alto como sea posible, en la medida de lo posible" }, { letter: "E", desc: "... saltar hacia adelante, hacia los lados, hacia atrás con dos pies juntos en pequeñas secuencias" }, { letter: "F", desc: "... saltar una serie de saltos sobre conos o pequeños obstáculos" }, { letter: "G", desc: "... realizar un patrón de rayuela (salto, salto, salto, salto)" }, { letter: "H", desc: ".. luego saltar hacia adelante y hacia atrás a través de una línea, con los dos pies, intercambiando pies (hacia delante y hacia atrás), cruzando los pies sobre" }, { letter: "I", desc: ".. luego saltar dentro y fuera, todo alrededor de un cuadrado marcado en la cancha (o con elemento hexagonal)" }, { letter: "J", desc: "... correr saltar y aterrizar, correr saltar voltear en el aire y aterrizar, aterrizar en diferentes posiciones de pie, despegar de un pie y aterrizar en el otro y viceversa" } ] },
+      ec10: { title: "EC #10 – Escaleras de conos: Patrones de juego de pies lineal", items: [ { letter: "A", desc: "Coloque una escalera para el trabajo de pies usando los conos bajos o las líneas paralelas 50 cm uniformemente espaciados." }, { letter: "B", desc: "Los jugadores marchan dando un paso en cada escalón" }, { letter: "C", desc: "... luego 2 pasos en cada escalón... luego trotar, un paso en cada escalón" }, { letter: "D", desc: "... luego 4 pasos en cada escalón" }, { letter: "E", desc: "... cambiar el tamaño de los espacios entre los conos. Algunos cerca juntos y otros más lejos aparte, tienen jugadores hacen 2 pasos en cada escalón" }, { letter: "F", desc: "... luego tomar dos pasos, luego un paso, luego dos pasos" }, { letter: "G", desc: "... luego bloquea ciertos escalones de la escalera para que se los salteen .. o se mueven primero con un paso en cada peldaño luego 2, luego 1,2,1,2" }, { letter: "H", desc: "... con un paso en cada escalón mover dos pasos hacia adelante y uno para atrás" }, { letter: "I", desc: "Luego moviéndose usando uno de los patrones antedichos el profesor exclama Drive o revés y el alumno debe picar lateralmente fuera de la escalera y hace la sombra del gesto técnico" }, { letter: "J", desc: "Luego moviéndose con un paso, dos pasos, o una combination el profesor lanza una pelota para ser agarrada y lanzada de atrás, mientras que todavía se mueve" } ] },
+      ec11: { title: "EC #11 – Código cono: Adaptar patrones de juego de pies", items: [ { letter: "A", desc: "Los jugadores se mueven a través de una escalera de conos. Cada color requiere un patrón diferente - Rojo = correr alrededor / Amarillo = Split step / Azul = correr adelante y atrás / Verde = Saltar de lado a lado. Comenzar con 2 colores y 6 conos de cada uno." }, { letter: "B", desc: ".. luego mezclar estos conos para crear un patrón alternativo (rojo, amarillo, rojo, amarillo, etc)" }, { letter: "C", desc: ".. luego de forma aleatoria los conos en cualquier orden" }, { letter: "D", desc: ".. luego agregue un tercer color y luego en forma aleatoria" }, { letter: "E", desc: ".. luego agregue un cuarto color" }, { letter: "F", desc: ".. luego cambiar la forma de la escalera para agregar círculos y curvas (no solamente línea recta)" }, { letter: "G", desc: ".. luego cambiar el orden de los conos mientras los jugadores se mueven a través de la escalera" } ] },
+      ec12: { title: "EC #12 – Desplazamientos Diamante: Movimiento multidireccional", items: [ { letter: "A", desc: "Comienza en el centro de la línea de base con dos conos de color a unos 3mts de distancia a cada lado. El compañero o profesor llama por el color y los jugadores deben tocarlo para recuperarse." }, { letter: "B", desc: ".. Luego gritar por el color y la mano (por ejemplo, ¡azul derecha!)" }, { letter: "C", desc: "... a continuación, agregar un 3º cono de frente al jugador y de un color diferente" }, { letter: "D", desc: ".. luego agrega un 4to cono detrás del jugador (los jugadores se desplazan en forma lateral, adelante y atrás)" }, { letter: "E", desc: ".. luego gritar por los colores en secuencia (azul, amarillo, rojo, azul). Los jugadores deben recuperarse entre toques." }, { letter: "F", desc: ".. luego cambiar las posiciones de color" }, { letter: "G", desc: ".. luego cambiar la distancia de los conos de varias formas diferentes" }, { letter: "H", desc: ".. Luego hacer un golpe en sombra sobre el cono llamado (por ejemplo, verde revés, azul volea baja, etc.)" } ] },
+      ec13: { title: "EC #13 – Zumbido: Lanzamiento dinámico sobre la cabeza", items: [ { letter: "A", desc: "Trabajo en parejas con uno lanzando y el otro atrapando para simular sacar y devolver. Empiece la pelota a la altura del hombro y láncela al otro lado garantizando que pique en el cuadro de saque." }, { letter: "B", desc: "... luego tiran lo más alto posible (hacia el cielo, etc). El compañero la agarra y lanza hacia atrás." }, { letter: "C", desc: "... luego pelota en el suelo detrás del jugador, posición preparado, gira hacia atrás, toma la pelota y lanza como acción de tirar la piedra a la orden del profesor." }, { letter: "D", desc: "... luego comenzar con la pelota y la otra mano para lanzar como acción de saque" }, { letter: "E", desc: "... lanzar a dos objetivos diferentes: uno a la izquierda y uno a la derecha sobre el fondo de pista" }, { letter: "F", desc: ".. tirar en dos blancos diferentes: uno corto y uno profundo" }, { letter: "G", desc: ".. juego de lanzar y atrapar por encima del hombro. Contar cuántos pases exitosos completan y retroceder distancia si tienen éxito." }, { letter: "H", desc: ".. juego de lanzar y atrapar tipo tenis sobre cuadros de saque, siempre iniciando por encima del hombro." }, { letter: "I", desc: "... desde preparado, correr adelante hasta una línea y tirar lo más lejos posible; correr atrás hasta una línea y tirar." }, { letter: "J", desc: "... correr y recoger una pelota desde el suelo y tirarla mientras sigue en movimiento" } ] }
+    };
+
+    const database = {
+      blanca: {
+        manip1: [
+          { id: "m1_1", kid: "El Imán Aéreo Bimanual", meta: "Manipulación • Objetivo 1", tech: "Subact. 1.1: Arroja pelota por encima de cabeza, brazos semiflexionados, atrapa a 2 manos sin pique.", pedagogy: "Cálculo de suspensión y ajuste sin impacto brusco." },
+          { id: "m1_2", kid: "Racha de 5 a 20 Continuas", meta: "Manipulación • Objetivo 1", tech: "Subact. 1.2: Proponerse arrojar y agarrar 5 veces continuas; logrado pasa a 10, 15 y 20.", pedagogy: "Concentración y consistencia en su propio eje." },
+          { id: "m1_3", kid: "Aplauso Trueno (+ Aplausos)", meta: "Manipulación • Objetivo 1", tech: "Subact. 1.3: Tira arriba a 2 manos, aplaude en el aire y atrapa limpia.", pedagogy: "Ritmo, disociación y velocidad de reacción." },
+          { id: "m1_4", kid: "Canguro a Dos Manos (1 Pique)", meta: "Manipulación • Objetivo 1", tech: "Subact. 1.4: Arroja arriba por encima de la cabeza, deja 1 pique y atrapa con dos manos.", pedagogy: "Lectura de parábola y rebote." },
+          { id: "m1_5", kid: "La Garra Solitaria (1 Mano)", meta: "Manipulación • Objetivo 1", tech: "Subact. 1.5: Arroja por encima de la cabeza, deja 1 pique y atrapa con una mano.", pedagogy: "Prensión unimanual y lateralidad." },
+          { id: "m1_6", kid: "El Trompo Giratorio 360°", meta: "Manipulación • Objetivo 1", tech: "Subact. 1.6: Arroja adelante, gira 360º, 1 pique y atrapa con ambas manos.", pedagogy: "Reubicación espacial dinámica en rotación." },
+          { id: "m1_7", kid: "Rodilla al Piso Bimanual", meta: "Manipulación • Objetivo 1", tech: "Subact. 1.7: Arroja adelante, se arrodilla en la pista, 1 pique y atrapa con 2 manos.", pedagogy: "Control del centro de gravedad bajando a rodillas." },
+          { id: "m1_8", kid: "Rodilla al Piso Unimanual", meta: "Manipulación • Objetivo 1", tech: "Subact. 1.8: Ídem: se arrodilla tras el lanzamiento y atrapa a una mano.", pedagogy: "Equilibrio asimétrico en plano bajo." },
+          { id: "m1_9", kid: "Buda Veloz Sentado (2 Manos)", meta: "Manipulación • Objetivo 1", tech: "Subact. 1.9: Arroja adelante, se sienta en el suelo, 1 pique y atrapa con dos manos.", pedagogy: "Máximo descenso corporal sin perder la pelota de vista." },
+          { id: "m1_10", kid: "Buda Veloz Sentado (1 Mano)", meta: "Manipulación • Objetivo 1", tech: "Subact. 1.10: Se sienta en el piso y asegura la recepción a una mano.", pedagogy: "Agilidad motriz en el suelo." },
+          { id: "m1_11", kid: "Cazador de Cometas (Hileras 3m)", meta: "Manipulación • Objetivo 1", tech: "Subact. 2.1: Profe lanza arriba y costados; niños corren y atrapan antes del 2° pique.", pedagogy: "Desplazamiento frontal y lateral con cálculo de caída." },
+          { id: "m1_12", kid: "Despegue desde Silla / Cuclillas", meta: "Manipulación • Objetivo 1", tech: "Subact. 2.2: Lanzamiento alto; niño cambia salida: sentado, cuclillas o talones.", pedagogy: "Capacidad de aceleración desde posturas complejas." },
+          { id: "m1_13", kid: "Escape Reptil (Boca Arriba/Abajo)", meta: "Manipulación • Objetivo 1", tech: "Subact. 2.2: Salida acostado boca arriba o abajo hacia la pelota antes del 2° rebote.", pedagogy: "Fuerza reactiva y transición a la carrera." },
+          { id: "m1_14", kid: "Giro del Búho Alerta (¡YA! 180°)", meta: "Manipulación • Objetivo 1", tech: "Subact. 2.3: De espaldas; al grito de '¡Ya!', gira 180º y atrapa antes del 2° pique.", pedagogy: "Respuesta al estímulo auditivo y orientación." },
+          { id: "m1_15", kid: "Doble Rescate Relámpago", meta: "Manipulación • Objetivo 1", tech: "Subact. 2.4: El profe lanza 2 pelotas a la vez; el niño atrapa ambas antes de 2 rebotes.", pedagogy: "Atención dividida y coordinación periférica." },
+          { id: "m1_16", kid: "Puntería al Cráter Lunar", meta: "Manipulación • Objetivo 1", tech: "Subact. 3.1: En parejas con aro en medio: uno lanza al aro y el otro atrapa.", pedagogy: "Cooperación y puntería compartida." },
+          { id: "m1_17", kid: "Cruce Espacial Sincronizado", meta: "Manipulación • Objetivo 1", tech: "Subact. 3.2: Ambos lanzan pelota al área simultáneamente y atrapan sin chocar.", pedagogy: "Sincronización temporal sin choque." }
+        ],
+        manip2: [
+          { id: "m2_1", kid: "El Escudo Doble (Ambas Manos)", meta: "Manipulación • Objetivo 2", tech: "Llevo la raqueta de un lado a otro con ambas manos.", pedagogy: "Firmeza bimanual y transporte." },
+          { id: "m2_2", kid: "Espadachín Diestro (Mano Derecha)", meta: "Manipulación • Objetivo 2", tech: "Llevo la raqueta controlada de lado a lado con mano derecha.", pedagogy: "Fuerza y control articular dominante." },
+          { id: "m2_3", kid: "Espadachín Zurdo (Mano Izquierda)", meta: "Manipulación • Objetivo 2", tech: "Llevo la raqueta de lado a lado con mano izquierda.", pedagogy: "Estimulación bilateral indispensable." },
+          { id: "m2_4", kid: "Pase de Bastón (Mano a Mano)", meta: "Manipulación • Objetivo 2", tech: "Me paso la raqueta de una mano a la otra frente al cuerpo.", pedagogy: "Soltura en cambios de agarre." },
+          { id: "m2_5", kid: "Órbita Planetaria (Alrededor)", meta: "Manipulación • Objetivo 2", tech: "Paso la raqueta alrededor del cuerpo en círculo.", pedagogy: "Noción espacial posterior." },
+          { id: "m2_6", kid: "El Túnel del Flamenco (Bajo Pierna)", meta: "Manipulación • Objetivo 2", tech: "Elevo una pierna y paso la raqueta por debajo.", pedagogy: "Equilibrio unipedal y flexibilidad." },
+          { id: "m2_7", kid: "Las 5 Guardias Espaciales", meta: "Manipulación • Objetivo 2", tech: "Sostengo firme: Frente, derecha, izquierda, cabeza y rodilla.", pedagogy: "Firmeza en diferentes planos." },
+          { id: "m2_8", kid: "Doctor Raqueta & Objetos Mágicos", meta: "Manipulación • Objetivo 2", tech: "Reconoce mango, cabeza, grip, marco con roles lúdicos.", pedagogy: "Familiarización con la raqueta." }
+        ],
+        manip3: [
+          { id: "m3_1", kid: "La Sartén de Dos Asas (2 Manos)", meta: "Manipulación • Objetivo 3", tech: "Balanceo pelota sobre raqueta sosteniendo con ambas manos.", pedagogy: "Equilibrio plano bimanual." },
+          { id: "m3_2", kid: "El Mozo Diestro y Zurdo (1 Mano)", meta: "Manipulación • Objetivo 3", tech: "Balanceo la pelota en cuerdas con mano derecha e izquierda.", pedagogy: "Ajuste fino de muñeca." },
+          { id: "m3_3", kid: "Bandeja al Sol (Palma Arriba)", meta: "Manipulación • Objetivo 3", tech: "Balanceo con palma orientada hacia arriba (supinación).", pedagogy: "Base del plano de contacto de drive." },
+          { id: "m3_4", kid: "Techo Protector (Palma Abajo)", meta: "Manipulación • Objetivo 3", tech: "Balanceo con palma hacia abajo (pronación).", pedagogy: "Exploración de planos invertidos." }
+        ],
+        manip4: [
+          { id: "m4_1", kid: "Globo Saltarín (Rebotes Arriba)", meta: "Manipulación • Objetivo 4", tech: "Rebotar pelota sobre cuerdas tantas veces como sea posible.", pedagogy: "Continuidad del impacto vertical." },
+          { id: "m4_2", kid: "Rebote Ratoncito vs Jirafa", meta: "Manipulación • Objetivo 4", tech: "Variación: rebotes bajos al mentón y altos sobre cabeza.", pedagogy: "Modulación de fuerza." },
+          { id: "m4_3", kid: "Básquetbolista (Rebotes al Piso)", meta: "Manipulación • Objetivo 4", tech: "Botar la pelota contra el suelo hacia abajo con cuerdas.", pedagogy: "Empuje vertical hacia el suelo." }
+        ],
+        recib1: [
+          { id: "r1_1", kid: "Expreso Frontal (Mano Derecha)", meta: "Recepción • Objetivo 1", tech: "Rodamos la pelota sobre una línea hacia delante con mano derecha.", pedagogy: "Lectura de trayectoria rasante." },
+          { id: "r1_2", kid: "Expreso Frontal (Mano Izquierda)", meta: "Recepción • Objetivo 1", tech: "Rodamos la pelota sobre una línea con mano izquierda.", pedagogy: "Control fino no dominante." },
+          { id: "r1_3", kid: "Expreso Frontal Bimanual", meta: "Recepción • Objetivo 1", tech: "Rodamos la pelota hacia delante con ambas manos.", pedagogy: "Simetría de brazos." },
+          { id: "r1_4", kid: "Tren en Reversa (D, I y Ambas)", meta: "Recepción • Objetivo 1", tech: "Rodamos hacia atrás manteniendo la guía de la línea.", pedagogy: "Paso de ajuste posterior." }
+        ],
+        recib2: [
+          { id: "r2_1", kid: "Entrega de Joya (Agarres)", meta: "Recepción • Objetivo 2", tech: "Pasar pelota de una raqueta a la otra sin dejarla caer.", pedagogy: "Amortiguación pura." },
+          { id: "r2_2", kid: "Dúos, Tríos y Cuartetos", meta: "Recepción • Objetivo 2", tech: "Pasar de raqueta a raqueta en grupos cooperativos.", pedagogy: "Cooperación y sintonía." }
+        ],
+        proy1: [
+          { id: "p1_1", kid: "El Tractor Bimanual", meta: "Proyección • Objetivo 1", tech: "Empuja la pelota rodando al frente con 2 manos en grip.", pedagogy: "Conducción con intención direccional." },
+          { id: "p1_2", kid: "El Bólido Diestro y Zurdo", meta: "Proyección • Objetivo 1", tech: "Empuja rodando por el piso con mano derecha e izquierda.", pedagogy: "Fuerza y dirección unimanual." },
+          { id: "p1_3", kid: "Flechas y Rumbos en el Suelo", meta: "Proyección • Objetivo 1", tech: "Empuja rodando: adelante, costados y diagonales.", pedagogy: "Direccionalidad en todos los cuadrantes." },
+          { id: "p1_4", kid: "Gol de Raqueta (Puntería)", meta: "Proyección • Objetivo 1", tech: "Empuja rodando con puntería dentro de mini-arcos de conos.", pedagogy: "Concepto de blanco en pista." }
+        ],
+        proy2: [
+          { id: "p2_1", kid: "El Trampolín Aéreo", meta: "Proyección • Objetivo 2", tech: "Arroja arriba con la mano y deja rebotar sobre cuerdas.", pedagogy: "Auto-alimentación y tacto." },
+          { id: "p2_2", kid: "Toque de Pluma al Cielo", meta: "Proyección • Objetivo 2", tech: "Arroja y pega suave hacia arriba buscando altura.", pedagogy: "Dosificación suave de potencia vertical." },
+          { id: "p2_3", kid: "Blanco Silencioso (Con Bote)", meta: "Proyección • Objetivo 2", tech: "Arroja, deja 1 pique y golpea suave hacia conos/aros.", pedagogy: "Paciencia para esperar el pique." }
+        ]
+      },
+      celeste: {
+        manip_obj4: [
+          { id: "mc4_1_1", kid: "Doble Motor (Ambas Manos)", meta: "Celeste • Obj. 4.1.1", tech: "Rebotar pelota sobre raqueta tantas veces como sea posible con ambas manos.", pedagogy: "Firmeza bimanual y control de la cara plana." },
+          { id: "mc4_1_2", kid: "Motor Derecho (Mano Derecha)", meta: "Celeste • Obj. 4.1.2", tech: "Rebotar pelota con la mano derecha.", pedagogy: "Dominio articular y propiocepción hábil." },
+          { id: "mc4_1_3", kid: "Motor Izquierdo (Mano Izquierda)", meta: "Celeste • Obj. 4.1.3", tech: "Rebotar pelota con la mano izquierda.", pedagogy: "Estimulación de la lateralidad no dominante." },
+          { id: "mc4_2_1", kid: "Escudo Frontal", meta: "Celeste • Obj. 4.2.1", tech: "Mientras coloco la raqueta frente al cuerpo.", pedagogy: "Control espacial en plano anterior." },
+          { id: "mc4_2_2", kid: "Escudo Lateral Derecho", meta: "Celeste • Obj. 4.2.2", tech: "Mientras coloco la raqueta sobre el costado derecho.", pedagogy: "Separación del cuerpo y ajuste lateral." },
+          { id: "mc4_2_3", kid: "Escudo Lateral Izquierdo", meta: "Celeste • Obj. 4.2.3", tech: "Mientras coloco la raqueta sobre el costado izquierdo.", pedagogy: "Separación lateral cruzada o zurda." },
+          { id: "mc4_3", kid: "El Caballero (Arrodillándose)", meta: "Celeste • Obj. 4.3", tech: "Rebotar mientras el jugador se está arrodillando.", pedagogy: "Descenso del centro de gravedad con control visual." },
+          { id: "mc4_4", kid: "Flamenco Derecho", meta: "Celeste • Obj. 4.4", tech: "Rebotar parado en un pie (derecho).", pedagogy: "Equilibrio unipedal dinámico." },
+          { id: "mc4_5", kid: "Flamenco Izquierdo", meta: "Celeste • Obj. 4.5", tech: "Rebotar parado en un pie (izquierdo).", pedagogy: "Equilibrio unipedal dinámico." },
+          { id: "mc4_6", kid: "Rana Rebotadora (Cuclillas)", meta: "Celeste • Obj. 4.6", tech: "Rebotar en posición de cuclillas.", pedagogy: "Fuerza isométrica en piernas." },
+          { id: "mc4_7", kid: "Trompo Completo 360º", meta: "Celeste • Obj. 4.7", tech: "Rebotar mientras se gira 360º.", pedagogy: "Reubicación espacio-temporal en rotación." },
+          { id: "mc4_8", kid: "Medio Trompo 180º", meta: "Celeste • Obj. 4.8", tech: "Rebotar mientras se gira 180º.", pedagogy: "Control de freno en giro." },
+          { id: "mc4_9", kid: "Base Ancha (Piernas Separadas)", meta: "Celeste • Obj. 4.9", tech: "Rebotar manteniendo las piernas separadas.", pedagogy: "Afianzamiento de la base de sustentación." },
+          { id: "mc4_10_2", kid: "Rascacielos (Altura Cabeza)", meta: "Celeste • Obj. 4.10.1.2", tech: "Variando la altura de los rebotes: Altas hasta la cabeza.", pedagogy: "Ajuste de potencia vertical." },
+          { id: "mc4_10_3", kid: "Burbujas Bajas (Al Mentón)", meta: "Celeste • Obj. 4.10.1.3", tech: "Variando la altura de los rebotes: Bajas hasta el mentón.", pedagogy: "Toque sutil y reflejos rápidos." },
+          { id: "mc4_11", kid: "Techo Protector (Palma Abajo)", meta: "Celeste • Obj. 4.11", tech: "Sosteniendo la raqueta con la palma hacia abajo.", pedagogy: "Familiarización con empuñaduras de revés." },
+          { id: "mc4_11_1", kid: "Paseador Frontal", meta: "Celeste • Obj. 4.11.1", tech: "Palma hacia abajo, mientras me dirijo hacia adelante.", pedagogy: "Desplazamiento frontal con pronación." },
+          { id: "mc4_11_2", kid: "Paseador en Reversa", meta: "Celeste • Obj. 4.11.2", tech: "Palma hacia abajo, mientras me dirijo hacia atrás.", pedagogy: "Desplazamiento invertido." },
+          { id: "mc4_11_3", kid: "Cangrejo a la Derecha", meta: "Celeste • Obj. 4.11.3", tech: "Palma hacia abajo, mientras me dirijo hacia la derecha.", pedagogy: "Desplazamiento lateral derecho." },
+          { id: "mc4_11_4", kid: "Cangrejo a la Izquierda", meta: "Celeste • Obj. 4.11.4", tech: "Palma hacia abajo, mientras me dirijo hacia la izquierda.", pedagogy: "Desplazamiento lateral izquierdo." }
+        ],
+        manip_obj5: [
+          { id: "mc5_1", kid: "Rebotes Mixtos (Bimanual)", meta: "Celeste • Obj. 5.1", tech: "Hago rebotar sobre raqueta y piso con ambas manos.", pedagogy: "Ritmo bimanual." },
+          { id: "mc5_2", kid: "Rebotes Mixtos (Diestro)", meta: "Celeste • Obj. 5.2", tech: "Hago rebotar con la mano derecha.", pedagogy: "Coordinación ojo-mano hábil." },
+          { id: "mc5_3", kid: "Rebotes Mixtos (Zurdo)", meta: "Celeste • Obj. 5.3", tech: "Hago rebotar con la mano izquierda.", pedagogy: "Coordinación ojo-mano no hábil." },
+          { id: "mc5_4", kid: "Bandeja Viva (Palma Arriba)", meta: "Celeste • Obj. 5.4", tech: "Sosteniendo raqueta con palma de la mano hacia arriba.", pedagogy: "Sensibilidad en supinación." },
+          { id: "mc5_5", kid: "Techo Vivo (Palma Abajo)", meta: "Celeste • Obj. 5.5", tech: "Sosteniendo raqueta con palma de la mano hacia abajo.", pedagogy: "Sensibilidad en pronación." },
+          { id: "mc5_6_1", kid: "Alternado Hacia Adelante", meta: "Celeste • Obj. 5.6.1", tech: "Alternar un rebote en raqueta y piso mientras camino hacia adelante.", pedagogy: "Disociación en marcha." },
+          { id: "mc5_6_2", kid: "Alternado Hacia Atrás", meta: "Celeste • Obj. 5.6.2", tech: "Alternar un rebote en raqueta y piso mientras camino hacia atrás.", pedagogy: "Noción espacial posterior." },
+          { id: "mc5_6_3", kid: "Alternado Lateral", meta: "Celeste • Obj. 5.6.3", tech: "Alternar un rebote en raqueta y piso mientras camino hacia los costados.", pedagogy: "Pasos laterales." }
+        ],
+        manip_obj6: [
+          { id: "mc6_1", kid: "Parada Mágica", meta: "Celeste • Obj. 6.1", tech: "Dejo caer la pelota y la trato de tomar con la raqueta llevándola a una parada.", pedagogy: "Amortiguación seca." },
+          { id: "mc6_2", kid: "Paradas Dinámicas", meta: "Celeste • Obj. 6.2", tech: "Varias veces a diferentes paradas.", pedagogy: "Agilidad en detenciones." },
+          { id: "mc6_3_1", kid: "Atrapar Frontal (Palma Abajo)", meta: "Celeste • Obj. 6.3.1", tech: "Sosteniendo raqueta con palma hacia abajo, mientras me muevo hacia delante.", pedagogy: "Percepción de caída en movimiento." },
+          { id: "mc6_3_2", kid: "Atrapar Atrás (Palma Abajo)", meta: "Celeste • Obj. 6.3.2", tech: "Sosteniendo raqueta con palma hacia abajo, mientras me muevo hacia atrás.", pedagogy: "Percepción de caída en retroceso." },
+          { id: "mc6_3_3", kid: "Atrapar Derecha (Palma Abajo)", meta: "Celeste • Obj. 6.3.3", tech: "Sosteniendo raqueta con palma hacia abajo, mientras me muevo hacia la derecha.", pedagogy: "Amortiguación en paso lateral." },
+          { id: "mc6_3_4", kid: "Atrapar Izquierda (Palma Abajo)", meta: "Celeste • Obj. 6.3.4", tech: "Sosteniendo raqueta con palma hacia abajo, mientras me muevo hacia la izquierda.", pedagogy: "Amortiguación en paso lateral." },
+          { id: "mc6_4", kid: "Francotirador de Pique", meta: "Celeste • Obj. 6.4", tech: "La dejo caer en un blanco determinado mientras me desplazo.", pedagogy: "Precisión en movimiento." },
+          { id: "mc6_5_1", kid: "Toque Celeste (Palma Arriba)", meta: "Celeste • Obj. 6.5.1", tech: "Golpeo hacia arriba suavemente con la palma de la mano hacia arriba.", pedagogy: "Toque base de Drive." },
+          { id: "mc6_5_2", kid: "Ráfaga de Toques", meta: "Celeste • Obj. 6.5.2", tech: "Golpeo hacia arriba varias veces seguidas.", pedagogy: "Continuidad del tacto." },
+          { id: "mc6_5_3", kid: "Toque Nublado (Palma Abajo)", meta: "Celeste • Obj. 6.5.3", tech: "Golpeo hacia arriba con la palma de la mano hacia abajo.", pedagogy: "Toque base de Revés." },
+          { id: "mc6_5_4", kid: "Toque Mixto", meta: "Celeste • Obj. 6.5.4", tech: "Golpeo hacia arriba alternando las caras de la raqueta.", pedagogy: "Transición rápida de empuñadura." },
+          { id: "mc6_6_1", kid: "Toque Frontal Suave", meta: "Celeste • Obj. 6.6.1", tech: "Golpeándola suavemente frente a mí.", pedagogy: "Zona de impacto óptima." },
+          { id: "mc6_6_2", kid: "Toque Lateral Derecho", meta: "Celeste • Obj. 6.6.2", tech: "Golpeándola suavemente a mi derecha.", pedagogy: "Impacto lateral." },
+          { id: "mc6_6_3", kid: "Toque Lateral Izquierdo", meta: "Celeste • Obj. 6.6.3", tech: "Golpeándola suavemente a mi izquierda.", pedagogy: "Impacto lateral opuesto." },
+          { id: "mc6_6_4", kid: "Toque en Giro", meta: "Celeste • Obj. 6.6.4", tech: "Golpeándola suavemente mientras giro.", pedagogy: "Tacto bajo rotación corporal." }
+        ],
+        manip_obj7: [
+          { id: "mc7_1_1", kid: "Bote de Rodillas", meta: "Celeste • Obj. 7.1.1", tech: "Hacer rebotar en el suelo arrodillados, mano D o I.", pedagogy: "Fuerza descendente en plano bajo." },
+          { id: "mc7_1_2", kid: "Bote Sentado", meta: "Celeste • Obj. 7.1.2", tech: "Hacer rebotar sentados.", pedagogy: "Bloqueo de piernas, fuerza pura de brazo." },
+          { id: "mc7_1_3", kid: "Bote en Cuclillas", meta: "Celeste • Obj. 7.1.3", tech: "Hacer rebotar en cuclillas.", pedagogy: "Tensión en tren inferior." },
+          { id: "mc7_1_4", kid: "Bote Encogiéndose", meta: "Celeste • Obj. 7.1.4", tech: "Hacer rebotar encogiéndose progresivamente.", pedagogy: "Control dinámico de altura." },
+          { id: "mc7_1_5", kid: "Bote en Puntillas", meta: "Celeste • Obj. 7.1.5", tech: "Hacer rebotar alargándose en puntillas.", pedagogy: "Equilibrio alto." },
+          { id: "mc7_1_6", kid: "Bote Base Ancha", meta: "Celeste • Obj. 7.1.6", tech: "Hacer rebotar con piernas separadas.", pedagogy: "Estabilidad central." },
+          { id: "mc7_1_7", kid: "Bote Acostado", meta: "Celeste • Obj. 7.1.7", tech: "Hacer rebotar acostados.", pedagogy: "Máxima disociación brazo/suelo." },
+          { id: "mc7_1_8", kid: "Bote en Trompo 360º", meta: "Celeste • Obj. 7.1.8", tech: "Hacer rebotar girando 360º.", pedagogy: "Giro continuo manteniendo el pique." },
+          { id: "mc7_1_9", kid: "Bote Medio Giro 180º", meta: "Celeste • Obj. 7.1.9", tech: "Hacer rebotar girando 180º.", pedagogy: "Frenado de rotación." },
+          { id: "mc7_1_10", kid: "Bote Frontal Parado", meta: "Celeste • Obj. 7.1.10", tech: "Parados, picándola al frente del cuerpo.", pedagogy: "Bote básico frente al eje." },
+          { id: "mc7_1_11", kid: "Bote Lateral Derecho", meta: "Celeste • Obj. 7.1.11", tech: "Parados, picándola al costado derecho del cuerpo.", pedagogy: "Bote fuera del eje central." },
+          { id: "mc7_1_12", kid: "Bote Lateral Izquierdo", meta: "Celeste • Obj. 7.1.12", tech: "Parados, picándola al costado izquierdo del cuerpo.", pedagogy: "Bote lateral cruzado/zurdo." },
+          { id: "mc7_1_13", kid: "Dribbling Frontal", meta: "Celeste • Obj. 7.1.13", tech: "Picando mientras caminan hacia adelante.", pedagogy: "Conducción en marcha." },
+          { id: "mc7_1_14", kid: "Dribbling en Reversa", meta: "Celeste • Obj. 7.1.14", tech: "Picando mientras caminan hacia atrás.", pedagogy: "Marcha atrás con control de bola." },
+          { id: "mc7_1_15", kid: "Dribbling Cangrejo Derecho", meta: "Celeste • Obj. 7.1.15", tech: "Picando mientras caminan hacia el costado derecho.", pedagogy: "Desplazamiento lateral derecho." },
+          { id: "mc7_1_16", kid: "Dribbling Cangrejo Izquierdo", meta: "Celeste • Obj. 7.1.16", tech: "Picando mientras caminan hacia el costado izquierdo.", pedagogy: "Desplazamiento lateral izquierdo." },
+          { id: "mc7_1_17", kid: "El Callejón", meta: "Celeste • Obj. 7.1.17", tech: "Siguiendo un camino tipo canal o callejón.", pedagogy: "Precisión direccional del pique." },
+          { id: "mc7_1_18", kid: "Dribbling Guiado", meta: "Celeste • Obj. 7.1.18", tech: "Derecho, usando conos como guía.", pedagogy: "Enfoque externo." },
+          { id: "mc7_1_19", kid: "Slalom Sinuoso", meta: "Celeste • Obj. 7.1.19", tech: "Sinuoso, en zig-zag entre conos.", pedagogy: "Cambios de dirección continuos." }
+        ],
+        proy_obj3: [
+          { id: "pc3_1", kid: "La Flecha Frontal", meta: "Celeste • Proy. 3.1", tech: "Golpear hacia adelante, de forma paralela y lejos.", pedagogy: "Proyección rectilínea y fuerza longitudinal." },
+          { id: "pc3_2", kid: "Estatua del Arquero", meta: "Celeste • Proy. 3.1.3", tech: "Golpear ubicando pies de diferentes maneras (izq, der, frente).", pedagogy: "Exploración de apoyos (open/closed stance)." },
+          { id: "pc3_3", kid: "La Cruzada Inesperada", meta: "Celeste • Proy. 3.1.4", tech: "Golpear cruzada y lejos, a la derecha e izquierda.", pedagogy: "Proyección diagonal y ángulos." },
+          { id: "pc3_4", kid: "Frontón Doble Cara", meta: "Celeste • Proy. 3.2", tech: "Rebote en pared limitando el espacio vertical, usando ambas caras.", pedagogy: "Precisión de rebote y cambio de grip." }
+        ],
+        proy_obj4: [
+          { id: "pc4_1", kid: "Toque de Pluma (Cerca)", meta: "Celeste • Proy. 4.1.1", tech: "Golpear variando la potencia para que caiga en un sitio cercano.", pedagogy: "Sensibilidad motriz fina." },
+          { id: "pc4_2", kid: "Impacto Controlado (Media)", meta: "Celeste • Proy. 4.1.2", tech: "Golpear con potencia media buscando una zona intermedia.", pedagogy: "Calibración de la fuerza." },
+          { id: "pc4_3", kid: "El Gran Cañón (Lejos)", meta: "Celeste • Proy. 4.1.3", tech: "Golpear a máxima distancia controlada.", pedagogy: "Aceleración de la cabeza de raqueta." }
+        ],
+        proy_obj5: [
+          { id: "pc5_1", kid: "El Callejón del Muro", meta: "Celeste • Proy. 5.1", tech: "Rebote en pared entre 2 líneas, de frente y perfilado a ambos lados.", pedagogy: "Precisión lateral y postura." },
+          { id: "pc5_2", kid: "Muro de Alturas", meta: "Celeste • Proy. 5.2", tech: "Rebote por sobre diferentes alturas desde varias distancias.", pedagogy: "Manejo de parábolas y adaptación." }
+        ],
+        recib_obj3: [
+          { id: "rc3_1", kid: "Malabarista de Manos", meta: "Celeste • Recib. 3.1", tech: "Dejar caer de una mano y recoger con otra (palma arriba/abajo).", pedagogy: "Disociación y transferencia interhemisférica." },
+          { id: "rc3_2", kid: "Ascensor Bajo (Rodillas)", meta: "Celeste • Recib. 3.2", tech: "Recoger con raqueta a la altura de la rodilla con M.D o M.I.", pedagogy: "Flexión de piernas y centro de gravedad." },
+          { id: "rc3_3", kid: "Ascensor Medio (Cintura)", meta: "Celeste • Recib. 3.3", tech: "Recoger a la altura de la cintura, palmas arriba y abajo.", pedagogy: "Recepción en la zona de impacto óptima." },
+          { id: "rc3_4", kid: "Ascensor Alto (Hombros)", meta: "Celeste • Recib. 3.4", tech: "Recoger a la altura de los hombros, manos derecha e izquierda.", pedagogy: "Lectura temprana y dominio espacial aéreo." }
+        ],
+        recib_obj4: [
+          { id: "rc4_1", kid: "Puente Unimanual", meta: "Celeste • Recib. 4.1/2", tech: "Pasar la pelota al compañero con un pique usando mano D/I.", pedagogy: "Tacto y fuerza compartida." },
+          { id: "rc4_2", kid: "El Gran Puente (Ambas)", meta: "Celeste • Recib. 4.3", tech: "Pase al compañero usando ambas manos.", pedagogy: "Simetría de fuerza." },
+          { id: "rc4_3", kid: "Mensajeros Estáticos", meta: "Celeste • Recib. 4.5", tech: "Pasar la pelota ubicados de frente o de costado.", pedagogy: "Estabilidad de base al lanzar." },
+          { id: "rc4_4", kid: "Carteros en Acción", meta: "Celeste • Recib. 4.5.3", tech: "Pasar dejándola caer en un blanco mientras se mueven.", pedagogy: "Precisión dinámica y sincronía." }
+        ],
+        recib_obj5: [
+          { id: "rc5_1", kid: "El Volcán de Turnos", meta: "Celeste • Recib. 5", tech: "Por turnos, rebotar contra el piso y golpear hacia arriba.", pedagogy: "Atención y respeto por el tiempo del otro." },
+          { id: "rc5_2", kid: "Techo Nublado Grupal", meta: "Celeste • Recib. 5.2", tech: "Golpear hacia arriba con palma hacia abajo (perfilados o de frente).", pedagogy: "Acercamiento al impacto de revés aéreo." }
+        ],
+        recib_obj6: [
+          { id: "rc6_1", kid: "Ping-Pong Rasante", meta: "Celeste • Recib. 6.1/2", tech: "Rebotar ida y vuelta sobre una línea (palmas abajo y arriba).", pedagogy: "Control direccional en equipo." },
+          { id: "rc6_2", kid: "El Acordeón Humano", meta: "Celeste • Recib. 6.3/4", tech: "Intercambio en parejas acercándose y alejándose.", pedagogy: "Regulación de fuerza según distancia visual." }
+        ],
+        recib_obj7: [
+          { id: "rc7_1", kid: "Lanzamiento Libre", meta: "Celeste • Recib. 7.1/2", tech: "Lanzar con mano libre (D/I) y atrapar con raqueta (ambas caras).", pedagogy: "Independencia de brazos." },
+          { id: "rc7_2", kid: "Escalera de Atrapes", meta: "Celeste • Recib. 7.6", tech: "Recoger en rodillas, cintura y hombros variando la cara de la raqueta.", pedagogy: "Adaptación de la muñeca a distintas alturas." },
+          { id: "rc7_3", kid: "Nace el Saque (Medio Saque)", meta: "Celeste • Recib. 7.7", tech: "Lanzar y tocar con raqueta por encima de los hombros.", pedagogy: "Iniciación de la ventana de impacto del servicio." }
+        ]
+      },
+      roja: {}, naranja: {}, verde: {}, amarilla: {}
+    };
+
+    const extremeCardsDB = [
+      { id: "xxs1_1", level: "XXS 1", name: "En la esquina", rule: "El jugador comienza cada punto desde diferentes esquinas.", que: "Al rival", quien: "Todo el partido", cuando: "Al iniciar", icon: "📐" },
+      { id: "xxs1_2", level: "XXS 1", name: "Sin control", rule: "Cada devolución debe realizarse sin bloquear la pelota.", que: "Al rival", quien: "Durante 1 gol", cuando: "Al devolver", icon: "⚡" },
+      { id: "xxs1_3", level: "XXS 1", name: "Cambios de perfil", rule: "Obligación de alternar derecha y revés en cada golpe.", que: "Al rival", quien: "Durante 2 goles", cuando: "En el peloteo", icon: "🔄" },
+      { id: "xxs1_4", level: "XXS 1", name: "De lado a lado 2 manos", rule: "Obligación de jugar de cada lado a 2 manos.", que: "Al rival", quien: "Todo el partido", when: "En todo el juego", icon: "🤲" },
+      { id: "xxs1_5", level: "XXS 1", name: "De lado a lado 1 mano", rule: "Obligación de jugar a 1 mano de los 2 lados.", que: "Al rival", quien: "Todo el partido", when: "En todo el juego", icon: "✋" },
+      { id: "xxs1_6", level: "XXS 1", name: "Desde la orilla", rule: "El jugador debe golpear la pelota desde su línea de fondo.", que: "Al rival", quien: "Durante 1 gol", when: "Al impactar", icon: "🛑" },
+      { id: "xxs2_1", level: "XXS 2", name: "En la cima", rule: "El jugador comienza desde atrás y se da la vuelta en la cima.", que: "Al rival", quien: "Por 1 gol", when: "Al iniciar", icon: "⛰️" },
+      { id: "xxs2_2", level: "XXS 2", name: "Pato en una pata", rule: "Cada golpe debe hacerse estando en un solo pie.", que: "Al rival", quien: "Durante 1 gol", when: "En el impacto", icon: "🦆" },
+      { id: "xxs2_3", level: "XXS 2", name: "Piratas del tenis", rule: "El jugador juega con un ojo tapado con un parche o mano.", que: "Al rival", quien: "Durante 2 goles", when: "Todo el tanto", icon: "🏴‍☠️" },
+      { id: "xxs2_4", level: "XXS 2", name: "Calma Fanfarrona!", rule: "Jugar con una mano en el bolsillo o detrás de la espalda.", que: "Al rival", quien: "Durante 1 gol", when: "Todo el tanto", icon: "🤫" },
+      { id: "xxs2_5", level: "XXS 2", name: "Aquí en La Isla!!", rule: "El jugador se ubica dentro del círculo marcado con cuerda.", que: "Al rival", quien: "Hasta el próximo punto", when: "En el saque", icon: "🏝️" },
+      { id: "xxs2_6", level: "XXS 2", name: "No te muevas!!", rule: "El jugador hace la estatua tras su golpe hasta que cruce la red.", que: "Al rival", quien: "Durante 1 gol", when: "Post-impacto", icon: "🗿" },
+      { id: "xxs3_1", level: "XXS 3", name: "Boom de derecha!!", rule: "El siguiente tanto anotado de derecha suma 2 puntos.", que: "Poseedor", quien: "Válido por 1 gol", when: "Al definir", icon: "💥" },
+      { id: "xxs3_2", level: "XXS 3", name: "Revés de fuego!!!", rule: "El siguiente tanto anotado de revés vale 2 puntos.", que: "Poseedor", quien: "Válido por 1 gol", when: "Al definir", icon: "🔥" },
+      { id: "xxs3_3", level: "XXS 3", name: "Penales!!!", rule: "El jugador puede avanzar al centro del campo para definir.", que: "Poseedor", quien: "Durante 2 goles", when: "Al atacar", icon: "🥅" },
+      { id: "xxs3_4", level: "XXS 3", name: "Doble toque!", rule: "El jugador puede controlar la pelota 1 vez antes de pasarla.", que: "Poseedor", quien: "Durante el juego", when: "Recepción", icon: "✌️" },
+      { id: "xxs3_5", level: "XXS 3", name: "Arco pequeño!!", rule: "Se reduce el arco u objetivo de impacto del jugador.", that: "Poseedor", who: "Hasta el próximo punto", when: "En defensa", icon: "🎯" },
+      { id: "xxs3_6", level: "XXS 3", name: "Vos lo elegís!!", rule: "Vos elegís si tu gol de derecha o de revés valdrá 2 puntos.", que: "Poseedor", quien: "Hasta el próximo punto", when: "Al cantar golpe", icon: "⭐" },
+      { id: "xxs4_1", level: "XXS 4", name: "2 goles!!", rule: "Se crean 2 arcos en las esquinas para cada campo de juego.", that: "Ambos", who: "Todo el juego", when: "En el partido", icon: "🥅" },
+      { id: "xxs4_2", level: "XXS 4", name: "Más rápido!!!", rule: "Reducción de la longitud de la cancha (cancha más corta).", that: "Ambos", who: "Por 2 goles", when: "En 2 tantos", icon: "🏃" },
+      { id: "xxs4_3", level: "XXS 4", name: "Doble cara!!!", rule: "Si bloqueo de revés, golpeo de derecha y viceversa.", that: "Ambos", who: "Por 1 gol", when: "En peloteo", icon: "🎭" },
+      { id: "xxs4_4", level: "XXS 4", name: "Apoyos abiertos!!", rule: "Todos los golpes deben ejecutarse con apoyos abiertos.", that: "Ambos", who: "Por 1 punto", when: "Al apoyar pies", icon: "🦶" },
+      { id: "xxs4_5", level: "XXS 4", name: "Apoyos cerrados!!", rule: "Todos los apoyos deben ser lineales o cerrados al golpear.", that: "Ambos", who: "Todo el juego", when: "En carrera", icon: "👟" },
+      { id: "xxs4_6", level: "XXS 4", name: "Mala mano!!", rule: "Tienes que cambiar de mano para sostener la raqueta en cada tiro.", that: "Ambos", who: "Hasta el próximo punto", when: "En cada tiro", icon: "🤹" },
+      { id: "xxs5_1", level: "XXS 5", name: "Ladrón!!", rule: "Tomas aleatoriamente una carta del mazo de tu rival.", that: "Poseedor", who: "En cualquier momento", when: "¡Acción sorpresa!", icon: "🦹" },
+      { id: "xxs5_2", level: "XXS 5", name: "El Espejo!!!", rule: "Devuelve o rebota el efecto de la carta que te jugaron.", that: "Poseedor", who: "En cualquier momento", when: "Como respuesta", icon: "🪞" },
+      { id: "xxs5_3", level: "XXS 5", name: "Invertir puntos!!!", rule: "Los jugadores intercambian sus tanteadores actuales.", that: "Ambos", who: "En cualquier momento", when: "En tiebreak", icon: "🔀" },
+      { id: "xxs5_4", level: "XXS 5", name: "Punto Extra +1", rule: "El jugador suma 1 punto de forma directa a su tanteador.", that: "Poseedor", who: "En cualquier momento", when: "Cualquier tanto", icon: "➕" },
+      { id: "xxs5_5", level: "XXS 5", name: "Menos 1!!", rule: "Te permite restar 1 punto del tanteador del rival.", that: "Poseedor", who: "En cualquier momento", when: "Cualquier tanto", icon: "➖" },
+      { id: "xxs5_6", level: "XXS 5", name: "No la quiero!!", rule: "Cancela de inmediato el efecto de una carta de tu elección.", that: "Poseedor", who: "En cualquier momento", when: "Anulación", icon: "🚫" }
+    ];
+
+    function initStudentSelector() {
+      const select = document.getElementById('selectStudent');
+      if(!select) return;
+      select.innerHTML = '';
+      const keys = Object.keys(students);
+      if (!students[activeStudent]) activeStudent = keys[0];
+
+      keys.forEach(k => {
+        const st = students[k];
+        const opt = document.createElement('option');
+        opt.value = k; opt.innerText = `${st.name} ${st.avatar} ${st.streak >= 3 ? '🔥' : ''}`;
+        if (k === activeStudent) opt.selected = true;
+        select.appendChild(opt);
+      });
+      updateCardCount();
+    }
+
+    function addStreak() {
+      if(currentMode !== 'profe') return alert("Solo el profe puede tomar asistencia.");
+      students[activeStudent].streak = (students[activeStudent].streak || 0) + 1;
+      saveState(); initStudentSelector(); renderActivities();
+      alert(`¡Racha aumentada! Asistencias seguidas de ${students[activeStudent].name}: ${students[activeStudent].streak}`);
+    }
+
+    function setStage(stageKey, title, btnId) {
+      currentStage = stageKey;
+      document.querySelectorAll('.screen-content').forEach(el => el.style.display = 'none');
+      document.getElementById('viewTechnical').style.display = 'flex';
+      
+      document.querySelectorAll('.stage-badge').forEach(b => b.classList.remove('active'));
+      if (btnId) {
+         let btn = document.getElementById(btnId);
+         if(btn) btn.classList.add('active');
+      }
+      
+      document.getElementById('currentStageText').innerText = title;
+      currentFilter = Object.keys(database[stageKey] || {})[0] || '';
+      renderFilters(); renderActivities();
+    }
+
+    function renderFilters() {
+      const grid = document.getElementById('filtersGrid'); grid.innerHTML = '';
+      const keys = Object.keys(database[currentStage] || {});
+      keys.forEach(k => {
+        const btn = document.createElement('button'); btn.className = 'filter-pill ' + (currentFilter === k ? 'active' : '');
+        btn.innerText = k.toUpperCase().replace(/_/g, ' '); btn.onclick = () => { currentFilter = k; renderFilters(); renderActivities(); };
+        grid.appendChild(btn);
+      });
+    }
+
+    function selectFirstCategoryOf(type) {
+      const keys = Object.keys(database[currentStage] || {});
+      const found = keys.find(k => k.toLowerCase().includes(type));
+      if (found) { currentFilter = found; renderFilters(); renderActivities(); }
+    }
+
+    function updateTotalsDisplay() {
+      const st = students[activeStudent];
+      const estrellasEarned = getStudentEarnedStars(st);
+      document.getElementById('totalXpDisplay').innerText = getStudentBalance(activeStudent) + ' 🌟';
+      let evoText = "Novato";
+      if (estrellasEarned >= 500) evoText = "Leyenda 🏅";
+      else if (estrellasEarned >= 300) evoText = "Avanzado 🎾✨";
+      else if (estrellasEarned >= 100) evoText = "Competidor 🎽";
+      else evoText = `Faltan ${100 - estrellasEarned}🌟 para 🎽`;
+      
+      let evoEl = document.getElementById('avatarEvoText');
+      if (evoEl) evoEl.innerText = "Evolución: " + evoText;
+    }
+
+    function updateTriangleStats() {
+      const st = students[activeStudent];
+      if (!st.skillLevels) st.skillLevels = {};
+      let manipDone = 0, recibDone = 0, proyDone = 0;
+      Object.keys(database).forEach(sKey => {
+        Object.keys(database[sKey]).forEach(cat => {
+          database[sKey][cat].forEach(item => {
+            if (st.skillLevels[item.id] === 3) {
+              if (cat.includes('manip')) manipDone++;
+              else if (cat.includes('recib')) recibDone++;
+              else if (cat.includes('proy')) proyDone++;
+            }
+          });
+        });
+      });
+      document.getElementById('tri-stat-manip').textContent = `${manipDone} 🌟`;
+      document.getElementById('tri-stat-recib').textContent = `${recibDone} 🌟`;
+      document.getElementById('tri-stat-proy').textContent = `${proyDone} 🌟`;
+    }
+
+    function renderActivities() {
+      const list = document.getElementById('activitiesList'); list.innerHTML = '';
+      const items = (database[currentStage] || {})[currentFilter] || [];
+      const st = students[activeStudent]; if (!st) return;
+      if (!st.skillLevels) st.skillLevels = {};
+
+      items.forEach(item => {
+        let state = st.skillLevels[item.id] || 0;
+        let isDone = (state === 3);
+        let isReto = (item.id === retoDelDiaId); 
+        let multiplicador = (st.streak >= 3) ? 2 : 1;
+        if(isReto) multiplicador *= 2; 
+
+        const bgColors = ['#F8FAFC', '#EF4444', '#EAB308', '#10B981'];
+        const borderColors = ['#CBD5E1', '#991B1B', '#A16207', '#047857'];
+        const textColors = ['#94A3B8', '#FFFFFF', '#FFFFFF', '#FFFFFF'];
+        const icons = ['➕', '🔴', '🟡', '🌟'];
+
+        let statusText = '';
+        if (state === 1) statusText = '<span style="color:#EF4444; font-size:11px; background:#FEF2F2; padding:3px 6px; border-radius:6px; margin-left:6px; font-weight:900;">TE FALTA</span>'; 
+        else if (state === 2) statusText = '<span style="color:#D97706; font-size:11px; background:#FFFBEB; padding:3px 6px; border-radius:6px; margin-left:6px; font-weight:900;">CASI LA TENÉS</span>';
+        else if (state === 3) statusText = '<span style="color:#10B981; font-size:11px; background:#ECFDF5; padding:3px 6px; border-radius:6px; margin-left:6px; font-weight:900;">¡LOGRADO!</span>';
+
+        const row = document.createElement('div'); row.className = 'activity-row ' + (isDone ? 'done ' : '') + (isReto && !isDone ? ' glowing-reto' : '');
+
+        const btnCheck = document.createElement('div');
+        btnCheck.className = 'cocarda-btn';
+        btnCheck.style.backgroundColor = bgColors[state]; btnCheck.style.borderColor = borderColors[state]; btnCheck.style.color = textColors[state];
+        btnCheck.innerHTML = icons[state]; btnCheck.setAttribute('onclick', `clickCocarda('${item.id}')`);
+
+        const content = document.createElement('div'); content.className = 'act-content';
+        content.innerHTML = `
+          <div class="act-top">
+            <div><span class="act-title">${item.kid}</span>${statusText}</div>
+            <span class="act-xp" style="${isDone ? 'background:#10B981; color:white; border-color:#059669;' : ''}">${multiplicador} 🌟</span>
+          </div>
+          <div class="act-meta">${item.meta}</div>
+          <div class="act-tech">${item.tech}</div>
+          <div class="act-pedagogy">${item.pedagogy || ''}</div>
+          ${state > 0 ? `<button class="btn-share" onclick="notifyFamily('${st.name}', '${item.kid}',${state})">📲 Avisar</button>` : ''}
+        `;
+
+        row.appendChild(btnCheck); row.appendChild(content); list.appendChild(row);
+      });
+
+      updateTotalsDisplay();
+      updateTriangleStats();
+    }
+
+    function changeActiveStudent() {
+      activeStudent = document.getElementById('selectStudent').value;
+      renderActivities(); updateCardCount();
+      if (document.getElementById('viewTienda').style.display !== 'none') renderTienda();
+      if (document.getElementById('viewWarmup').style.display !== 'none') renderWarmupDetails();
+    }
+
+    function updateCardCount() {
+      const st = students[activeStudent];
+      if (!st) return;
+      const count = (st.cards || []).length;
+      let lbl = document.getElementById('lblCardCount');
+      if(lbl) lbl.innerText = `🃏 ${count} Cartas`;
+    }
+
+    window.toggleNavalCell = function(el) {
+      if (!el.classList.contains('ship') && !el.classList.contains('hit')) {
+          el.classList.add('ship');
+          el.innerHTML = '🚢';
+          el.style.backgroundColor = '#BAE6FD';
+          el.style.borderColor = '#0284C7';
+      } else if (el.classList.contains('ship')) {
+          el.classList.remove('ship');
+          el.classList.add('hit');
+          el.innerHTML = '💥';
+          el.style.backgroundColor = '#1E293B';
+          el.style.borderColor = '#0F172A';
+      } else {
+          el.classList.remove('hit');
+          el.innerHTML = '';
+          el.style.backgroundColor = '#FFFFFF';
+          el.style.borderColor = '#94A3B8';
+      }
+    };
+
+    function dibujarBatallaNaval() {
+      const blocks = parseInt(document.getElementById('navalGrid').value);
+      let cols = 2;
+      if(blocks === 6 || blocks === 9) cols = 3;
+
+      const g1 = document.getElementById('gridP1');
+      const g2 = document.getElementById('gridP2');
+      if(!g1 || !g2) return;
+      g1.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+      g2.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+      g1.innerHTML = ''; g2.innerHTML = '';
+
+      for(let i=0; i<blocks; i++) {
+         g1.innerHTML += `<div class="n-cell" onclick="toggleNavalCell(this)"></div>`;
+         g2.innerHTML += `<div class="n-cell" onclick="toggleNavalCell(this)"></div>`;
+      }
+      populateNavalSelects();
+    }
+
+    function populateNavalSelects() {
+      const t1 = document.getElementById('team1List');
+      const t2 = document.getElementById('team2List');
+      if(!t1 || !t2) return;
+      
+      t1.innerHTML = ''; t2.innerHTML = '';
+      Object.keys(students).forEach(k => {
+         t1.innerHTML += `<label><input type="checkbox" value="${k}"> ${students[k].avatar} ${students[k].name}</label>`;
+         t2.innerHTML += `<label><input type="checkbox" value="${k}"> ${students[k].avatar} ${students[k].name}</label>`;
+      });
+    }
+
+    window.winNaval = function(teamNum) {
+      const listId = teamNum === 1 ? 'team1List' : 'team2List';
+      const checkboxes = document.querySelectorAll(`#${listId} input:checked`);
+      
+      if(checkboxes.length === 0) return alert("Seleccioná al menos un jugador marcando su casillero en este equipo.");
+
+      const nivelTorneo = document.getElementById('desafioNivel').value;
+      let multiplier = nivelTorneo === 'oro' ? 3 : nivelTorneo === 'plata' ? 2 : 1;
+      let reward = 2 * multiplier; 
+      
+      let ganadores = [];
+      checkboxes.forEach(cb => {
+          let st = students[cb.value];
+          st.bonusStars = (st.bonusStars || 0) + reward;
+          ganadores.push(st.name);
+      });
+      
+      saveState(); 
+      renderActivities(); 
+      renderClasificaciones();
+      
+      alert(`🎉 ¡Batalla Naval Ganada!\n\nEquipo ganador: ${ganadores.join(', ')}\nCada jugador suma ${reward} ESTRELLAS extra en nivel ${nivelTorneo.toUpperCase()}.`);
+      dibujarBatallaNaval();
+    }
+
+    function renderClasificaciones() {
+      const indContainer = document.getElementById('rankingIndividual');
+      const groupContainer = document.getElementById('rankingCasas');
+      if(!indContainer || !groupContainer) return;
+      
+      indContainer.innerHTML = ''; groupContainer.innerHTML = '';
+
+      let maxIndividual = 20; 
+      let casasData = { 'Águilas': 0, 'Leones': 0, 'Osos': 0, 'Dragones': 0 };
+
+      Object.keys(students).forEach(stKey => {
+        const st = students[stKey];
+        let pts = getStudentEarnedStars(st);
+        let pct = Math.min((pts / maxIndividual) * 100, 100);
+        let fillClass = pct > 75 ? 'fill-oro' : pct > 40 ? 'fill-plata' : 'fill-bronce';
+        
+        if(st.house && casasData[st.house] !== undefined) casasData[st.house] += pts;
+
+        indContainer.innerHTML += `
+          <div class="progress-box">
+            <div class="progress-title"><span>${st.avatar} ${st.name}</span><span>${pts} 🌟</span></div>
+            <div class="progress-track"><div class="progress-fill ${fillClass}" style="width: ${pct}%;">${Math.round(pct)}%</div></div>
+          </div>
+        `;
+      });
+
+      let maxGrupal = 50; 
+      Object.keys(casasData).forEach(casa => {
+        let pts = casasData[casa];
+        let pct = Math.min((pts / maxGrupal) * 100, 100);
+        let fillClass = pct > 75 ? 'fill-oro' : pct > 40 ? 'fill-plata' : 'fill-bronce';
+        let icon = casa === 'Águilas' ? '🦅' : casa === 'Leones' ? '🦁' : casa === 'Osos' ? '🐻' : '🐉';
+
+        groupContainer.innerHTML += `
+          <div class="progress-box">
+            <div class="progress-title"><span>${icon} Casa de los ${casa}</span><span>${pts} 🌟 Totales</span></div>
+            <div class="progress-track"><div class="progress-fill ${fillClass}" style="width: ${pct}%;">${Math.round(pct)}%</div></div>
+          </div>
+        `;
+      });
+    }
+
+    function toggleCardsView() {
+      document.querySelectorAll('.screen-content').forEach(el => el.style.display = 'none');
+      document.getElementById('viewCards').style.display = 'flex';
+      renderCardsGrid();
+    }
+
+    function setCardFilter(cat) {
+      activeCardFilter = cat;
+      document.querySelectorAll('.card-pill-btn').forEach(b => b.classList.remove('active'));
+      let btn = document.getElementById('cbtn-' + cat);
+      if(btn) btn.classList.add('active');
+      renderCardsGrid();
+    }
+
+    function sortearCartaJusta() {
+      const st = students[activeStudent];
+      const stCards = st.cards || [];
+      if(stCards.length === 0) {
+        document.getElementById('resultadoSorteoAlAzar').innerHTML = `⚠️ El alumno no tiene cartas en su mazo todavía. ¡Entregale algunas!`;
+        return;
+      }
+      const randomIndex = Math.floor(Math.random() * stCards.length);
+      const cartaId = stCards[randomIndex];
+      const cardObj = extremeCardsDB.find(c => c.id === cartaId);
+      
+      if(cardObj) {
+        document.getElementById('resultadoSorteoAlAzar').innerHTML = `
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 24px;">${cardObj.icon}</span>
+            <div style="text-align: left;">
+              <div style="font-size: 11px; color: #7C3AED; font-weight: 900;">CARTA SORTEADA:</div>
+              <div style="font-size: 13px; font-weight: 1000; color: #0F172A;">${cardObj.name}</div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function toggleCardUsedState(cardId) {
+      const st = students[activeStudent];
+      if(!st.usedCards) st.usedCards = [];
+      const idx = st.usedCards.indexOf(cardId);
+      if(idx > -1) {
+        st.usedCards.splice(idx, 1);
+      } else {
+        st.usedCards.push(cardId);
+      }
+      saveState();
+      renderCardsGrid();
+    }
+
+    function renderCardsGrid() {
+      const grid = document.getElementById('cardsGrid'); grid.innerHTML = '';
+      const st = students[activeStudent]; const stCards = st.cards || []; const stUsed = st.usedCards || []; const isFamily = (currentMode === 'family');
+      let list = extremeCardsDB;
+      if (activeCardFilter === 'inventory') list = extremeCardsDB.filter(c => stCards.includes(c.id));
+      else if (activeCardFilter !== 'all') list = extremeCardsDB.filter(c => c.id.startsWith(activeCardFilter));
+
+      list.forEach(c => {
+        const isOwned = stCards.includes(c.id);
+        const isUsed = stUsed.includes(c.id);
+        if(!isFamily && !isOwned && activeCardFilter === 'inventory') return; 
+        const cardEl = document.createElement('div'); 
+        cardEl.className = 'comic-card ' + (!isOwned && isFamily ? 'locked-card ' : '') + (isUsed ? 'card-used-state' : '');
+        
+        cardEl.innerHTML = `
+          <div class="comic-card-head">
+            <span class="comic-level-tag">${c.level}</span>
+            <span style="font-size: 10px; font-weight: 900; color: ${isUsed ? '#EF4444' : '#10B981'};">${isUsed ? '🔴 USADA' : '🟢 DISPONIBLE'}</span>
+            <span class="comic-icon">${c.icon}</span>
+          </div>
+          <div class="comic-card-title">${c.name}</div>
+          <div class="comic-rule-box">"${c.rule}"</div>
+          <div class="comic-meta-row" style="display:flex; justify-content:space-between; font-size:11px; font-weight:800; color:#64748B;">
+            <div>👤 ${c.que || 'Al rival'}</div>
+            <div>⏱️ ${c.quien || 'Todo el partido'}</div>
+          </div>
+          ${!isFamily && isOwned ? `
+            <div style="display:flex; gap:6px; margin-top:4px;">
+              <button class="btn-card-play" onclick="openPlayModal('${c.id}')">⚡ VER</button>
+              <button class="${isUsed ? 'btn-card-used' : 'btn-card-give'}" onclick="toggleCardUsedState('${c.id}')">${isUsed ? '🔄 REACTIVAR' : '✨ USAR / APAGAR'}</button>
+            </div>
+          ` : ''}
+          ${currentMode === 'profe' && !isOwned ? `<button class="btn-card-give" onclick="awardCardToStudent('${c.id}')">🎁 Entregar Carta</button>` : ''}
+        `;
+        grid.appendChild(cardEl);
+      });
+    }
+
+    function awardCardToStudent(cardId) {
+      const st = students[activeStudent]; if (!st.cards) st.cards = [];
+      if (!st.cards.includes(cardId)) { st.cards.push(cardId); saveState(); alert(`🎉 ¡Carta agregada al mazo de ${st.name}!`); renderCardsGrid(); }
+    }
+
+    function openPlayModal(cardId) {
+      const card = extremeCardsDB.find(c => c.id === cardId);
+      const modal = document.getElementById('cardModal');
+      document.getElementById('cardModalBody').innerHTML = `<div style="font-size: 42px; margin-bottom: 4px;">${card.icon}</div><div style="font-size: 13px; font-weight: 900; color: #7C3AED; text-transform: uppercase;">${card.level}</div><h2 style="font-size: 20px; font-weight: 1000; color: #0F172A; text-transform: uppercase;">${card.name}</h2><div style="background: #F8FAFC; border: 2.5px dashed #6D28D9; border-radius: 14px; padding: 12px; font-size: 13px; font-weight: 800; color: #1E293B;">"${card.rule}"</div>`;
+      modal.style.display = 'flex';
+    }
+
+    function closeCardModal() { document.getElementById('cardModal').style.display = 'none'; }
+
+    function toggleWarmupView() {
+      document.querySelectorAll('.screen-content').forEach(el => el.style.display = 'none');
+      document.getElementById('viewWarmup').style.display = 'flex';
+      renderWarmupIndex(); renderWarmupDetails();
+    }
+
+    function renderWarmupIndex() {
+      const grid = document.getElementById('warmupTitlesGrid'); grid.innerHTML = '';
+      Object.keys(warmupDatabase).forEach(key => {
+        const btn = document.createElement('div'); btn.className = 'warmup-pill ' + (key === activeWarmupKey ? 'active' : '');
+        btn.innerText = warmupDatabase[key].title;
+        btn.onclick = () => { activeWarmupKey = key; renderWarmupIndex(); renderWarmupDetails(); };
+        grid.appendChild(btn);
+      });
+    }
+
+    function renderWarmupDetails() {
+      const current = warmupDatabase[activeWarmupKey];
+      document.getElementById('warmupActiveTitle').innerText = current.title;
+      const list = document.getElementById('warmupSubList'); list.innerHTML = '';
+      const stWarmups = students[activeStudent].warmupDone || [];
+
+      current.items.forEach(it => {
+        const itemId = activeWarmupKey + '_' + it.letter;
+        const isDone = stWarmups.includes(itemId);
+        const row = document.createElement('div'); row.className = 'activity-row ' + (isDone ? 'done' : '');
+        const btnCheck = document.createElement('div'); btnCheck.className = 'cocarda-btn'; 
+        btnCheck.style.backgroundColor = isDone ? '#10B981' : '#F8FAFC'; btnCheck.style.color = isDone ? 'white' : '#94A3B8';
+        btnCheck.innerText = isDone ? '✓' : '';
+        btnCheck.onclick = () => {
+          if (currentMode === 'family') return alert("Solo lectura.");
+          if (isDone) stWarmups.splice(stWarmups.indexOf(itemId), 1); else stWarmups.push(itemId);
+          students[activeStudent].warmupDone = stWarmups; saveState(); renderWarmupDetails();
+        };
+
+        const content = document.createElement('div'); content.className = 'act-content';
+        content.innerHTML = `<div class="act-top"><span class="act-title">Variante #${it.letter}</span><span class="act-xp" style="color: #B91C1C; background: #FEF2F2; font-weight:900;">Activación</span></div><div class="act-tech" style="font-size: 13px; font-weight: 700; color: #1E293B;">${it.desc}</div>`;
+        row.appendChild(btnCheck); row.appendChild(content); list.appendChild(row);
+      });
+    }
+
+    function renderTienda() {
+      const st = students[activeStudent];
+      const saldo = getStudentBalance(activeStudent);
+      let nameEl = document.getElementById('tiendaStudentName');
+      if (nameEl) nameEl.innerText = st.name;
+      document.getElementById('tiendaSaldoDisplay').innerText = `${saldo} 🌟 Disponibles`;
+      const renderGrid = (items, containerId) => {
+        const grid = document.getElementById(containerId); grid.innerHTML = '';
+        items.forEach(item => {
+          const div = document.createElement('div'); div.className = 'tienda-item';
+          div.innerHTML = `<div class="tienda-icon">${item.icon}</div><div class="tienda-title">${item.name}</div>
+            ${item.sponsor ? `<div class="tienda-sponsor">${item.sponsor}</div>` : ''}
+            <div style="font-size:16px; font-weight:900; color:#D97706; margin-top:4px;">${item.cost} 🌟</div>
+            ${currentMode === 'profe' || currentMode === 'family' ? `<button class="btn-buy" onclick="buyItem('${item.id}', ${item.cost}, '${item.name}')">Canjear Premio</button>` : ''}`;
+          grid.appendChild(div);
+        });
+      };
+      renderGrid(tiendaDB.virtuales, 'gridBienesVirtuales');
+      renderGrid(tiendaDB.fisicos, 'gridPremiosFisicos');
+    }
+
+    function buyItem(id, cost, name) {
+      if(currentMode !== 'profe') return alert("Los canjes deben realizarse con el Profesor presente.");
+      const saldo = getStudentBalance(activeStudent);
+      if(saldo >= cost) {
+        if(confirm(`¿Estás seguro de canjear ${cost}🌟 por: ${name}?`)) {
+          students[activeStudent].spentStars = (students[activeStudent].spentStars || 0) + cost;
+          saveState(); renderTienda(); updateTotalsDisplay();
+          alert(`🎉 ¡ÉXITO! Entregale a ${students[activeStudent].name} su premio: ${name}.`);
+        }
+      } else { alert(`❌ Faltan ${cost - saldo}🌟 para este premio. ¡A seguir esforzándose!`); }
+    }
+
+    function renderCopa() {
+      const grid = document.getElementById('copaRankingGrid'); grid.innerHTML = '';
+      const casas = { 'Águilas': { icon: '🦅', points: 0, color: '#0284C7', bg: '#F0F9FF', name: 'Águilas' }, 'Leones': { icon: '🦁', points: 0, color: '#DC2626', bg: '#FEF2F2', name: 'Leones' }, 'Osos': { icon: '🐻', points: 0, color: '#D97706', bg: '#FFFBEB', name: 'Osos' }, 'Dragones': { icon: '🐉', points: 0, color: '#059669', bg: '#ECFDF5', name: 'Dragones' } };
+      Object.keys(students).forEach(stKey => { const st = students[stKey]; if(!st.house) return; const houseKey = Object.keys(casas).find(k => st.house.includes(k)); if(houseKey) casas[houseKey].points += getStudentEarnedStars(st); });
+      Object.values(casas).sort((a,b) => b.points - a.points).forEach((c, i) => {
+        let medalla = i===0 ? '🥇 1º' : i===1 ? '🥈 2º' : i===2 ? '🥉 3º' : '🏅 4º';
+        grid.innerHTML += `<div style="background: ${c.bg}; border: 3px solid ${c.color}; border-radius: 16px; padding: 20px; text-align: center; position: relative;"><div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #1E293B; color: white; font-size: 11px; font-weight: 900; padding: 4px 10px; border-radius: 10px;">${medalla}</div><div style="font-size: 48px; margin-top: 10px; margin-bottom: 8px;">${c.icon}</div><div style="font-size: 18px; font-weight: 900; color: ${c.color}; text-transform: uppercase;">Casa de los ${c.name}</div><div style="font-size: 32px; font-weight: 1000; color: #0F172A; margin-top: 8px;">${c.points} 🌟</div></div>`;
+      });
+    }
+
+    function toggleGroupRoundMode() {
+      isGroupRoundMode = !isGroupRoundMode;
+      const btn = document.getElementById('btnToggleGroupMode');
+      if (isGroupRoundMode) {
+        btn.classList.add('active'); btn.innerText = '👤 Salir a Modo Individual';
+        document.getElementById('singleStudentControls').style.display = 'none'; document.getElementById('groupRoundView').style.display = 'block'; document.getElementById('individualView').style.display = 'none';
+        populateRoundDrillSelect(); renderGroupStudentsGrid();
+      } else {
+        btn.classList.remove('active'); btn.innerText = '👥 Ronda Grupal';
+        document.getElementById('singleStudentControls').style.display = 'inline-block'; document.getElementById('groupRoundView').style.display = 'none'; document.getElementById('individualView').style.display = 'block';
+        renderActivities();
+      }
+    }
+
+    function populateRoundDrillSelect() {
+      const select = document.getElementById('roundDrillSelect'); select.innerHTML = ''; const stageData = database[currentStage] || {};
+      Object.keys(stageData).forEach(cat => { stageData[cat].forEach(drill => { const opt = document.createElement('option'); opt.value = drill.id; opt.innerText = `[${drill.meta}] ${drill.kid}`; if (drill.id === currentRoundDrillId) opt.selected = true; select.appendChild(opt); }); });
+      if (!currentRoundDrillId && select.options.length > 0) currentRoundDrillId = select.options[0].value;
+    }
+    function onRoundDrillChange() { currentRoundDrillId = document.getElementById('roundDrillSelect').value; renderGroupStudentsGrid(); }
+    
+    function renderGroupStudentsGrid() {
+      const grid = document.getElementById('groupStudentsGrid'); grid.innerHTML = '';
+      Object.keys(students).forEach(stKey => {
+        const st = students[stKey];
+        const isDone = st.skillLevels && st.skillLevels[currentRoundDrillId] === 3;
+        let stEstrellas = getStudentEarnedStars(st);
+        const card = document.createElement('div'); card.className = 'group-student-card ' + (isDone ? 'done' : '');
+        card.innerHTML = `<div class="group-avatar">${st.avatar}</div><div class="group-student-name">${st.name}</div><div class="group-student-xp">${stEstrellas} 🌟</div><button class="group-check-btn" onclick="toggleStudentDrillInRound('${stKey}', '${currentRoundDrillId}')">${isDone ? '✓ Logrado' : 'Pendiente'}</button>`;
+        grid.appendChild(card);
+      });
+      updateTotalsDisplay();
+    }
+
+    function toggleStudentDrillInRound(stKey, drillId) {
+      if (!students[stKey].skillLevels) students[stKey].skillLevels = {};
+      students[stKey].skillLevels[drillId] = (students[stKey].skillLevels[drillId] === 3) ? 0 : 3;
+      saveState(); renderGroupStudentsGrid();
+    }
+
+    function markRoundAllDone() {
+      Object.keys(students).forEach(stKey => { if (!students[stKey].skillLevels) students[stKey].skillLevels = {}; students[stKey].skillLevels[currentRoundDrillId] = 3; });
+      saveState(); renderGroupStudentsGrid();
+    }
+
+    function openNewStudentModal() { document.getElementById('newStudentModal').style.display = 'flex'; }
+    function closeNewStudentModal() { document.getElementById('newStudentModal').style.display = 'none'; }
+    function saveNewStudent() {
+      const name = document.getElementById('newStudentName').value.trim(); const avatar = document.getElementById('newStudentAvatar').value; const house = document.getElementById('newStudentHouse').value;
+      if (!name) return alert("Ingresa un nombre."); const key = name.replace(/\s+/g, '_'); if (students[key]) return alert("Ya existe un alumno con ese nombre.");
+      students[key] = { name, avatar, house, skillLevels: {}, warmupDone: [], cards: [], spentStars: 0, streak: 0, bonusStars: 0, usedCards: [] };
+      saveState(); activeStudent = key; closeNewStudentModal(); initStudentSelector();
+    }
+
+    function setMasterMode(mode) {
+      currentMode = mode;
+      document.querySelectorAll('.master-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.screen-content').forEach(el => el.style.display = 'none');
+      document.getElementById('heroBar').style.display = 'flex';
+      document.getElementById('masterWarmupBar').style.display = 'flex';
+      document.getElementById('progressionStrip').style.display = 'flex';
+
+      if(mode === 'profe') {
+        document.getElementById('btnModeProfe').classList.add('active'); 
+        document.getElementById('viewTechnical').style.display = 'flex';
+      } else if(mode === 'family') {
+        document.getElementById('btnModeFamily').classList.add('active'); 
+        document.getElementById('viewTechnical').style.display = 'flex';
+      } else if(mode === 'desafios') {
+        document.getElementById('btnModeDesafios').classList.add('active'); 
+        document.getElementById('heroBar').style.display = 'none'; 
+        document.getElementById('masterWarmupBar').style.display = 'none';
+        document.getElementById('progressionStrip').style.display = 'none';
+        document.getElementById('viewDesafios').style.display = 'flex';
+        dibujarBatallaNaval(); renderClasificaciones();
+      } else if(mode === 'copa') {
+        document.getElementById('btnModeCopa').classList.add('active'); 
+        document.getElementById('heroBar').style.display = 'none'; 
+        document.getElementById('masterWarmupBar').style.display = 'none'; 
+        document.getElementById('progressionStrip').style.display = 'none'; 
+        document.getElementById('viewCopa').style.display = 'flex'; 
+        renderCopa(); 
+      } else if(mode === 'tienda') {
+        document.getElementById('btnModeTienda').classList.add('active'); 
+        document.getElementById('masterWarmupBar').style.display = 'none'; 
+        document.getElementById('progressionStrip').style.display = 'none'; 
+        document.getElementById('viewTienda').style.display = 'flex'; 
+        renderTienda();
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+      initStudentSelector();
+      setStage('blanca', '⚪ Blanca', 'stg-blanca');
+    });
+  </script>
+</body>
+</html>
