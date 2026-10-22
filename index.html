@@ -228,7 +228,13 @@
         <div class="desafio-header"><span class="desafio-icon">🚢</span> Batalla Naval: Campo a Campo</div>
         <div class="selector-row" style="justify-content: center;">
           <select id="navalGrid" onchange="dibujarBatallaNaval()" style="max-width: 250px;">
-            <option value="2">2 Bloques (Cancha partida)</option><option value="4">4 Bloques (Cuadrantes)</option><option value="6">6 Bloques</option><option value="9">9 Bloques (Precisión)</option>
+            <option value="2L">2 Bloques (Longitudinales)</option>
+            <option value="2T">2 Bloques (Transversales)</option>
+            <option value="3T">3 Bloques (Transversales)</option>
+            <option value="3L">3 Bloques (Longitudinales)</option>
+            <option value="4">4 Bloques (Cuadrantes)</option>
+            <option value="6">6 Bloques</option>
+            <option value="9">9 Bloques (Precisión)</option>
           </select>
         </div>
         <div class="naval-battlefield">
@@ -247,6 +253,38 @@
       <div class="card-3d" style="border-color: #DDD6FE; border-bottom-color: #6D28D9;">
         <div class="card-title" id="tituloMazo" style="color: #6D28D9;">Mazo Oficial de Cartas</div>
         
+        <!-- DINÁMICAS DEL MAZO OFICIAL INYECTADAS AQUÍ -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px;">
+          
+          <!-- Sobre Sorpresa -->
+          <div style="background: #F0FDF4; border: 2.5px solid #86EFAC; border-radius: 16px; padding: 14px; text-align: center;">
+            <div style="font-size: 26px; margin-bottom: 4px;">🎁</div>
+            <h3 style="font-size: 14px; font-weight: 900; color: #166534; margin-bottom: 4px;">Sobre Sorpresa (Pack)</h3>
+            <p style="font-size: 11px; font-weight: 700; color: #15803D; margin-bottom: 12px;">Elegir 1 carta o sobre de 3 para el Desafío.</p>
+            <div style="display: flex; gap: 8px; justify-content: center;">
+              <button onclick="abrirSobre(1, 0)" style="background: #22C55E; color: white; border: none; border-bottom: 3px solid #166534; padding: 8px 10px; border-radius: 10px; font-weight: 900; font-size: 12px; cursor: pointer; flex: 1;">1 Carta</button>
+              <button onclick="abrirSobre(3, 3)" style="background: #EAB308; color: white; border: none; border-bottom: 3px solid #A16207; padding: 8px 10px; border-radius: 10px; font-weight: 900; font-size: 12px; cursor: pointer; flex: 1;">Sobre x3 🌟</button>
+            </div>
+          </div>
+
+          <!-- Trueque Digital -->
+          <div style="background: #EFF6FF; border: 2.5px solid #93C5FD; border-radius: 16px; padding: 14px; text-align: center;">
+            <div style="font-size: 26px; margin-bottom: 4px;">🤝</div>
+            <h3 style="font-size: 14px; font-weight: 900; color: #1E3A8A; margin-bottom: 4px;">Trueque Digital</h3>
+            <p style="font-size: 11px; font-weight: 700; color: #1D4ED8; margin-bottom: 12px;">Intercambiar cartas entre alumnos.</p>
+            <button onclick="openTradeModal()" style="background: #3B82F6; color: white; border: none; border-bottom: 3px solid #1E40AF; padding: 8px 14px; border-radius: 10px; font-weight: 900; font-size: 13px; cursor: pointer; width: 100%;">🔄 Iniciar Trueque</button>
+          </div>
+
+          <!-- Conserva o Cambia -->
+          <div style="background: #FEF2F2; border: 2.5px solid #FCA5A5; border-radius: 16px; padding: 14px; text-align: center;">
+            <div style="font-size: 26px; margin-bottom: 4px;">⚡</div>
+            <h3 style="font-size: 14px; font-weight: 900; color: #991B1B; margin-bottom: 4px;">Conserva o Cambia</h3>
+            <p style="font-size: 11px; font-weight: 700; color: #B91C1C; margin-bottom: 12px;">Duelo: conservá tu carta o arriesgala por el mazo.</p>
+            <button onclick="openDuelModal()" style="background: #EF4444; color: white; border: none; border-bottom: 3px solid #991B1B; padding: 8px 14px; border-radius: 10px; font-weight: 900; font-size: 13px; cursor: pointer; width: 100%;">🎲 Jugar Duelo</button>
+          </div>
+
+        </div>
+
         <!-- PANEL DE SORTEO ALEATORIO JUSTO -->
         <div style="background: linear-gradient(135deg, #F5F3FF, #EDE9FE); border: 2.5px solid #8B5CF6; border-radius: 16px; padding: 14px; margin-bottom: 16px; text-align: center;">
           <h3 style="font-size: 14px; font-weight: 900; color: #6D28D9; margin-bottom: 6px;">🎲 Sorteo Aleatorio Transparente</h3>
@@ -309,6 +347,44 @@
   </div>
 
   <div class="modal-overlay" id="cardModal"><div class="modal-card-box"><div id="cardModalBody"></div><button class="btn-close-modal" onclick="closeCardModal()">Cerrar</button></div></div>
+
+  <!-- NUEVOS MODALES PARA DINÁMICAS DE CARTAS -->
+  <div class="modal-overlay" id="tradeModal">
+    <div class="modal-card-box" style="border-color: #3B82F6;">
+      <h3 style="color: #1E3A8A; font-weight: 1000; text-align: center; font-size: 18px;">🤝 Trueque Digital</h3>
+      
+      <div style="background: #F8FAFC; padding: 10px; border-radius: 12px; border: 2px solid #E2E8F0;">
+        <label style="font-size: 11px; font-weight: 900; color: #64748B;">Mandar Carta de <span id="tradeActiveName" style="color:#0F172A;"></span>:</label>
+        <select id="tradeCardA" style="width: 100%; padding: 8px; border-radius: 8px; border: 2px solid #CBD5E1; font-weight: 800; outline: none; margin-top: 4px;"></select>
+      </div>
+
+      <div style="background: #F8FAFC; padding: 10px; border-radius: 12px; border: 2px solid #E2E8F0;">
+        <label style="font-size: 11px; font-weight: 900; color: #64748B;">Intercambiar con (Alumno B):</label>
+        <select id="tradeStudentB" onchange="updateTradeCardB()" style="width: 100%; padding: 8px; border-radius: 8px; border: 2px solid #CBD5E1; font-weight: 800; outline: none; margin-top: 4px;"></select>
+        
+        <label style="font-size: 11px; font-weight: 900; color: #64748B; display: block; margin-top: 10px;">Recibir Carta de Alumno B:</label>
+        <select id="tradeCardB" style="width: 100%; padding: 8px; border-radius: 8px; border: 2px solid #CBD5E1; font-weight: 800; outline: none; margin-top: 4px;"></select>
+      </div>
+
+      <button onclick="executeTrade()" style="background: #3B82F6; color: white; border: none; border-bottom: 4px solid #1E40AF; padding: 10px; border-radius: 12px; font-weight: 900; cursor: pointer; margin-top: 8px;">🔄 Confirmar Trueque</button>
+      <button class="btn-close-modal" onclick="closeTradeModal()">Cancelar</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="duelModal">
+    <div class="modal-card-box" style="border-color: #EF4444;">
+      <h3 style="color: #991B1B; font-weight: 1000; text-align: center; font-size: 18px;">⚡ Conserva o Cambia</h3>
+      <p style="font-size: 12px; font-weight: 700; color: #475569; text-align: center; margin-bottom: 10px;">Seleccioná la carta que querés arriesgar. ¡Se perderá y recibirás una nueva al azar del mazo!</p>
+      
+      <div style="background: #FEF2F2; padding: 10px; border-radius: 12px; border: 2px solid #FCA5A5;">
+        <label style="font-size: 11px; font-weight: 900; color: #991B1B;">Carta a arriesgar:</label>
+        <select id="duelCard" style="width: 100%; padding: 8px; border-radius: 8px; border: 2px solid #F87171; font-weight: 800; outline: none; margin-top: 4px;"></select>
+      </div>
+
+      <button onclick="executeDuel()" style="background: #EF4444; color: white; border: none; border-bottom: 4px solid #991B1B; padding: 10px; border-radius: 12px; font-weight: 900; cursor: pointer; margin-top: 8px;">🎲 ¡Arriesgar y Cambiar!</button>
+      <button class="btn-close-modal" onclick="closeDuelModal()">Mejor la conservo</button>
+    </div>
+  </div>
 
   <script>
     window.onerror = function(msg, url, lineNo) { alert("⚠️ ALERTA DIVERTITENIS ⚠️\nError línea: " + lineNo + "\n" + msg); return false; };
@@ -760,15 +836,28 @@
     };
 
     function dibujarBatallaNaval() {
-      const blocks = parseInt(document.getElementById('navalGrid').value);
+      const mode = document.getElementById('navalGrid').value;
+      let blocks = 4;
       let cols = 2;
-      if(blocks === 6 || blocks === 9) cols = 3;
+      let rows = 2;
+
+      if (mode === '2L') { blocks = 2; cols = 2; rows = 1; }
+      else if (mode === '2T') { blocks = 2; cols = 1; rows = 2; }
+      else if (mode === '3T') { blocks = 3; cols = 1; rows = 3; }
+      else if (mode === '3L') { blocks = 3; cols = 3; rows = 1; }
+      else if (mode === '4') { blocks = 4; cols = 2; rows = 2; }
+      else if (mode === '6') { blocks = 6; cols = 3; rows = 2; }
+      else if (mode === '9') { blocks = 9; cols = 3; rows = 3; }
 
       const g1 = document.getElementById('gridP1');
       const g2 = document.getElementById('gridP2');
       if(!g1 || !g2) return;
+      
       g1.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+      g1.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
       g2.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+      g2.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+      
       g1.innerHTML = ''; g2.innerHTML = '';
 
       for(let i=0; i<blocks; i++) {
@@ -959,6 +1048,139 @@
     }
 
     function closeCardModal() { document.getElementById('cardModal').style.display = 'none'; }
+
+    // ==========================================
+    // NUEVAS DINÁMICAS DEL MAZO
+    // ==========================================
+    
+    window.abrirSobre = function(cantidad, costo) {
+      const st = students[activeStudent];
+      if (costo > 0) {
+        if (getStudentBalance(activeStudent) < costo) {
+            return alert(`❌ Necesitas al menos ${costo} 🌟 para abrir este sobre especial.`);
+        }
+        st.spentStars = (st.spentStars || 0) + costo;
+      }
+      
+      let available = extremeCardsDB.filter(c => !(st.cards || []).includes(c.id));
+      if (available.length === 0) return alert("¡Impresionante! El alumno ya tiene TODAS las cartas del mazo.");
+      
+      let obtenidas = [];
+      for(let i=0; i<cantidad; i++) {
+        if(available.length === 0) break;
+        let idx = Math.floor(Math.random() * available.length);
+        let carta = available[idx];
+        obtenidas.push(carta.icon + " " + carta.name);
+        if(!st.cards) st.cards = [];
+        st.cards.push(carta.id);
+        available.splice(idx, 1); 
+      }
+      
+      saveState();
+      renderCardsGrid();
+      updateTotalsDisplay();
+      alert(`🎉 ¡SOBRE ABIERTO!\n\n${st.name} ha conseguido ${obtenidas.length} carta(s):\n\n- ${obtenidas.join('\n- ')}`);
+    }
+
+    window.openTradeModal = function() {
+      if(!students[activeStudent].cards || students[activeStudent].cards.length === 0) {
+         return alert(`❌ ${students[activeStudent].name} no tiene cartas para ofrecer en un trueque.`);
+      }
+      document.getElementById('tradeActiveName').innerText = students[activeStudent].name;
+      document.getElementById('tradeModal').style.display = 'flex';
+      updateTradeDropdowns();
+    }
+
+    window.closeTradeModal = function() { document.getElementById('tradeModal').style.display = 'none'; }
+
+    window.updateTradeDropdowns = function() {
+       const stA = students[activeStudent];
+       const selectCardA = document.getElementById('tradeCardA');
+       selectCardA.innerHTML = '';
+       stA.cards.forEach(cId => {
+           let cObj = extremeCardsDB.find(c => c.id === cId);
+           if(cObj) selectCardA.innerHTML += `<option value="${cId}">${cObj.icon} ${cObj.name}</option>`;
+       });
+
+       const selectStudentB = document.getElementById('tradeStudentB');
+       selectStudentB.innerHTML = '<option value="">Selecciona alumno para intercambiar...</option>';
+       Object.keys(students).forEach(k => {
+           if(k !== activeStudent && students[k].cards && students[k].cards.length > 0) {
+               selectStudentB.innerHTML += `<option value="${k}">${students[k].avatar} ${students[k].name}</option>`;
+           }
+       });
+       updateTradeCardB();
+    }
+
+    window.updateTradeCardB = function() {
+       const selectStudentB = document.getElementById('tradeStudentB').value;
+       const selectCardB = document.getElementById('tradeCardB');
+       selectCardB.innerHTML = '';
+       if(!selectStudentB) return;
+       students[selectStudentB].cards.forEach(cId => {
+           let cObj = extremeCardsDB.find(c => c.id === cId);
+           if(cObj) selectCardB.innerHTML += `<option value="${cId}">${cObj.icon} ${cObj.name}</option>`;
+       });
+    }
+
+    window.executeTrade = function() {
+       const stBKey = document.getElementById('tradeStudentB').value;
+       if(!stBKey) return alert("Selecciona un alumno para el trueque.");
+       const cardA = document.getElementById('tradeCardA').value;
+       const cardB = document.getElementById('tradeCardB').value;
+       
+       if(!cardA || !cardB) return alert("Faltan cartas por seleccionar.");
+
+       const stA = students[activeStudent];
+       const stB = students[stBKey];
+
+       stA.cards = stA.cards.filter(c => c !== cardA);
+       stA.cards.push(cardB);
+
+       stB.cards = stB.cards.filter(c => c !== cardB);
+       stB.cards.push(cardA);
+
+       saveState();
+       renderCardsGrid();
+       closeTradeModal();
+       alert(`🤝 ¡TRUEQUE DIGITAL EXITOSO!\n\n${stA.name} y ${stB.name} han intercambiado sus cartas perfectamente.`);
+    }
+
+    window.openDuelModal = function() {
+      const st = students[activeStudent];
+      if(!st.cards || st.cards.length === 0) return alert(`❌ ${st.name} no tiene cartas para arriesgar en el duelo.`);
+      document.getElementById('duelModal').style.display = 'flex';
+      const selectDuel = document.getElementById('duelCard');
+      selectDuel.innerHTML = '';
+      st.cards.forEach(cId => {
+           let cObj = extremeCardsDB.find(c => c.id === cId);
+           if(cObj) selectDuel.innerHTML += `<option value="${cId}">${cObj.icon} ${cObj.name}</option>`;
+      });
+    }
+
+    window.closeDuelModal = function() { document.getElementById('duelModal').style.display = 'none'; }
+
+    window.executeDuel = function() {
+      const cardToRisk = document.getElementById('duelCard').value;
+      if(!cardToRisk) return;
+
+      const st = students[activeStudent];
+      st.cards = st.cards.filter(c => c !== cardToRisk); 
+
+      let available = extremeCardsDB.filter(c => !(st.cards || []).includes(c.id));
+      if (available.length > 0) {
+          let rnd = available[Math.floor(Math.random() * available.length)];
+          st.cards.push(rnd.id);
+          saveState();
+          renderCardsGrid();
+          closeDuelModal();
+          alert(`⚡ ¡DUELO COMPLETADO!\n\n${st.name} arriesgó su carta al mazo y obtuvo a cambio:\n\n✨ ${rnd.icon} ${rnd.name}`);
+      } else {
+          st.cards.push(cardToRisk); 
+          alert("No hay más cartas libres en el mazo para realizar el duelo.");
+      }
+    }
+    // ==========================================
 
     function toggleWarmupView() {
       document.querySelectorAll('.screen-content').forEach(el => el.style.display = 'none');
