@@ -2,7 +2,7 @@
 <html lang="es" style="background-color: #FFF8F0 !important;">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="color-scheme" content="light only">
   <title>Divertitenis - Sistema Oficial Integral</title>
   <style>
@@ -119,11 +119,26 @@
     .modal-overlay {position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.85); z-index: 9999; display: none; justify-content: center; align-items: center; padding: 16px;}
     .modal-card-box {background: #FFFFFF; border: 5px solid #1E293B; border-radius: 26px; max-width: 380px; width: 100%; padding: 20px; display: flex; flex-direction: column; gap: 12px;}
     .btn-close-modal {background: #EF4444; border: none; border-bottom: 4px solid #991B1B; color: white; padding: 10px; border-radius: 12px; font-weight: 900; cursor: pointer;}
+    
+    /* CSS PARA EL SISTEMA DE ALERTAS PERSONALIZADO (NO USAR NATIVOS) */
+    .custom-alert-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.85); z-index: 99999; display: none; justify-content: center; align-items: center; padding: 16px; }
+    .custom-alert-box { background: #FFFFFF; border: 5px solid #1E293B; border-radius: 26px; max-width: 350px; width: 100%; padding: 20px; text-align: center; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .custom-alert-msg { font-size: 15px; font-weight: 800; color: #1E293B; white-space: pre-wrap; line-height: 1.4; }
+    .btn-custom-alert { background: #FF7A00; color: white; border: none; border-bottom: 4px solid #D95D00; padding: 12px; border-radius: 14px; font-weight: 900; font-size: 14px; cursor: pointer; width: 100%; transition: transform 0.1s; }
+    .btn-custom-alert:active { transform: scale(0.95); }
   </style>
 </head>
 <body>
 
   <div id="notification-container" class="notification-container"></div>
+
+  <!-- SISTEMA DE ALERTAS PERSONALIZADO -->
+  <div class="custom-alert-overlay" id="customAlertBox">
+    <div class="custom-alert-box">
+      <div class="custom-alert-msg" id="customAlertMsg"></div>
+      <div id="customAlertBtnArea"></div>
+    </div>
+  </div>
 
   <!-- NAVEGACIÓN -->
   <div class="master-switcher">
@@ -139,6 +154,8 @@
       <div class="logo-frame">
         <img src="https://i.postimg.cc/vTMhkSR4/logo.png" alt="Divertitenis Oficial" style="width: 100%; height: auto; display: block; object-fit: contain;">
       </div>
+      <!-- BOTÓN AMARILLO GIGANTE PARA EL MODO OSCURO TERCO -->
+      <button onclick="forzarColorClaro()" style="margin-top: 14px; background: #FACC15; color: #713F12; border: 2px solid #EAB308; border-bottom: 4px solid #CA8A04; padding: 10px 18px; border-radius: 14px; font-weight: 900; font-size: 14px; cursor: pointer; width: 100%; max-width: 300px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">☀️ TOCAR AQUÍ SI SE VE NEGRO</button>
     </header>
 
     <div class="progression-strip" id="progressionStrip">
@@ -393,7 +410,28 @@
   </div>
 
   <script>
-    window.onerror = function(msg, url, lineNo) { alert("⚠️ ALERTA DIVERTITENIS ⚠️\nError línea: " + lineNo + "\n" + msg); return false; };
+    // --- SISTEMA DE ALERTAS PERSONALIZADO ---
+    window.showAlert = function(msg) {
+      document.getElementById('customAlertMsg').innerText = msg;
+      document.getElementById('customAlertBtnArea').innerHTML = `<button class="btn-custom-alert" onclick="document.getElementById('customAlertBox').style.display='none'">¡Entendido!</button>`;
+      document.getElementById('customAlertBox').style.display = 'flex';
+    };
+
+    window.showConfirm = function(msg, onConfirmCallback) {
+      document.getElementById('customAlertMsg').innerText = msg;
+      let btnArea = document.getElementById('customAlertBtnArea');
+      btnArea.innerHTML = `
+        <button class="btn-custom-alert" style="background: #10B981; border-bottom-color: #059669; margin-bottom: 8px;" id="btnConfirmYes">¡Sí, seguro!</button>
+        <button class="btn-custom-alert" style="background: #EF4444; border-bottom-color: #991B1B;" onclick="document.getElementById('customAlertBox').style.display='none'">Cancelar</button>
+      `;
+      document.getElementById('btnConfirmYes').onclick = function() {
+        document.getElementById('customAlertBox').style.display = 'none';
+        onConfirmCallback();
+      };
+      document.getElementById('customAlertBox').style.display = 'flex';
+    };
+
+    window.onerror = function(msg, url, lineNo) { showAlert("⚠️ ALERTA DIVERTITENIS ⚠️\nError línea: " + lineNo + "\n" + msg); return false; };
 
     let currentMode = 'profe', currentStage = 'blanca', currentFilter = 'manip1', activeStudent = 'Ayson';
     let activeWarmupKey = 'ec1', isGroupRoundMode = false, currentRoundDrillId = 'm1_1', retoDelDiaId = 'm1_6', activeCardFilter = 'all';
@@ -426,11 +464,11 @@
     }
 
     window.clickCocarda = function(itemId) {
-      if (currentMode === 'family') return alert("Modo Familia: Solo de lectura.");
+      if (currentMode === 'family') return showAlert("Modo Familia: Solo de lectura.");
       const st = students[activeStudent]; if (!st.skillLevels) st.skillLevels = {};
       let val = st.skillLevels[itemId] || 0; val = (val + 1) % 4; st.skillLevels[itemId] = val;
       let mul = (st.streak >= 3) ? 2 : 1; if (itemId === retoDelDiaId) mul *= 2;
-      if (val === 3 && mul > 1) { st.bonusStars = (st.bonusStars || 0) + (mul - 1); alert('¡Combo Fuego x' + mul + '!'); }
+      if (val === 3 && mul > 1) { st.bonusStars = (st.bonusStars || 0) + (mul - 1); showAlert('¡Combo Fuego x' + mul + '!'); }
       saveState(); renderActivities();
     };
 
@@ -530,7 +568,7 @@
           { id: "mc4_3", kid: "El Caballero (Arrodillándose)", meta: "Celeste • Obj. 4.3", tech: "Rebotar mientras el jugador se está arrodillando.", pedagogy: "Descenso del centro de gravedad con control visual." },
           { id: "mc4_4", kid: "Flamenco Derecho", meta: "Celeste • Obj. 4.4", tech: "Rebotar parado en un pie (derecho).", pedagogy: "Equilibrio unipedal dinámico." },
           { id: "mc4_5", kid: "Flamenco Izquierdo", meta: "Celeste • Obj. 4.5", tech: "Rebotar parado en un pie (izquierdo).", pedagogy: "Equilibrio unipedal dinámico." },
-          { id: "mc4_6", kid: "Rana Rebotadora (Cuclillas)", meta: "Celeste • Obj. 4.6", tech: "Rebotar en posición de cuclillas.", pedagogy: "Fuerza isométrica en piernas." },
+          { id: "mc4_6", kid: "Rana Rebotadora (Cuclillas)", meta: "Celeste • Obj. 4.6", tech: "Rebotar en position de cuclillas.", pedagogy: "Fuerza isométrica en piernas." },
           { id: "mc4_7", kid: "Trompo Completo 360º", meta: "Celeste • Obj. 4.7", tech: "Rebotar mientras se gira 360º.", pedagogy: "Reubicación espacio-temporal en rotación." },
           { id: "mc4_8", kid: "Medio Trompo 180º", meta: "Celeste • Obj. 4.8", tech: "Rebotar mientras se gira 180º.", pedagogy: "Control de freno en giro." },
           { id: "mc4_9", kid: "Base Ancha (Piernas Separadas)", meta: "Celeste • Obj. 4.9", tech: "Rebotar manteniendo las piernas separadas.", pedagogy: "Afianzamiento de la base de sustentación." },
@@ -685,10 +723,10 @@
     }
 
     function addStreak() {
-      if(currentMode !== 'profe') return alert("Solo el profe puede tomar asistencia.");
+      if(currentMode !== 'profe') return showAlert("Solo el profe puede tomar asistencia.");
       students[activeStudent].streak = (students[activeStudent].streak || 0) + 1;
       saveState(); initStudentSelector(); renderActivities();
-      alert(`¡Racha aumentada! Asistencias seguidas de ${students[activeStudent].name}: ${students[activeStudent].streak}`);
+      showAlert(`¡Racha aumentada! Asistencias seguidas de ${students[activeStudent].name}: ${students[activeStudent].streak}`);
     }
 
     function setStage(stageKey, title, btnId) {
@@ -889,7 +927,7 @@
       const listId = teamNum === 1 ? 'team1List' : 'team2List';
       const checkboxes = document.querySelectorAll(`#${listId} input:checked`);
       
-      if(checkboxes.length === 0) return alert("Seleccioná al menos un jugador marcando su casillero en este equipo.");
+      if(checkboxes.length === 0) return showAlert("Seleccioná al menos un jugador marcando su casillero en este equipo.");
 
       const nivelTorneo = document.getElementById('desafioNivel').value;
       let multiplier = nivelTorneo === 'oro' ? 3 : nivelTorneo === 'plata' ? 2 : 1;
@@ -906,7 +944,7 @@
       renderActivities(); 
       renderClasificaciones();
       
-      alert(`🎉 ¡Batalla Naval Ganada!\n\nEquipo ganador: ${ganadores.join(', ')}\nCada jugador suma ${reward} ESTRELLAS extra en nivel ${nivelTorneo.toUpperCase()}.`);
+      showAlert(`🎉 ¡Batalla Naval Ganada!\n\nEquipo ganador: ${ganadores.join(', ')}\nCada jugador suma ${reward} ESTRELLAS extra en nivel ${nivelTorneo.toUpperCase()}.`);
       dibujarBatallaNaval();
     }
 
@@ -1043,7 +1081,7 @@
 
     function awardCardToStudent(cardId) {
       const st = students[activeStudent]; if (!st.cards) st.cards = [];
-      if (!st.cards.includes(cardId)) { st.cards.push(cardId); saveState(); alert(`🎉 ¡Carta agregada al mazo de ${st.name}!`); renderCardsGrid(); }
+      if (!st.cards.includes(cardId)) { st.cards.push(cardId); saveState(); showAlert(`🎉 ¡Carta agregada al mazo de ${st.name}!`); renderCardsGrid(); }
     }
 
     function openPlayModal(cardId) {
@@ -1063,13 +1101,13 @@
       const st = students[activeStudent];
       if (costo > 0) {
         if (getStudentBalance(activeStudent) < costo) {
-            return alert(`❌ Necesitas al menos ${costo} 🌟 para abrir este sobre especial.`);
+            return showAlert(`❌ Necesitas al menos ${costo} 🌟 para abrir este sobre especial.`);
         }
         st.spentStars = (st.spentStars || 0) + costo;
       }
       
       let available = extremeCardsDB.filter(c => !(st.cards || []).includes(c.id));
-      if (available.length === 0) return alert("¡Impresionante! El alumno ya tiene TODAS las cartas del mazo.");
+      if (available.length === 0) return showAlert("¡Impresionante! El alumno ya tiene TODAS las cartas del mazo.");
       
       let obtenidas = [];
       for(let i=0; i<cantidad; i++) {
@@ -1085,12 +1123,12 @@
       saveState();
       renderCardsGrid();
       updateTotalsDisplay();
-      alert(`🎉 ¡SOBRE ABIERTO!\n\n${st.name} ha conseguido ${obtenidas.length} carta(s):\n\n- ${obtenidas.join('\n- ')}`);
+      showAlert(`🎉 ¡SOBRE ABIERTO!\n\n${st.name} ha conseguido ${obtenidas.length} carta(s):\n\n- ${obtenidas.join('\n- ')}`);
     }
 
     window.openTradeModal = function() {
       if(!students[activeStudent].cards || students[activeStudent].cards.length === 0) {
-         return alert(`❌ ${students[activeStudent].name} no tiene cartas para ofrecer en un trueque.`);
+         return showAlert(`❌ ${students[activeStudent].name} no tiene cartas para ofrecer en un trueque.`);
       }
       document.getElementById('tradeActiveName').innerText = students[activeStudent].name;
       document.getElementById('tradeModal').style.display = 'flex';
@@ -1131,11 +1169,11 @@
 
     window.executeTrade = function() {
        const stBKey = document.getElementById('tradeStudentB').value;
-       if(!stBKey) return alert("Selecciona un alumno para el trueque.");
+       if(!stBKey) return showAlert("Selecciona un alumno para el trueque.");
        const cardA = document.getElementById('tradeCardA').value;
        const cardB = document.getElementById('tradeCardB').value;
        
-       if(!cardA || !cardB) return alert("Faltan cartas por seleccionar.");
+       if(!cardA || !cardB) return showAlert("Faltan cartas por seleccionar.");
 
        const stA = students[activeStudent];
        const stB = students[stBKey];
@@ -1149,12 +1187,12 @@
        saveState();
        renderCardsGrid();
        closeTradeModal();
-       alert(`🤝 ¡TRUEQUE DIGITAL EXITOSO!\n\n${stA.name} y ${stB.name} han intercambiado sus cartas perfectamente.`);
+       showAlert(`🤝 ¡TRUEQUE DIGITAL EXITOSO!\n\n${stA.name} y ${stB.name} han intercambiado sus cartas perfectamente.`);
     }
 
     window.openDuelModal = function() {
       const st = students[activeStudent];
-      if(!st.cards || st.cards.length === 0) return alert(`❌ ${st.name} no tiene cartas para arriesgar en el duelo.`);
+      if(!st.cards || st.cards.length === 0) return showAlert(`❌ ${st.name} no tiene cartas para arriesgar en el duelo.`);
       document.getElementById('duelModal').style.display = 'flex';
       const selectDuel = document.getElementById('duelCard');
       selectDuel.innerHTML = '';
@@ -1180,10 +1218,10 @@
           saveState();
           renderCardsGrid();
           closeDuelModal();
-          alert(`⚡ ¡DUELO COMPLETADO!\n\n${st.name} arriesgó su carta al mazo y obtuvo a cambio:\n\n✨ ${rnd.icon} ${rnd.name}`);
+          showAlert(`⚡ ¡DUELO COMPLETADO!\n\n${st.name} arriesgó su carta al mazo y obtuvo a cambio:\n\n✨ ${rnd.icon} ${rnd.name}`);
       } else {
           st.cards.push(cardToRisk); 
-          alert("No hay más cartas libres en el mazo para realizar el duelo.");
+          showAlert("No hay más cartas libres en el mazo para realizar el duelo.");
       }
     }
     // ==========================================
@@ -1218,7 +1256,7 @@
         btnCheck.style.backgroundColor = isDone ? '#10B981' : '#F8FAFC'; btnCheck.style.color = isDone ? 'white' : '#94A3B8';
         btnCheck.innerText = isDone ? '✓' : '';
         btnCheck.onclick = () => {
-          if (currentMode === 'family') return alert("Solo lectura.");
+          if (currentMode === 'family') return showAlert("Solo lectura.");
           if (isDone) stWarmups.splice(stWarmups.indexOf(itemId), 1); else stWarmups.push(itemId);
           students[activeStudent].warmupDone = stWarmups; saveState(); renderWarmupDetails();
         };
@@ -1251,15 +1289,15 @@
     }
 
     function buyItem(id, cost, name) {
-      if(currentMode !== 'profe') return alert("Los canjes deben realizarse con el Profesor presente.");
+      if(currentMode !== 'profe') return showAlert("Los canjes deben realizarse con el Profesor presente.");
       const saldo = getStudentBalance(activeStudent);
       if(saldo >= cost) {
-        if(confirm(`¿Estás seguro de canjear ${cost}🌟 por: ${name}?`)) {
+        showConfirm(`¿Estás seguro de canjear ${cost}🌟 por: ${name}?`, function() {
           students[activeStudent].spentStars = (students[activeStudent].spentStars || 0) + cost;
           saveState(); renderTienda(); updateTotalsDisplay();
-          alert(`🎉 ¡ÉXITO! Entregale a ${students[activeStudent].name} su premio: ${name}.`);
-        }
-      } else { alert(`❌ Faltan ${cost - saldo}🌟 para este premio. ¡A seguir esforzándose!`); }
+          showAlert(`🎉 ¡ÉXITO! Entregale a ${students[activeStudent].name} su premio: ${name}.`);
+        });
+      } else { showAlert(`❌ Faltan ${cost - saldo}🌟 para este premio. ¡A seguir esforzándose!`); }
     }
 
     function renderCopa() {
@@ -1321,7 +1359,7 @@
     function closeNewStudentModal() { document.getElementById('newStudentModal').style.display = 'none'; }
     function saveNewStudent() {
       const name = document.getElementById('newStudentName').value.trim(); const avatar = document.getElementById('newStudentAvatar').value; const house = document.getElementById('newStudentHouse').value;
-      if (!name) return alert("Ingresa un nombre."); const key = name.replace(/\s+/g, '_'); if (students[key]) return alert("Ya existe un alumno con ese nombre.");
+      if (!name) return showAlert("Ingresa un nombre."); const key = name.replace(/\s+/g, '_'); if (students[key]) return showAlert("Ya existe un alumno con ese nombre.");
       students[key] = { name, avatar, house, skillLevels: {}, warmupDone: [], cards: [], spentStars: 0, streak: 0, bonusStars: 0, usedCards: [] };
       saveState(); activeStudent = key; closeNewStudentModal(); initStudentSelector();
     }
@@ -1361,6 +1399,28 @@
         document.getElementById('viewTienda').style.display = 'flex'; 
         renderTienda();
       }
+    }
+
+    function forzarColorClaro() {
+        const style = document.createElement('style');
+        style.innerHTML = `
+            html, body { background-color: #FFF8F0 !important; color: #1E293B !important; }
+            .app-container, .card-3d, .activity-row, .student-selector-box select, .group-student-card, .desafio-panel, .naval-side, .tienda-item, .round-banner { background-color: #FFFFFF !important; color: #1E293B !important; }
+            .master-switcher { background-color: #1E293B !important; }
+            .master-btn { color: #94A3B8 !important; }
+            .master-btn.active { color: #FFFFFF !important; background-color: #FF7A00 !important; }
+            .act-title, .card-title, .desafio-header, .comic-card-title, .tri-label, h3, h4, .group-student-name { color: #0F172A !important; }
+            .act-tech { color: #475569 !important; }
+            .btn-win-naval, .btn-buy, .btn-share, .round-all-btn, .btn-new-student, .eval-mode-toggle-btn { color: #FFFFFF !important; }
+            .student-hero { color: #FFFFFF !important; }
+            .xp-pill { background-color: #FFFFFF !important; color: #EA580C !important; }
+            .stage-badge { background-color: #F8FAFC !important; border-color: #CBD5E1 !important; }
+            .stage-badge.active { background-color: #FFF7ED !important; border-color: #FF7A00 !important; }
+            .warmup-master-btn { background-color: #FEF2F2 !important; color: #B91C1C !important; }
+            .comic-card { background-color: #FFFFFF !important; }
+        `;
+        document.head.appendChild(style);
+        showAlert("☀️ ¡Luz encendida! Hemos forzado el color claro en tu pantalla.");
     }
 
     window.addEventListener('DOMContentLoaded', (event) => {
