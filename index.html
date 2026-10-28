@@ -202,7 +202,7 @@
       <div class="stage-badge" id="stg-amarilla" onclick="setStage('amarilla', '🟡 Amarilla', 'stg-amarilla')"><span class="title">🟡 Amarilla</span></div>
     </div>
 
-    <!-- BARRA DEL ALUMNO (AHORA VISIBLE EN MANUAL TAMBIÉN) -->
+    <!-- BARRA DEL ALUMNO (VISIBLE EN TODAS LAS VISTAS) -->
     <div class="student-hero" id="heroBar">
       <div class="student-selector-box">
         <div id="singleStudentControls">
@@ -273,7 +273,7 @@
       </div>
     </div>
 
-    <!-- NUEVA PANTALLA: VALORES (ESCUDO DE HONOR) -->
+    <!-- PANTALLA: VALORES (ESCUDO DE HONOR) -->
     <div class="screen-content" id="viewValores" style="display: none;">
       <div class="card-3d" style="border-color: #FCD34D; border-bottom-color: #F59E0B; padding: 24px;">
         <div class="card-title" style="color: #D97706; font-size: 20px; display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap;">
@@ -286,7 +286,7 @@
       </div>
     </div>
 
-    <!-- PANTALLAS EXTRAS -->
+    <!-- PANTALLA DESAFÍOS -->
     <div class="screen-content" id="viewDesafios" style="display: none;">
       <div class="desafio-panel" style="border-color: #BAE6FD; background: #F0F9FF;">
         <div class="desafio-header"><span class="desafio-icon">⚙️</span> Configurador de Competencia</div>
@@ -320,12 +320,12 @@
       </div>
     </div>
 
-    <!-- NUEVA PANTALLA: MANUAL TÉCNICO -->
+    <!-- MANUAL TÉCNICO COMPLETO CON LAS 25 FOTOS Y PUNTOS EVALUABLES -->
     <div class="screen-content" id="viewManual" style="display: none;">
       <div class="card-3d" style="border-color: #6366F1; border-bottom-color: #4F46E5; padding: 20px;">
         <div class="card-title" style="color: #4F46E5; font-size: 18px; margin-bottom: 4px;">📖 MANUAL DE CONTENIDOS TÉCNICOS</div>
         <p style="font-size: 12px; font-weight: 800; color: #64748B; text-align: center; margin-bottom: 16px;">
-          Puntos claves técnicos evaluables por golpe y nivel. 
+          Puntos claves técnicos evaluables por golpe y nivel. Tocá las cocardas para registrar el progreso y enviar aviso directo a la familia.
         </p>
         
         <div class="manual-tabs" id="manualStrokeTabs">
@@ -354,7 +354,6 @@
         <div class="card-title" id="tituloMazo" style="color: #6D28D9;">Mazo Oficial de Cartas</div>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px;">
-          <!-- Sobre Sorpresa -->
           <div style="background: #F0FDF4; border: 2.5px solid #86EFAC; border-radius: 16px; padding: 14px; text-align: center;">
             <div style="font-size: 26px; margin-bottom: 4px;">🎁</div>
             <h3 style="font-size: 14px; font-weight: 900; color: #166534; margin-bottom: 4px;">Sobre Sorpresa (Pack)</h3>
@@ -365,7 +364,6 @@
             </div>
           </div>
 
-          <!-- Trueque Digital -->
           <div style="background: #EFF6FF; border: 2.5px solid #93C5FD; border-radius: 16px; padding: 14px; text-align: center;">
             <div style="font-size: 26px; margin-bottom: 4px;">🤝</div>
             <h3 style="font-size: 14px; font-weight: 900; color: #1E3A8A; margin-bottom: 4px;">Trueque Digital</h3>
@@ -373,7 +371,6 @@
             <button onclick="openTradeModal()" style="background: #3B82F6; color: white; border: none; border-bottom: 3px solid #1E40AF; padding: 8px 14px; border-radius: 10px; font-weight: 900; font-size: 13px; cursor: pointer; width: 100%;">🔄 Iniciar Trueque</button>
           </div>
 
-          <!-- Conserva o Cambia -->
           <div style="background: #FEF2F2; border: 2.5px solid #FCA5A5; border-radius: 16px; padding: 14px; text-align: center;">
             <div style="font-size: 26px; margin-bottom: 4px;">⚡</div>
             <h3 style="font-size: 14px; font-weight: 900; color: #991B1B; margin-bottom: 4px;">Conserva o Cambia</h3>
@@ -382,7 +379,6 @@
           </div>
         </div>
 
-        <!-- PANEL DE SORTEO ALEATORIO JUSTO -->
         <div style="background: linear-gradient(135deg, #F5F3FF, #EDE9FE); border: 2.5px solid #8B5CF6; border-radius: 16px; padding: 14px; margin-bottom: 16px; text-align: center;">
           <h3 style="font-size: 14px; font-weight: 900; color: #6D28D9; margin-bottom: 6px;">🎲 Sorteo Aleatorio Transparente</h3>
           <p style="font-size: 11px; font-weight: 700; color: #5B21B6; margin-bottom: 10px;">Garantiza cero favoritismos seleccionando una carta al azar para el desafío actual.</p>
@@ -419,7 +415,6 @@
     </div>
 
     <div class="screen-content" id="viewTienda" style="display: none;">
-      <!-- RULETA DE LA SUERTE -->
       <div style="background: linear-gradient(135deg, #8B5CF6, #6D28D9); border-radius: 16px; padding: 18px; text-align: center; color: white; margin-bottom: 18px; box-shadow: 0 4px 15px rgba(109, 40, 217, 0.4);">
         <div style="font-size: 32px; margin-bottom: 6px;">🎰</div>
         <h3 style="font-size: 18px; font-weight: 900; text-transform: uppercase;">La Ruleta de la Suerte</h3>
@@ -564,7 +559,7 @@
     }
 
     try { 
-        const ld = localStorage.getItem('dt_final_v65'); 
+        const ld = localStorage.getItem('dt_final_v67'); 
         if (ld) { 
             let pd = JSON.parse(ld); 
             if(pd && Object.keys(pd).length > 0) {
@@ -574,7 +569,7 @@
         } 
     } catch (e) {}
     
-    function saveState() { try { localStorage.setItem('dt_final_v65', JSON.stringify(students)); } catch (e) {} updateCardCount(); }
+    function saveState() { try { localStorage.setItem('dt_final_v67', JSON.stringify(students)); } catch (e) {} updateCardCount(); }
 
     function getStudentEarnedStars(st) {
       if (!st) return 0;
@@ -610,21 +605,21 @@
       fisicos: [ { id: "f1", name: "Antivibrador Pro", cost: 150, icon: "🎯", sponsor: "Wilson" }, { id: "f2", name: "Cubregrip Extra Tacky", cost: 200, icon: "🩹", sponsor: "Wilson" }, { id: "f3", name: "Tubo de Pelotas (3)", cost: 350, icon: "🟡", sponsor: "Babolat" }, { id: "f4", name: "Remera Oficial Divertitenis", cost: 500, icon: "👕", sponsor: "Divertitenis" } ]
     };
 
-    /* BASE DE DATOS DEL MANUAL TÉCNICO */
+    /* BASE DE DATOS DEL MANUAL TÉCNICO OFICIAL */
     const manualDB = {
        drive: {
           5: ["Tener la raqueta con las 2 manos al comienzo del peloteo.", "Sostener la raqueta del final del grip.", "Golpear la pelota delante del cuerpo."],
           4: ["Golpear la pelota con las diferentes caras de la raqueta.", "Apoyos semiabiertos.", "Apoyos cerrados.", "Salir de la línea de las trayectorias.", "La recuperación de la cancha después del impacto."],
           3: ["Actitud de alerta con la mano libre en el corazón de la raqueta.", "Unidad de giro.", "Apoyos semiabiertos en los envíos.", "Soltar la pelota hacia arriba y golpearla hacia adelante.", "Detener la pelota delante del cuerpo.", "Golpear la pelota delante del cuerpo.", "Mantiene y cambia las trayectorias."],
           2: ["Actitud de atención dinámica.", "Poner el cuerpo en atención a través del golpe del contrario.", "Disociación de la parte alta y baja del cuerpo.", "Orientación precoz de los hombros.", "Posición equilibrada.", "Acción de mano / antebrazo atravesando la pelota.", "Amplitud del backswing reducida sobre la devolución sobre el 1er saque."],
-          1: ["Sostener la raqueta con las 2 manos entre cada golpe.", "Cronología de la técnica hacia la pelota abierta y en la recuperación.", "Nivelación de la cabeza de la raqueta más baja para el efecto topspin.", "Apertura y empuje de las piernas para una buena base.", "Cronología de la técnica hacia la pelota corta golpear avanzando (pierna derecha hacia adelante).", "Apoyos abiertos sobre la devolución de 1ros saques al drive.", "Diferentes terminaciones del gesto del drive."]
+          1: ["Sostener la raqueta con las 2 manos entre cada golpe.", "Cronología de la técnica hacia la pelota abierta y en la recuperación.", "Nivelación de la cabeza de la raqueta más baja para el efecto topspin.", "Apertura y empuje de las piernas para una buena base.", "Cronología de la técnica hacia la pelota corta golpear avanzando.", "Apoyos abiertos sobre la devolución de 1ros saques al drive.", "Diferentes terminaciones del gesto del drive."]
        },
        reves: {
           5: ["Empuñadura de revés a una o dos manos.", "Jugar de revés a una mano.", "Jugar de revés a dos manos.", "Actitud de la mano libre en el corazón de la raqueta.", "Unidad de giro de revés a dos manos."],
           4: ["Golpear la pelota delante del cuerpo.", "La recuperación de la cancha después del impacto.", "Golpear y devolver en equilibrio."],
           3: ["Golpear la pelota delante del cuerpo.", "Actitud de atención dinámica con hombros y brazos relajados.", "Sostener la raqueta con las 2 manos entre cada golpe."],
-          2: ["Apoyos orientados hacia el golpe.", "Diferentes formas de ubicarse y recuperación.", "Preparación del revés donde las cuerdas van hacia atrás pasando por encima de las manos.", "Disociación de la parte alta y baja del cuerpo.", "Patinar sobre polvo de ladrillo.", "Fin de la preparación por encima del punto de impacto."],
-          1: ["Atraviesa la pelota.", "Nivelación de la cabeza de la raqueta más baja para el efecto topspin.", "Apertura y empuje de las piernas.", "Cronología de la técnica hacia la pelota corta golpear avanzando (pierna izquierda hacia adelante).", "Devolución defensiva de revés a una mano.", "Apoyos abiertos sobre devoluciones de revés de dos manos 1ros saques.", "Diferentes terminaciones en el gesto del revés."]
+          2: ["Apoyos orientados hacia el golpe.", "Diferentes formas de ubicarse y recuperación.", "Preparación del revés donde las cuerdas van hacia atrás.", "Disociación de la parte alta y baja del cuerpo.", "Patinar sobre polvo de ladrillo.", "Fin de la preparación por encima del punto de impacto."],
+          1: ["Atraviesa la pelota.", "Nivelación de la cabeza de la raqueta más baja para el efecto topspin.", "Apertura y empuje de las piernas.", "Cronología de la técnica hacia la pelota corta golpear avanzando.", "Devolución defensiva de revés a una mano.", "Apoyos abiertos sobre devoluciones de revés de dos manos.", "Diferentes terminaciones en el gesto del revés."]
        },
        volea: {
           5: ["Empuñadura continental.", "Posición de alerta con un cono.", "Posición de alerta con raqueta."],
@@ -642,10 +637,10 @@
        },
        saque: {
           5: ["Lanzamiento desde la posición armado.", "Apoyos semiabiertos detrás de la línea.", "Empuñadura semicerrada del drive.", "Lanzamiento de la pelota con la mano inhábil por encima de su cabeza."],
-          4: ["A partir de la mitad de la cancha celeste, lanza la pelota por arriba de su cabeza y golpearla.", "Inicio del movimiento del saque desde la mitad del cuerpo sosteniendo la raqueta del final del grip.", "Ambos brazos suben simétricamente hasta la posición de armado.", "Golpear por encima de la cabeza.", "Saca desde la posición de armado desde un lado de la cancha en el terreno opuesto."],
-          3: ["Lanzamiento hacia arriba de la pelota coordinado con lanzamiento hacia adelante.", "Posición de inicio del saque con raqueta sostenido por las dos manos.", "Regularidad y precisión del lanzamiento, búsqueda del punto de contacto ideal.", "Pronación del antebrazo.", "Golpear la pelota extendiendo el antebrazo.", "Flexión de la muñeca."],
-          2: ["Hacia el impacto de la pelota con extensión del cuerpo.", "Armado con más Orientación de los hombros hacia mayor torque.", "Ritmo del golpe del saque."],
-          1: ["Proyección del codo.", "Apoyos en línea, elevación coordinada de los brazos.", "Bucle con proyección del codo.", "Acción de flexión moderada de las piernas.", "Raspar la pelota de abajo hacia arriba y de izquierda a derecha (Top/Slice/Plano).", "Flexión de la muñeca.", "Lanzamiento de pelotas adaptado a los diferentes efectos.", "Transferencia y recuperación en equilibrio luego del impacto."]
+          4: ["A partir de la mitad de la cancha celeste, lanza la pelota por arriba de su cabeza y golpearla.", "Inicio del movimiento del saque desde la mitad del cuerpo.", "Ambos brazos suben simétricamente hasta la posición de armado.", "Golpear por encima de la cabeza.", "Saca desde la posición de armado desde un lado de la cancha en el terreno opuesto."],
+          3: ["Lanzamiento hacia arriba de la pelota coordinado con lanzamiento hacia adelante.", "Posición de inicio del saque con raqueta sostenido por las dos manos.", "Regularidad y precisión del lanzamiento.", "Pronación del antebrazo.", "Golpear la pelota extendiendo el antebrazo.", "Flexión de la muñeca."],
+          2: ["Hacia el impacto de la pelota con extensión del cuerpo.", "Armado con más orientación de los hombros hacia mayor torque.", "Ritmo del golpe del saque."],
+          1: ["Proyección del codo.", "Apoyos en línea, elevación coordinada de los brazos.", "Bucle con proyección del codo.", "Acción de flexión moderada de las piernas.", "Raspar la pelota de abajo hacia arriba y de izquierda a derecha.", "Flexión de la muñeca.", "Lanzamiento de pelotas adaptado a los diferentes efectos.", "Transferencia y recuperación en equilibrio luego del impacto."]
        }
     };
 
@@ -855,7 +850,7 @@
         ],
         recib_obj7: [
           { id: "rc7_1", kid: "Lanzamiento Libre", meta: "Celeste • Recib. 7.1/2", tech: "Lanzar con mano libre (D/I) y atrapar con raqueta (ambas caras).", pedagogy: "Independencia de brazos." },
-          { id: "rc7_2", kid: "Escalera de Atrapes", meta: "Celeste • Recib. 7.6", tech: "Recoger en rodillas, cintura y hombros variando la cara de la raqueta.", pedagogy: "Adaptación de la muñeca a distintas alturas." },
+          { id: "rc7_2", kid: "Escala de Atrapes", meta: "Celeste • Recib. 7.6", tech: "Recoger en rodillas, cintura y hombros variando la cara de la raqueta.", pedagogy: "Adaptación de la muñeca a distintas alturas." },
           { id: "rc7_3", kid: "Nace el Saque (Medio Saque)", meta: "Celeste • Recib. 7.7", tech: "Lanzar y tocar con raqueta por encima de los hombros.", pedagogy: "Iniciación de la ventana de impacto del servicio." }
         ]
       },
@@ -987,7 +982,7 @@
       document.getElementById('tri-stat-proy').textContent = `${proyDone} 🌟`;
     }
 
-    // --- RENDERIZAR ESCUDO DE HONOR ---
+    // --- ESCUDO DE HONOR ---
     window.openCriteriaModal = function() {
       document.getElementById('criteriaModal').style.display = 'flex';
       updateCriteriaView();
@@ -1060,7 +1055,7 @@
         updateTotalsDisplay();
     }
 
-    // --- MANUAL TÉCNICO ---
+    // --- MANUAL TÉCNICO COMPLETO ---
     window.setManualStroke = function(stroke) {
        currentManualStroke = stroke;
        document.querySelectorAll('.mtab-btn').forEach(b => b.classList.remove('active'));
@@ -1111,21 +1106,26 @@
            "drive_3": "https://i.postimg.cc/GthLbZkj/cont-1-Drive-nivel-3-1-2-3-4-5-6-7.jpg",
            "drive_2": "https://i.postimg.cc/7L3w0xXq/cont-1-drive-nivel-2-1-2-3-4-5-6-7.jpg",
            "drive_1": "https://i.postimg.cc/52vVWxhF/cont-1-drive-nivel-1-1-2-3-4-5-6-7.jpg",
-           "reves_5": "https://i.postimg.cc/9F7d0c3Z/cont-2-reves-nivel-5-1-2-3-4-5.jpg",
-           "reves_4": "https://i.postimg.cc/fLydjG6d/cont-2-reves-nivel-4-1-2-3.jpg",
-           "reves_3": "https://i.postimg.cc/MHWsHncm/cont-2-reves-nivel-3-1-2-3.jpg",
-           "reves_2": "https://i.postimg.cc/6pjF63z9/cont-2-reves-nivel-2-1-2-3-4-5-6.jpg",
-           "reves_1": "https://i.postimg.cc/prgQd6y9/cont-2-reves-nivel-1-1-2-3-4-5-6-7.jpg",
-           "volea_5": "https://i.postimg.cc/qvh7tL6S/cont-3-voleas-nivel-5-1-2-3.jpg",
-           "volea_4": "https://i.postimg.cc/dtzMym94/cont-3-voleas-nivel-4-1-2.jpg",
-           "volea_3": "https://i.postimg.cc/9fh82t0T/cont-3-voleas-nivel-3-1-2-3.jpg",
-           "volea_2": "https://i.postimg.cc/Vv88qM5k/cont-3-voleas-nivel-2-1-2-3-4-5.jpg",
-           "volea_1": "https://i.postimg.cc/g0K5t5d5/cont-3-voleas-nivel-1-1-2-3.jpg",
-           "smash_5": "https://i.postimg.cc/pT3Y3Z0w/cont-4-smash-nivel-5-1-2-3-4.jpg",
-           "smash_4": "https://i.postimg.cc/brZpTSYJ/cont-4-smash-nivel-4-1-2-3.jpg",
-           "smash_3": "https://i.postimg.cc/bvnTzK7r/cont-4-smash-nivel-3-1-2-3.jpg",
-           "smash_2": "https://i.postimg.cc/J0bLtt3Z/cont-4-smash-nivel-2-1-2-3.jpg",
-           "smash_1": "https://i.postimg.cc/YSpqF10G/cont-4-smash-nivel-1-1-2-3-4-5-6-7.jpg"
+           "reves_5": "https://i.postimg.cc/Xqg68DcV/cont-2-Reves-nivel-5-1-2-3-4-5.jpg",
+           "reves_4": "https://i.postimg.cc/jCVnH2Xg/Cont-2-Reves-nivel-4-1-2-3.jpg",
+           "reves_3": "https://i.postimg.cc/pd0ZDQFb/Cont-2-Reves-Nivel-3-1-2-3.jpg",
+           "reves_2": "https://i.postimg.cc/hPF0bth6/Cont-2-Reves-nivel-2-1-2-3-4-5-6.jpg",
+           "reves_1": "https://i.postimg.cc/jjj6dWkZ/cont-2-Reves-nivel-1-1-2-3-4-5-6-7.jpg",
+           "volea_5": "https://i.postimg.cc/kMWSCFgd/cont-3-Voleas-nivel-5-1-2-3.jpg",
+           "volea_4": "https://i.postimg.cc/P5VpyS2R/Cont-3-Voleas-Nivel-4-1-2.jpg",
+           "volea_3": "https://i.postimg.cc/CMCRXhcp/cont-3-voleas-nivel-3-1-2-3.jpg",
+           "volea_2": "https://i.postimg.cc/DZrw96dB/Cont-3-nivel-2-1-2-3-4-5.jpg",
+           "volea_1": "https://i.postimg.cc/sDDgLpBn/cont-3-Voleas-Nivel-1-1-2-3.jpg",
+           "smash_5": "https://i.postimg.cc/ZR7M5tcY/Cont-4-smash-nivel-5-1-2-3-4.jpg",
+           "smash_4": "https://i.postimg.cc/5tpPsdDB/Cont-4-Smash-Nivel-4-1-2-3.jpg",
+           "smash_3": "https://i.postimg.cc/d0WbLysb/Cont-4-Smash-nivel-3-1-2-3.jpg",
+           "smash_2": "https://i.postimg.cc/ryRBwsvP/Cont-4-Smash-Nivel-2-1-2-3.jpg",
+           "smash_1": "https://i.postimg.cc/mgjq5HHV/Cont-4-Smash-Nivel-1-1-2-3-4-5-6-7.jpg",
+           "saque_5": "https://i.postimg.cc/ZKMjBxps/Cont-5-Saque-nivel-5-1-2-3-4.jpg",
+           "saque_4": "https://i.postimg.cc/FznbShdD/Cont-5-Saque-Nivel-4-1-2-3-4-5.jpg",
+           "saque_3": "https://i.postimg.cc/bvJmsVF6/Cont-5-Saque-Nivel-3-1-2-3-4-5-6.jpg",
+           "saque_2": "https://i.postimg.cc/CxWRqzv0/Cont-5-Saque-nivel-2-1-2-3.jpg",
+           "saque_1": "https://i.postimg.cc/63B5rRC5/Cont-5-Saque-nivel-1-1-2-3-4-5-6-7-8.jpg"
        };
 
        let imgKey = `${currentManualStroke}_${currentManualLevel}`;
@@ -1795,14 +1795,13 @@
       currentMode = mode;
       document.querySelectorAll('.master-btn').forEach(btn => btn.classList.remove('active'));
       
-      // Control de Interfaz de Candado Familiar
       if (mode === 'family') {
           document.getElementById('btnModeFamily').classList.add('active'); 
           showAlert("🔒 MODO FAMILIA ACTIVADO\n\nEl celular está en Modo de Solo Lectura. Los padres pueden navegar por las pestañas inferiores para ver el progreso, pero no pueden modificar ni gastar nada.");
           document.getElementById('btnNewStudent').style.display = 'none';
           document.getElementById('btnStreak').style.display = 'none';
           document.getElementById('btnToggleGroupMode').style.display = 'none';
-          if(isGroupRoundMode) toggleGroupRoundMode(); // Sale de grupo si estaba
+          if(isGroupRoundMode) toggleGroupRoundMode(); 
       } else {
           document.getElementById('btnNewStudent').style.display = 'inline-block';
           document.getElementById('btnStreak').style.display = 'inline-block';
@@ -1811,7 +1810,6 @@
 
       document.querySelectorAll('.screen-content').forEach(el => el.style.display = 'none');
       
-      // Mostrar barras superiores por defecto (¡AQUÍ ESTABA EL PROBLEMA CON LA BARRA DE ALUMNO, AHORA SIEMPRE SE VE!)
       document.getElementById('heroBar').style.display = 'flex';
       document.getElementById('masterWarmupBar').style.display = 'flex';
       document.getElementById('progressionStrip').style.display = 'flex';
@@ -1847,11 +1845,11 @@
         renderTienda();
       } else if(mode === 'manual') {
         document.getElementById('btnModeManual').classList.add('active'); 
-        // ACÁ BORRÉ LA LÍNEA QUE OCULTABA EL 'heroBar'. AHORA LA BARRA DEL ALUMNO SE VE SIEMPRE EN EL MANUAL.
+        document.getElementById('heroBar').style.display = 'flex'; 
         document.getElementById('masterWarmupBar').style.display = 'none'; 
         document.getElementById('progressionStrip').style.display = 'none'; 
         document.getElementById('viewManual').style.display = 'flex'; 
-        renderManual(); // Renderiza la primer vista del manual
+        renderManual(); 
       }
     }
 
