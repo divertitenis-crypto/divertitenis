@@ -14,7 +14,7 @@
     
     :root {--orange-primary: #FF7A00; --orange-dark: #D95D00; --blue-accent: #0284C7; --blue-dark: #0369A1; --green-grass: #10B981; --green-dark: #059669; --bg-tennis: #FFF8F0; --card-bg: #FFFFFF; --text-dark: #1E293B; --warmup-color: #EF4444; --warmup-dark: #B91C1C;}
     * {box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;}
-    html, body {background-color: #FFF8F0 !important; color: var(--text-dark); padding: 16px 12px 40px; min-height: 100vh; display: flex; flex-direction: column; align-items: center;}
+    html, body {background-color: #FFF8F0 !important; color: var(--text-dark); padding: 16px 12px 40px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; width: 100%; max-width: 100vw;}
     
     /* MODIFICACIÓN: BARRA MAESTRA ADAPTADA PARA 7 BOTONES */
     .master-switcher {display: flex; background: #1E293B; padding: 6px; border-radius: 30px; margin-bottom: 14px; border: 2px solid #334155; width: 100%; max-width: 850px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); flex-wrap: wrap; justify-content: center; gap: 4px;}
@@ -32,7 +32,7 @@
     .stage-badge {flex: 1 1 130px; display: flex; flex-direction: column; align-items: center; padding: 8px 10px; border-radius: 14px; background: #F8FAFC; border: 2px solid #CBD5E1; border-bottom: 4px solid #94A3B8; cursor: pointer; opacity: 0.65; transition: all 0.15s ease; text-align: center;}
     .stage-badge.active {opacity: 1; background: #FFF7ED; border-color: var(--orange-primary); border-bottom: 4px solid var(--orange-dark); transform: translateY(-2px);}
     .stage-badge .title {font-size: 13px; font-weight: 900; color: #0F172A;}
-    .screen-content {padding: 18px; display: flex; flex-direction: column; gap: 14px;}
+    .screen-content {padding: 18px; display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 100%; overflow-x: hidden;}
     .student-hero {background: linear-gradient(135deg, #FF7A00, #EA580C); color: white; border-radius: 20px; padding: 14px 18px; border-bottom: 5px solid #C2410C; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; margin: 16px 18px 0;}
     .student-selector-box {display: flex; align-items: center; flex-wrap: wrap; gap: 10px;}
     .student-selector-box select {background: #FFFFFF; border: none; font-size: 16px; font-weight: 900; color: #EA580C; padding: 6px 12px; border-radius: 10px; outline: none; cursor: pointer;}
@@ -41,7 +41,7 @@
     .eval-mode-toggle-btn.active {background: #0284C7; border-color: #0369A1; color: #FFFFFF;}
     .student-hero .subtitle {font-size: 12px; font-weight: 700; background: rgba(255,255,255,0.25); padding: 4px 10px; border-radius: 10px; display: inline-block;}
     .xp-pill {background: #FFFFFF; color: #EA580C; font-weight: 900; font-size: 17px; padding: 8px 16px; border-radius: 16px; border-bottom: 3px solid #FDBA74; cursor: pointer;}
-    .card-3d {background-color: #FFFFFF !important; border-radius: 20px; padding: 16px; border: 3px solid #FFEDD5; border-bottom: 6px solid #FDBA74;}
+    .card-3d {background-color: #FFFFFF !important; border-radius: 20px; padding: 16px; border: 3px solid #FFEDD5; border-bottom: 6px solid #FDBA74; width: 100%; max-width: 100%; box-sizing: border-box; overflow-x: hidden;}
     .card-title {font-size: 14px; font-weight: 900; color: var(--orange-primary); text-transform: uppercase; margin-bottom: 10px; text-align: center;}
     .triangle-box {position: relative; width: 100%; max-width: 420px; margin: 0 auto 10px; display: flex; justify-content: center; align-items: center;}
     svg.tri-svg {width: 100%; height: 200px; overflow: visible;}
@@ -52,18 +52,18 @@
     .skills-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px; margin-bottom: 14px;}
     .filter-pill {background: #F8FAFC; border: 2px solid #E2E8F0; border-bottom: 4px solid #CBD5E1; border-radius: 14px; padding: 9px 8px; font-size: 11.5px; font-weight: 800; color: #64748B; cursor: pointer; text-align: center;}
     .filter-pill.active {background: #EFF6FF; border-color: #38BDF8; border-bottom: 4px solid var(--blue-accent); color: var(--blue-dark); transform: translateY(-2px);}
-    .activity-row {background: #FFFFFF; border: 2px solid #E2E8F0; border-bottom: 4px solid #CBD5E1; border-radius: 16px; padding: 12px 14px; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 12px; position: relative;}
+    .activity-row {background: #FFFFFF; border: 2px solid #E2E8F0; border-bottom: 4px solid #CBD5E1; border-radius: 16px; padding: 12px 14px; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 12px; position: relative; width: 100%;}
     .activity-row.done {background: #F0FDF4; border-color: #86EFAC; border-bottom-color: #4ADE80;}
     .glowing-reto {border-color: #FBBF24; border-bottom-color: #D97706; background: #FFFBEB; box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);}
     .glowing-reto::before {content: '🎯 RETO DEL DÍA (Doble 🌟)'; position: absolute; top: -10px; right: 15px; background: #F59E0B; color: white; font-size: 9px; font-weight: 900; padding: 2px 8px; border-radius: 10px;}
     .cocarda-btn {width: 44px; height: 44px; border-radius: 50%; border: 3px solid; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; cursor: pointer; flex-shrink: 0; margin-top: 2px; user-select: none;}
     .cocarda-btn:active {transform: scale(0.9);}
-    .act-content {flex: 1;}
+    .act-content {flex: 1; min-width: 0; overflow-x: hidden;}
     .act-top {display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; flex-wrap: wrap; gap:4px;}
-    .act-title {font-size: 13.5px; font-weight: 900; color: #0F172A;}
+    .act-title {font-size: 13.5px; font-weight: 900; color: #0F172A; word-break: break-word;}
     .act-xp {background: #FFF7ED; color: var(--orange-primary); border: 1.5px solid #FFEDD5; font-weight: 800; font-size: 10.5px; padding: 2px 7px; border-radius: 8px;}
     .act-meta {font-size: 9.5px; font-weight: 800; color: #9A3412; background: #FFEDD5; padding: 2px 7px; border-radius: 6px; display: inline-block; margin-bottom: 3px;}
-    .act-tech {font-size: 11.5px; font-weight: 600; color: #475569; line-height: 1.35; margin-bottom: 5px;}
+    .act-tech {font-size: 11.5px; font-weight: 600; color: #475569; line-height: 1.35; margin-bottom: 5px; word-break: break-word;}
     .act-pedagogy {font-size: 10.5px; font-weight: 700; color: #0369A1; background: #F0F9FF; border: 1px solid #BAE6FD; padding: 3px 9px; border-radius: 10px; display: inline-block;}
     .notification-container {position: fixed; top: 20px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 10px; pointer-events: none;}
     .toast-push {background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-left: 6px solid #10B981; border-radius: 16px; padding: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.25); width: 320px; transform: translateX(150%); transition: transform 0.4s ease; display: flex; gap: 14px; align-items: center; pointer-events: auto;}
@@ -141,22 +141,30 @@
     .h-nivel-3 {background: linear-gradient(135deg, #FEF08A, #FACC15); border-color: #CA8A04; border-bottom-color: #A16207; color: #713F12; box-shadow: 0 0 16px rgba(250,204,21,0.6);} /* Oro */
     .h-nivel-3 .honor-icon {transform: scale(1.2); filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.25));}
     
-    /* ESTILOS MANUAL TECNICO */
-    .manual-tabs {display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px;}
-    .mtab-btn {background: #F1F5F9; border: 2px solid #CBD5E1; border-bottom: 4px solid #94A3B8; border-radius: 12px; padding: 8px 12px; font-size: 13px; font-weight: 900; color: #475569; cursor: pointer; white-space: nowrap;}
-    .mtab-btn.active {background: #E0F2FE; border-color: #38BDF8; border-bottom-color: #0284C7; color: #0369A1; transform: translateY(-2px);}
-    .mlevel-btn {flex: 1; padding: 8px 4px; font-size: 11px; font-weight: 900; border-radius: 10px; border: 2px solid; border-bottom-width: 4px; cursor: pointer; text-align: center; opacity: 0.6; color: #0F172A;}
-    .mlevel-btn.active {opacity: 1; transform: translateY(-2px);}
-    .ml-5 {background: #F8FAFC; border-color: #CBD5E1; border-bottom-color: #94A3B8;} /* Blanco */
-    .ml-4 {background: #E0F2FE; border-color: #7DD3FC; border-bottom-color: #0284C7;} /* Celeste */
-    .ml-3 {background: #FEE2E2; border-color: #FCA5A5; border-bottom-color: #DC2626;} /* Rojo */
-    .ml-2 {background: #FFEDD5; border-color: #FDBA74; border-bottom-color: #EA580C;} /* Naranja */
-    .ml-1 {background: #DCFCE7; border-color: #86EFAC; border-bottom-color: #16A34A;} /* Verde */
-    
-    .manual-list-item {background: #F8FAFC; border-left: 5px solid #0284C7; padding: 12px; border-radius: 8px; margin-bottom: 8px; font-size: 13px; font-weight: 700; color: #334155; display: flex; gap: 10px; align-items: flex-start;}
-    .manual-list-num {background: #0284C7; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 11px; flex-shrink: 0;}
+    /* RESTRICCIÓN DE IMAGEN MANUAL PARA QUE NO ROMPA EL ANCHO DE PANTALLA EN CELULAR */
+    #manualContentList img {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      object-fit: contain !important;
+      display: block;
+      border-radius: 12px;
+    }
 
-    /* ESTILO PARA EL PIE LEGAL */
+    /* ESTILOS MANUAL TÉCNICO */
+    .manual-tabs {display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px; width: 100%; -webkit-overflow-scrolling: touch;}
+    .mtab-btn {background: #F1F5F9; border: 2px solid #CBD5E1; border-bottom: 4px solid #94A3B8; border-radius: 12px; padding: 8px 12px; font-size: 13px; font-weight: 900; color: #475569; cursor: pointer; white-space: nowrap; flex-shrink: 0;}
+    .mtab-btn.active {background: #E0F2FE; border-color: #38BDF8; border-bottom-color: #0284C7; color: #0369A1; transform: translateY(-2px);}
+    
+    /* NIVELES SÓLO NÚMEROS (5, 4, 3, 2, 1) */
+    .mlevel-btn {flex: 1; min-width: 55px; padding: 8px 4px; font-size: 12px; font-weight: 900; border-radius: 10px; border: 2px solid; border-bottom-width: 4px; cursor: pointer; text-align: center; opacity: 0.6; color: #0F172A;}
+    .mlevel-btn.active {opacity: 1; transform: translateY(-2px);}
+    .ml-5 {background: #F8FAFC; border-color: #CBD5E1; border-bottom-color: #94A3B8;} 
+    .ml-4 {background: #E0F2FE; border-color: #7DD3FC; border-bottom-color: #0284C7;} 
+    .ml-3 {background: #FEE2E2; border-color: #FCA5A5; border-bottom-color: #DC2626;} 
+    .ml-2 {background: #FFEDD5; border-color: #FDBA74; border-bottom-color: #EA580C;} 
+    .ml-1 {background: #DCFCE7; border-color: #86EFAC; border-bottom-color: #16A34A;} 
+
     .legal-footer { text-align: center; margin-top: 24px; padding: 0 20px; font-size: 10.5px; font-weight: 800; color: #64748B; max-width: 600px; line-height: 1.5; }
     .legal-footer strong { color: #475569; font-weight: 900; }
   </style>
@@ -173,7 +181,7 @@
     </div>
   </div>
 
-  <!-- NAVEGACIÓN -->
+  <!-- NAVEGACIÓN (7 BOTONES) -->
   <div class="master-switcher">
     <button class="master-btn active" id="btnModeProfe" onclick="setMasterMode('profe')">📋 Profe</button>
     <button class="master-btn" id="btnModeFamily" onclick="setMasterMode('family')">👨‍👩‍👧 Familia</button>
@@ -320,10 +328,10 @@
       </div>
     </div>
 
-    <!-- MANUAL TÉCNICO COMPLETO CON LAS 25 FOTOS Y PUNTOS EVALUABLES -->
+    <!-- MANUAL TÉCNICO COMPLETO (SÓLO NÚMEROS EN NIVELES 5, 4, 3, 2, 1) -->
     <div class="screen-content" id="viewManual" style="display: none;">
       <div class="card-3d" style="border-color: #6366F1; border-bottom-color: #4F46E5; padding: 20px;">
-        <div class="card-title" style="color: #4F46E5; font-size: 18px; margin-bottom: 4px;">📖 MANUAL DE CONTENIDOS TÉCNICOS</div>
+        <div class="card-title" style="color: #6366F1; font-size: 18px; margin-bottom: 4px;">📖 MANUAL DE CONTENIDOS TÉCNICOS</div>
         <p style="font-size: 12px; font-weight: 800; color: #64748B; text-align: center; margin-bottom: 16px;">
           Puntos claves técnicos evaluables por golpe y nivel. Tocá las cocardas para registrar el progreso y enviar aviso directo a la familia.
         </p>
@@ -336,12 +344,13 @@
           <button class="mtab-btn" onclick="setManualStroke('saque')">🚀 Saque</button>
         </div>
 
+        <!-- SÓLO NÚMEROS EN LOS NIVELES 5, 4, 3, 2, 1 -->
         <div style="display: flex; gap: 4px; margin-bottom: 16px;" id="manualLevelTabs">
-          <button class="mlevel-btn ml-5 active" onclick="setManualLevel('5')">⚪ Nivel 5<br>Blanco</button>
-          <button class="mlevel-btn ml-4" onclick="setManualLevel('4')">🩵 Nivel 4<br>Celeste</button>
-          <button class="mlevel-btn ml-3" onclick="setManualLevel('3')">🔴 Nivel 3<br>Rojo</button>
-          <button class="mlevel-btn ml-2" onclick="setManualLevel('2')">🟠 Nivel 2<br>Naranja</button>
-          <button class="mlevel-btn ml-1" onclick="setManualLevel('1')">🟢 Nivel 1<br>Verde</button>
+          <button class="mlevel-btn ml-5 active" onclick="setManualLevel('5')">Nivel 5</button>
+          <button class="mlevel-btn ml-4" onclick="setManualLevel('4')">Nivel 4</button>
+          <button class="mlevel-btn ml-3" onclick="setManualLevel('3')">Nivel 3</button>
+          <button class="mlevel-btn ml-2" onclick="setManualLevel('2')">Nivel 2</button>
+          <button class="mlevel-btn ml-1" onclick="setManualLevel('1')">Nivel 1</button>
         </div>
 
         <div id="manualContentList"></div>
@@ -559,7 +568,7 @@
     }
 
     try { 
-        const ld = localStorage.getItem('dt_final_v67'); 
+        const ld = localStorage.getItem('dt_final_v65'); 
         if (ld) { 
             let pd = JSON.parse(ld); 
             if(pd && Object.keys(pd).length > 0) {
@@ -569,7 +578,7 @@
         } 
     } catch (e) {}
     
-    function saveState() { try { localStorage.setItem('dt_final_v67', JSON.stringify(students)); } catch (e) {} updateCardCount(); }
+    function saveState() { try { localStorage.setItem('dt_final_v65', JSON.stringify(students)); } catch (e) {} updateCardCount(); }
 
     function getStudentEarnedStars(st) {
       if (!st) return 0;
@@ -873,7 +882,7 @@
       { id: "xxs3_1", level: "XXS 3", name: "Boom de derecha!!", rule: "El siguiente tanto anotado de derecha suma 2 puntos.", que: "Poseedor", quien: "Válido por 1 gol", when: "Al definir", icon: "💥" },
       { id: "xxs3_2", level: "XXS 3", name: "Revés de fuego!!!", rule: "El siguiente tanto anotado de revés vale 2 puntos.", que: "Poseedor", quien: "Válido por 1 gol", when: "Al definir", icon: "🔥" },
       { id: "xxs3_3", level: "XXS 3", name: "Penales!!!", rule: "El jugador puede avanzar al centro del campo para definir.", que: "Poseedor", quien: "Durante 2 goles", when: "Al atacar", icon: "🥅" },
-      { id: "xxs3_4", level: "XXS 3", name: "Doble toque!", rule: "El jugador puede controlar la pelota 1 vez antes de pasarla.", que: "Poseedor", quien: "Durante el juego", when: "Recepción", icon: "✌️" },
+      { id: "xxs3_4", level: "XXS 3", name: "Doble toque!", rule: "El jugador puede controlar la pelota 1 vez antes de pasarla.", that: "Poseedor", who: "Durante el juego", when: "Recepción", icon: "✌️" },
       { id: "xxs3_5", level: "XXS 3", name: "Arco pequeño!!", rule: "Se reduce el arco u objetivo de impacto del jugador.", that: "Poseedor", who: "Hasta el próximo punto", when: "En defensa", icon: "🎯" },
       { id: "xxs3_6", level: "XXS 3", name: "Vos lo elegís!!", rule: "Vos elegís si tu gol de derecha o de revés valdrá 2 puntos.", que: "Poseedor", quien: "Hasta el próximo punto", when: "Al cantar golpe", icon: "⭐" },
       { id: "xxs4_1", level: "XXS 4", name: "2 goles!!", rule: "Se crean 2 arcos en las esquinas para cada campo de juego.", that: "Ambos", who: "Todo el juego", when: "En el partido", icon: "🥅" },
