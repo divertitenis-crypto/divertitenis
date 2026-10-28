@@ -9,15 +9,18 @@
     /* Escudo anti-modo-oscuro para celulares */
     @media (prefers-color-scheme: dark) {
       html, body { background-color: #FFF8F0 !important; color: #1E293B !important; }
-      .app-container, .card-3d, .activity-row, .student-selector-box select, .group-student-card, .desafio-panel, .naval-side, .tienda-item, .round-banner, .modal-card-box { background-color: #FFFFFF !important; color: #1E293B !important; }
+      .app-container, .card-3d, .activity-row, .student-selector-box select { background-color: #FFFFFF !important; color: #1E293B !important; }
     }
     
     :root {--orange-primary: #FF7A00; --orange-dark: #D95D00; --blue-accent: #0284C7; --blue-dark: #0369A1; --green-grass: #10B981; --green-dark: #059669; --bg-tennis: #FFF8F0; --card-bg: #FFFFFF; --text-dark: #1E293B; --warmup-color: #EF4444; --warmup-dark: #B91C1C;}
     * {box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;}
     html, body {background-color: #FFF8F0 !important; color: var(--text-dark); padding: 16px 12px 40px; min-height: 100vh; display: flex; flex-direction: column; align-items: center;}
-    .master-switcher {display: flex; background: #1E293B; padding: 6px; border-radius: 30px; margin-bottom: 14px; border: 2px solid #334155; width: 100%; max-width: 850px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); flex-wrap: wrap; gap: 4px; justify-content: center;}
-    .master-btn {flex: 1; border: none; background: transparent; padding: 10px 4px; border-radius: 25px; font-size: 12px; font-weight: 900; color: #94A3B8; cursor: pointer; transition: all 0.2s ease; text-align: center; min-width: 90px;}
+    
+    /* MODIFICACIÓN: BARRA MAESTRA ADAPTADA PARA 7 BOTONES */
+    .master-switcher {display: flex; background: #1E293B; padding: 6px; border-radius: 30px; margin-bottom: 14px; border: 2px solid #334155; width: 100%; max-width: 850px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); flex-wrap: wrap; justify-content: center; gap: 4px;}
+    .master-btn {flex: 1 1 100px; border: none; background: transparent; padding: 10px 4px; border-radius: 25px; font-size: 12px; font-weight: 900; color: #94A3B8; cursor: pointer; transition: all 0.2s ease; text-align: center;}
     .master-btn.active {background: var(--orange-primary); color: #FFFFFF; box-shadow: 0 4px 14px rgba(255, 122, 0, 0.45);}
+    
     .app-container {width: 100%; max-width: 960px; background-color: #FFF8F0 !important; border-radius: 28px; border: 4px solid #334155; box-shadow: 0 20px 40px rgba(0,0,0,0.5); overflow: hidden; display: flex; flex-direction: column; position: relative;}
     .app-header {background: #FFFFFF; padding: 16px 20px; text-align: center; border-bottom: 4px solid #FFEDD5;}
     .logo-frame {max-width: 300px; margin: 0 auto;}
@@ -40,20 +43,6 @@
     .xp-pill {background: #FFFFFF; color: #EA580C; font-weight: 900; font-size: 17px; padding: 8px 16px; border-radius: 16px; border-bottom: 3px solid #FDBA74; cursor: pointer;}
     .card-3d {background-color: #FFFFFF !important; border-radius: 20px; padding: 16px; border: 3px solid #FFEDD5; border-bottom: 6px solid #FDBA74;}
     .card-title {font-size: 14px; font-weight: 900; color: var(--orange-primary); text-transform: uppercase; margin-bottom: 10px; text-align: center;}
-    
-    /* ESTILOS ESCUDO DE HONOR */
-    .honor-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 14px; margin-top: 14px;}
-    .honor-badge {display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px 8px; border-radius: 18px; border: 3px solid; border-bottom-width: 6px; cursor: pointer; transition: transform 0.15s; text-align: center;}
-    .honor-badge:active {transform: scale(0.95);}
-    .honor-icon {font-size: 32px; margin-bottom: 6px;}
-    .honor-title {font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.2px;}
-    .h-nivel-0 {background: #F8FAFC; border-color: #E2E8F0; border-bottom-color: #CBD5E1; color: #94A3B8;}
-    .h-nivel-0 .honor-icon {filter: grayscale(100%) opacity(50%);}
-    .h-nivel-1 {background: linear-gradient(135deg, #FEF3C7, #FDE68A); border-color: #D97706; border-bottom-color: #B45309; color: #92400E;} /* Bronce */
-    .h-nivel-2 {background: linear-gradient(135deg, #F1F5F9, #E2E8F0); border-color: #94A3B8; border-bottom-color: #64748B; color: #334155;} /* Plata */
-    .h-nivel-3 {background: linear-gradient(135deg, #FEF08A, #FACC15); border-color: #CA8A04; border-bottom-color: #A16207; color: #713F12; box-shadow: 0 0 16px rgba(250,204,21,0.6);} /* Oro */
-    .h-nivel-3 .honor-icon {transform: scale(1.2); filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.25));}
-
     .triangle-box {position: relative; width: 100%; max-width: 420px; margin: 0 auto 10px; display: flex; justify-content: center; align-items: center;}
     svg.tri-svg {width: 100%; height: 200px; overflow: visible;}
     .tri-node {cursor: pointer; transition: transform 0.15s ease;}
@@ -99,17 +88,15 @@
     .warmup-pill.active {background: #FEF2F2; border-color: #EF4444; border-bottom: 4px solid #B91C1C; color: #7F1D1D; font-weight: 900;}
     .cards-comic-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px;}
     .comic-card {background: #FFFFFF; border: 3.5px solid #1E293B; border-bottom: 7px solid #0F172A; border-radius: 20px; padding: 14px; display: flex; flex-direction: column; gap: 8px; transition: all 0.3s ease;}
-    .card-used-state {filter: grayscale(85%) brightness(75%); opacity: 0.5; transform: scale(0.98);}
     .locked-card {filter: grayscale(100%); opacity: 0.55;}
     .comic-card-head {display: flex; justify-content: space-between; align-items: center;}
     .comic-level-tag {font-size: 11px; font-weight: 900; padding: 3px 8px; border-radius: 8px; background: #FEF08A; color: #854D0E;}
     .comic-icon {font-size: 22px;}
     .comic-card-title {font-size: 15px; font-weight: 1000; color: #0F172A; text-transform: uppercase; border-bottom: 2px solid #E2E8F0; padding-bottom: 4px;}
     .comic-rule-box {background: #F8FAFC; border: 2px dashed #94A3B8; border-radius: 12px; padding: 9px; font-size: 12px; font-weight: 700; color: #334155; min-height: 48px;}
-    .btn-card-give, .btn-card-play, .btn-card-used {color: white; border: none; padding: 9px; border-radius: 12px; font-weight: 900; font-size: 12px; cursor: pointer; width: 100%;}
+    .btn-card-give, .btn-card-play {color: white; border: none; padding: 9px; border-radius: 12px; font-weight: 900; font-size: 12px; cursor: pointer; width: 100%;}
     .btn-card-give {background: #8B5CF6; border-bottom: 4px solid #6D28D9;}
     .btn-card-play {background: #10B981; border-bottom: 4px solid #059669;}
-    .btn-card-used {background: #64748B; border-bottom: 4px solid #334155;}
     .tienda-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;}
     .tienda-item {background: #F8FAFC; border: 3px solid #CBD5E1; border-bottom: 6px solid #94A3B8; border-radius: 16px; padding: 14px; text-align: center;}
     .tienda-icon {font-size: 40px; margin-bottom: 4px;}
@@ -131,24 +118,47 @@
     .fill-plata {background: linear-gradient(90deg, #94A3B8, #64748B);}
     .fill-bronce {background: linear-gradient(90deg, #D97706, #B45309);}
     .modal-overlay {position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.85); z-index: 9999; display: none; justify-content: center; align-items: center; padding: 16px;}
-    .modal-card-box {background: #FFFFFF; border: 5px solid #1E293B; border-radius: 26px; max-width: 450px; width: 100%; padding: 20px; display: flex; flex-direction: column; gap: 12px;}
+    .modal-card-box {background: #FFFFFF; border: 5px solid #1E293B; border-radius: 26px; max-width: 380px; width: 100%; padding: 20px; display: flex; flex-direction: column; gap: 12px;}
     .btn-close-modal {background: #EF4444; border: none; border-bottom: 4px solid #991B1B; color: white; padding: 10px; border-radius: 12px; font-weight: 900; cursor: pointer;}
     
-    /* CSS PARA EL SISTEMA DE ALERTAS PERSONALIZADO */
+    /* SISTEMA DE ALERTAS PERSONALIZADO */
     .custom-alert-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.85); z-index: 99999; display: none; justify-content: center; align-items: center; padding: 16px; }
     .custom-alert-box { background: #FFFFFF; border: 5px solid #1E293B; border-radius: 26px; max-width: 350px; width: 100%; padding: 20px; text-align: center; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     .custom-alert-msg { font-size: 15px; font-weight: 800; color: #1E293B; white-space: pre-wrap; line-height: 1.4; }
     .btn-custom-alert { background: #FF7A00; color: white; border: none; border-bottom: 4px solid #D95D00; padding: 12px; border-radius: 14px; font-weight: 900; font-size: 14px; cursor: pointer; width: 100%; transition: transform 0.1s; }
     .btn-custom-alert:active { transform: scale(0.95); }
+
+    /* ESTILOS ESCUDO DE HONOR */
+    .honor-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 14px; margin-top: 14px;}
+    .honor-badge {display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px 8px; border-radius: 18px; border: 3px solid; border-bottom-width: 6px; cursor: pointer; transition: transform 0.15s; text-align: center;}
+    .honor-badge:active {transform: scale(0.95);}
+    .honor-icon {font-size: 32px; margin-bottom: 6px;}
+    .honor-title {font-size: 11px; font-weight: 900; text-transform: uppercase;}
+    .h-nivel-0 {background: #F8FAFC; border-color: #E2E8F0; border-bottom-color: #CBD5E1; color: #94A3B8;}
+    .h-nivel-0 .honor-icon {filter: grayscale(100%) opacity(50%);}
+    .h-nivel-1 {background: linear-gradient(135deg, #FEF3C7, #FDE68A); border-color: #D97706; border-bottom-color: #B45309; color: #92400E;} /* Bronce */
+    .h-nivel-2 {background: linear-gradient(135deg, #F1F5F9, #E2E8F0); border-color: #94A3B8; border-bottom-color: #64748B; color: #334155;} /* Plata */
+    .h-nivel-3 {background: linear-gradient(135deg, #FEF08A, #FACC15); border-color: #CA8A04; border-bottom-color: #A16207; color: #713F12; box-shadow: 0 0 16px rgba(250,204,21,0.6);} /* Oro */
+    .h-nivel-3 .honor-icon {transform: scale(1.2); filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.25));}
     
+    /* ESTILOS MANUAL TECNICO */
+    .manual-tabs {display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px;}
+    .mtab-btn {background: #F1F5F9; border: 2px solid #CBD5E1; border-bottom: 4px solid #94A3B8; border-radius: 12px; padding: 8px 12px; font-size: 13px; font-weight: 900; color: #475569; cursor: pointer; white-space: nowrap;}
+    .mtab-btn.active {background: #E0F2FE; border-color: #38BDF8; border-bottom-color: #0284C7; color: #0369A1; transform: translateY(-2px);}
+    .mlevel-btn {flex: 1; padding: 8px 4px; font-size: 11px; font-weight: 900; border-radius: 10px; border: 2px solid; border-bottom-width: 4px; cursor: pointer; text-align: center; opacity: 0.6; color: #0F172A;}
+    .mlevel-btn.active {opacity: 1; transform: translateY(-2px);}
+    .ml-5 {background: #F8FAFC; border-color: #CBD5E1; border-bottom-color: #94A3B8;} /* Blanco */
+    .ml-4 {background: #E0F2FE; border-color: #7DD3FC; border-bottom-color: #0284C7;} /* Celeste */
+    .ml-3 {background: #FEE2E2; border-color: #FCA5A5; border-bottom-color: #DC2626;} /* Rojo */
+    .ml-2 {background: #FFEDD5; border-color: #FDBA74; border-bottom-color: #EA580C;} /* Naranja */
+    .ml-1 {background: #DCFCE7; border-color: #86EFAC; border-bottom-color: #16A34A;} /* Verde */
+    
+    .manual-list-item {background: #F8FAFC; border-left: 5px solid #0284C7; padding: 12px; border-radius: 8px; margin-bottom: 8px; font-size: 13px; font-weight: 700; color: #334155; display: flex; gap: 10px; align-items: flex-start;}
+    .manual-list-num {background: #0284C7; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 11px; flex-shrink: 0;}
+
     /* ESTILO PARA EL PIE LEGAL */
     .legal-footer { text-align: center; margin-top: 24px; padding: 0 20px; font-size: 10.5px; font-weight: 800; color: #64748B; max-width: 600px; line-height: 1.5; }
     .legal-footer strong { color: #475569; font-weight: 900; }
-
-    /* ESTILO PARA CAJAS DE CRITERIOS MODAL */
-    .crit-box { padding: 12px; border-radius: 12px; border: 2px solid; border-left-width: 6px; margin-bottom: 8px; text-align: left;}
-    .crit-box h4 { font-size: 12px; font-weight: 900; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
-    .crit-box p { font-size: 12px; font-weight: 700; line-height: 1.4; }
   </style>
 </head>
 <body>
@@ -163,7 +173,7 @@
     </div>
   </div>
 
-  <!-- NAVEGACIÓN (CON 6 BOTONES) -->
+  <!-- NAVEGACIÓN -->
   <div class="master-switcher">
     <button class="master-btn active" id="btnModeProfe" onclick="setMasterMode('profe')">📋 Profe</button>
     <button class="master-btn" id="btnModeFamily" onclick="setMasterMode('family')">👨‍👩‍👧 Familia</button>
@@ -171,6 +181,7 @@
     <button class="master-btn" id="btnModeDesafios" onclick="setMasterMode('desafios')" style="color: #38BDF8;">🎯 Desafíos</button>
     <button class="master-btn" id="btnModeCopa" onclick="setMasterMode('copa')" style="color: #F59E0B;">🏆 Copa</button>
     <button class="master-btn" id="btnModeTienda" onclick="setMasterMode('tienda')" style="color: #10B981;">🏪 Tienda</button>
+    <button class="master-btn" id="btnModeManual" onclick="setMasterMode('manual')" style="color: #6366F1;">📖 Manual</button>
   </div>
 
   <div class="app-container">
@@ -178,6 +189,7 @@
       <div class="logo-frame">
         <img src="https://i.postimg.cc/vTMhkSR4/logo.png" alt="Divertitenis Oficial" style="width: 100%; height: auto; display: block; object-fit: contain;">
       </div>
+      <!-- BOTÓN AMARILLO GIGANTE PARA EL MODO OSCURO TERCO -->
       <button onclick="forzarColorClaro()" style="margin-top: 14px; background: #FACC15; color: #713F12; border: 2px solid #EAB308; border-bottom: 4px solid #CA8A04; padding: 10px 18px; border-radius: 14px; font-weight: 900; font-size: 14px; cursor: pointer; width: 100%; max-width: 300px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">☀️ TOCAR AQUÍ SI SE VE NEGRO</button>
     </header>
 
@@ -190,14 +202,14 @@
       <div class="stage-badge" id="stg-amarilla" onclick="setStage('amarilla', '🟡 Amarilla', 'stg-amarilla')"><span class="title">🟡 Amarilla</span></div>
     </div>
 
-    <!-- BARRA DEL ALUMNO -->
+    <!-- BARRA DEL ALUMNO (AHORA VISIBLE EN MANUAL TAMBIÉN) -->
     <div class="student-hero" id="heroBar">
       <div class="student-selector-box">
         <div id="singleStudentControls">
           <select id="selectStudent" onchange="changeActiveStudent()"></select>
         </div>
-        <button class="btn-new-student" onclick="openNewStudentModal()">➕ Nuevo Alumno</button>
-        <button class="btn-streak" onclick="addStreak()">🔥 Racha</button>
+        <button class="btn-new-student" id="btnNewStudent" onclick="openNewStudentModal()">➕ Nuevo Alumno</button>
+        <button class="btn-streak" id="btnStreak" onclick="addStreak()">🔥 Racha</button>
         <button class="eval-mode-toggle-btn" id="btnToggleGroupMode" onclick="toggleGroupRoundMode()">👥 Ronda Grupal</button>
         <span class="subtitle" id="currentStageText">⚪ Blanca</span>
       </div>
@@ -217,7 +229,7 @@
       </button>
     </div>
 
-    <!-- PANTALLA PRINCIPAL: TÉCNICA -->
+    <!-- PANTALLA PRINCIPAL -->
     <div class="screen-content" id="viewTechnical">
       <div class="card-3d">
         <div class="card-title">🔺 Triángulo de Coordinación</div>
@@ -249,7 +261,7 @@
             <h3 style="font-size: 15px; font-weight: 900; color: #0369A1; margin-bottom: 4px;">🎯 Consigna de la Clase</h3>
             <div class="round-selector-row">
               <select id="roundDrillSelect" onchange="onRoundDrillChange()"></select>
-              <button class="round-all-btn" onclick="markRoundAllDone()">🌟 ¡Logrado por Todos!</button>
+              <button class="round-all-btn" id="btnRoundAll" onclick="markRoundAllDone()">🌟 ¡Logrado por Todos!</button>
             </div>
           </div>
           <div class="group-students-grid" id="groupStudentsGrid"></div>
@@ -261,7 +273,7 @@
       </div>
     </div>
 
-    <!-- PANTALLA NUEVA: ESCUDO DE HONOR (VALORES) -->
+    <!-- NUEVA PANTALLA: VALORES (ESCUDO DE HONOR) -->
     <div class="screen-content" id="viewValores" style="display: none;">
       <div class="card-3d" style="border-color: #FCD34D; border-bottom-color: #F59E0B; padding: 24px;">
         <div class="card-title" style="color: #D97706; font-size: 20px; display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap;">
@@ -297,14 +309,43 @@
           </select>
         </div>
         <div class="naval-battlefield">
-          <div class="naval-side"><div style="font-size:12px;font-weight:900;margin-bottom:4px;color:#1E293B;">EQUIPO A</div><div class="team-selector" id="team1List"></div><div id="gridP1" class="naval-grid"></div><button class="btn-win-naval" onclick="winNaval(1)">🏆 ¡Hundió la flota!</button></div>
-          <div class="naval-side"><div style="font-size:12px;font-weight:900;margin-bottom:4px;color:#1E293B;">EQUIPO B</div><div class="team-selector" id="team2List"></div><div id="gridP2" class="naval-grid"></div><button class="btn-win-naval" onclick="winNaval(2)">🏆 ¡Hundió la flota!</button></div>
+          <div class="naval-side"><div style="font-size:12px;font-weight:900;margin-bottom:4px;color:#1E293B;">EQUIPO A</div><div class="team-selector" id="team1List"></div><div id="gridP1" class="naval-grid"></div><button class="btn-win-naval" id="btnWinA" onclick="winNaval(1)">🏆 ¡Hundió la flota!</button></div>
+          <div class="naval-side"><div style="font-size:12px;font-weight:900;margin-bottom:4px;color:#1E293B;">EQUIPO B</div><div class="team-selector" id="team2List"></div><div id="gridP2" class="naval-grid"></div><button class="btn-win-naval" id="btnWinB" onclick="winNaval(2)">🏆 ¡Hundió la flota!</button></div>
         </div>
       </div>
       <div class="desafio-panel" style="border-color: #FCD34D; background: #FFFBEB;">
         <div class="desafio-header"><span class="desafio-icon">📊</span> Clasificaciones Evolutivas</div>
-        <h3 style="font-size: 13px; font-weight: 900; color: #92400E; margin: 14px 0 8px;">🏆 Clasificación Individual (Camino a 500🌟)</h3><div id="rankingIndividual"></div>
-        <h3 style="font-size: 13px; font-weight: 900; color: #92400E; margin: 18px 0 8px;">🛡️ Clasificación por Casas (Camino a 2000🌟)</h3><div id="rankingCasas"></div>
+        <h3 style="font-size: 13px; font-weight: 900; color: #92400E; margin: 14px 0 8px;">🏆 Clasificación Individual (Camino a Leyenda)</h3><div id="rankingIndividual"></div>
+        <h3 style="font-size: 13px; font-weight: 900; color: #92400E; margin: 18px 0 8px;">🛡️ Clasificación por Casas</h3><div id="rankingCasas"></div>
+      </div>
+    </div>
+
+    <!-- NUEVA PANTALLA: MANUAL TÉCNICO -->
+    <div class="screen-content" id="viewManual" style="display: none;">
+      <div class="card-3d" style="border-color: #6366F1; border-bottom-color: #4F46E5; padding: 20px;">
+        <div class="card-title" style="color: #4F46E5; font-size: 18px; margin-bottom: 4px;">📖 MANUAL DE CONTENIDOS TÉCNICOS</div>
+        <p style="font-size: 12px; font-weight: 800; color: #64748B; text-align: center; margin-bottom: 16px;">
+          Puntos claves técnicos evaluables por golpe y nivel. 
+        </p>
+        
+        <div class="manual-tabs" id="manualStrokeTabs">
+          <button class="mtab-btn active" onclick="setManualStroke('drive')">🎾 Drive</button>
+          <button class="mtab-btn" onclick="setManualStroke('reves')">🔙 Revés</button>
+          <button class="mtab-btn" onclick="setManualStroke('volea')">✋ Voleas</button>
+          <button class="mtab-btn" onclick="setManualStroke('smash')">💥 Smash</button>
+          <button class="mtab-btn" onclick="setManualStroke('saque')">🚀 Saque</button>
+        </div>
+
+        <div style="display: flex; gap: 4px; margin-bottom: 16px;" id="manualLevelTabs">
+          <button class="mlevel-btn ml-5 active" onclick="setManualLevel('5')">⚪ Nivel 5<br>Blanco</button>
+          <button class="mlevel-btn ml-4" onclick="setManualLevel('4')">🩵 Nivel 4<br>Celeste</button>
+          <button class="mlevel-btn ml-3" onclick="setManualLevel('3')">🔴 Nivel 3<br>Rojo</button>
+          <button class="mlevel-btn ml-2" onclick="setManualLevel('2')">🟠 Nivel 2<br>Naranja</button>
+          <button class="mlevel-btn ml-1" onclick="setManualLevel('1')">🟢 Nivel 1<br>Verde</button>
+        </div>
+
+        <div id="manualContentList"></div>
+
       </div>
     </div>
 
@@ -320,7 +361,7 @@
             <p style="font-size: 11px; font-weight: 700; color: #15803D; margin-bottom: 12px;">Elegir 1 carta o sobre de 3 para el Desafío.</p>
             <div style="display: flex; gap: 8px; justify-content: center;">
               <button onclick="abrirSobre(1, 0)" style="background: #22C55E; color: white; border: none; border-bottom: 3px solid #166534; padding: 8px 10px; border-radius: 10px; font-weight: 900; font-size: 12px; cursor: pointer; flex: 1;">1 Carta</button>
-              <button onclick="abrirSobre(3, 3)" style="background: #EAB308; color: white; border: none; border-bottom: 3px solid #A16207; padding: 8px 10px; border-radius: 10px; font-weight: 900; font-size: 12px; cursor: pointer; flex: 1;">Sobre x3 🌟</button>
+              <button id="btnSobrePago" onclick="abrirSobre(3, 3)" style="background: #EAB308; color: white; border: none; border-bottom: 3px solid #A16207; padding: 8px 10px; border-radius: 10px; font-weight: 900; font-size: 12px; cursor: pointer; flex: 1;">Sobre x3 🌟</button>
             </div>
           </div>
 
@@ -378,6 +419,14 @@
     </div>
 
     <div class="screen-content" id="viewTienda" style="display: none;">
+      <!-- RULETA DE LA SUERTE -->
+      <div style="background: linear-gradient(135deg, #8B5CF6, #6D28D9); border-radius: 16px; padding: 18px; text-align: center; color: white; margin-bottom: 18px; box-shadow: 0 4px 15px rgba(109, 40, 217, 0.4);">
+        <div style="font-size: 32px; margin-bottom: 6px;">🎰</div>
+        <h3 style="font-size: 18px; font-weight: 900; text-transform: uppercase;">La Ruleta de la Suerte</h3>
+        <p style="font-size: 12px; font-weight: 700; opacity: 0.9; margin-bottom: 12px;">¿Te sobran estrellas? Girá la ruleta y ganá cartas, multiplicadores o premios sorpresa.</p>
+        <button id="btnOpenRuleta" onclick="openRuleta()" style="background: #FACC15; color: #713F12; border: none; border-bottom: 4px solid #CA8A04; padding: 10px 20px; border-radius: 12px; font-weight: 900; font-size: 14px; cursor: pointer; width: 100%; max-width: 250px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">Girar Ruleta (10 🌟)</button>
+      </div>
+
       <div class="card-3d" style="border-color: #34D399; border-bottom-color: #10B981;">
         <div class="card-title" style="color: #047857; font-size: 18px;">🏪 Tienda Oficial y Recompensas</div>
         <div style="text-align: center; margin-bottom: 18px; background: #ECFDF5; padding: 12px; border-radius: 16px; border: 2px dashed #10B981;">
@@ -408,28 +457,17 @@
     </div>
   </div>
 
-  <!-- MODAL DE CRITERIOS DEL ESCUDO -->
-  <div class="modal-overlay" id="criteriaModal">
-    <div class="modal-card-box" style="border-color: #D97706; max-width: 450px;">
-      <h3 style="color: #D97706; font-weight: 1000; text-align: center; font-size: 18px;">🛡️ Criterios de Honor</h3>
-      <p style="font-size: 11px; text-align: center; color: #92400E; font-weight: 800; margin-bottom: 8px;">¿Qué evaluamos en cada nivel?</p>
-      
-      <select id="criteriaSelect" onchange="updateCriteriaView()" style="padding: 10px; border-radius: 10px; border: 2px solid #FCD34D; font-weight: 900; outline: none; width: 100%; color: #92400E; background: #FFFBEB; margin-bottom: 8px;">
-        <option value="respeto">🤝 RESPETO</option>
-        <option value="honestidad">⚖️ HONESTIDAD</option>
-        <option value="equipo">👥 EQUIPO</option>
-        <option value="responsabilidad">🎒 RESPONSABILIDAD</option>
-        <option value="esfuerzo">💪 ESFUERZO</option>
-        <option value="independencia">🧭 INDEPENDENCIA</option>
-      </select>
-      
-      <div id="criteriaContent" style="display: flex; flex-direction: column; gap: 8px; max-height: 50vh; overflow-y: auto; padding-right: 4px;"></div>
-      
-      <button class="btn-close-modal" style="background: #F59E0B; border-bottom-color: #D97706; margin-top: 10px;" onclick="closeCriteriaModal()">¡Entendido!</button>
+  <div class="modal-overlay" id="cardModal"><div class="modal-card-box"><div id="cardModalBody"></div><button class="btn-close-modal" onclick="closeCardModal()">Cerrar</button></div></div>
+
+  <!-- MODAL DE LA RULETA -->
+  <div class="modal-overlay" id="ruletaModal">
+    <div class="modal-card-box" style="border-color: #6D28D9; text-align: center;">
+      <h3 style="color: #6D28D9; font-weight: 1000; font-size: 22px;">🎰 Ruleta de la Suerte</h3>
+      <div id="ruletaResult" style="font-size: 60px; height: 120px; display: flex; align-items: center; justify-content: center; background: #F5F3FF; border: 3px solid #C4B5FD; border-radius: 16px; margin: 10px 0; flex-direction: column;">❓</div>
+      <button id="btnSpinRuleta" onclick="executeRuleta()" style="background: #F59E0B; color: white; border: none; border-bottom: 4px solid #D97706; padding: 12px; border-radius: 14px; font-weight: 900; font-size: 16px; cursor: pointer; width: 100%; margin-bottom: 8px;">¡Girar por 10 🌟!</button>
+      <button class="btn-close-modal" style="background: #64748B; border-bottom-color: #475569;" onclick="document.getElementById('ruletaModal').style.display='none'">Volver a la Tienda</button>
     </div>
   </div>
-
-  <div class="modal-overlay" id="cardModal"><div class="modal-card-box"><div id="cardModalBody"></div><button class="btn-close-modal" onclick="closeCardModal()">Cerrar</button></div></div>
 
   <div class="modal-overlay" id="tradeModal">
     <div class="modal-card-box" style="border-color: #3B82F6;">
@@ -462,6 +500,24 @@
     </div>
   </div>
 
+  <!-- MODAL DE CRITERIOS DEL ESCUDO -->
+  <div class="modal-overlay" id="criteriaModal">
+    <div class="modal-card-box" style="border-color: #D97706; max-width: 450px;">
+      <h3 style="color: #D97706; font-weight: 1000; text-align: center; font-size: 18px;">🛡️ Criterios de Honor</h3>
+      <p style="font-size: 11px; text-align: center; color: #92400E; font-weight: 800; margin-bottom: 8px;">¿Qué evaluamos en cada nivel?</p>
+      <select id="criteriaSelect" onchange="updateCriteriaView()" style="padding: 10px; border-radius: 10px; border: 2px solid #FCD34D; font-weight: 900; outline: none; width: 100%; color: #92400E; background: #FFFBEB; margin-bottom: 8px;">
+        <option value="respeto">🤝 RESPETO</option>
+        <option value="honestidad">⚖️ HONESTIDAD</option>
+        <option value="equipo">👥 EQUIPO</option>
+        <option value="responsabilidad">🎒 RESPONSABILIDAD</option>
+        <option value="esfuerzo">💪 ESFUERZO</option>
+        <option value="independencia">🧭 INDEPENDENCIA</option>
+      </select>
+      <div id="criteriaContent" style="display: flex; flex-direction: column; gap: 8px; max-height: 50vh; overflow-y: auto; padding-right: 4px;"></div>
+      <button class="btn-close-modal" style="background: #F59E0B; border-bottom-color: #D97706; margin-top: 10px;" onclick="closeCriteriaModal()">¡Entendido!</button>
+    </div>
+  </div>
+
   <script>
     // --- SISTEMA DE ALERTAS PERSONALIZADO ---
     window.showAlert = function(msg) {
@@ -489,57 +545,16 @@
     let currentMode = 'profe', currentStage = 'blanca', currentFilter = 'manip1', activeStudent = 'Ayson';
     let activeWarmupKey = 'ec1', isGroupRoundMode = false, currentRoundDrillId = 'm1_1', retoDelDiaId = 'm1_6', activeCardFilter = 'all';
 
-    // DATOS DE LOS VALORES DEL ESCUDO
-    const honorPillars = [
-        { id: 'respeto', icon: '🤝', title: 'Respeto' },
-        { id: 'honestidad', icon: '⚖️', title: 'Honestidad' },
-        { id: 'equipo', icon: '👥', title: 'Equipo' },
-        { id: 'responsabilidad', icon: '🎒', title: 'Responsabilidad' },
-        { id: 'esfuerzo', icon: '💪', title: 'Esfuerzo' },
-        { id: 'independencia', icon: '🧭', title: 'Indep.' }
-    ];
-
-    const honorCriteria = {
-      respeto: {
-        bronce: "Presentarse al rival. Mirar a los ojos al estrechar la mano. Ser agradecido por jugar. Tratar a todos por igual.",
-        plata: "Anunciar la puntuación al sacar. Devolver las pelotas rápidamente. Agradecer a profesores y árbitros. Mantener la calma.",
-        oro: "Honrar el juego. Ser justo, honesto y fiel a sus palabras y acciones. Estar agradecido por competir."
-      },
-      honestidad: {
-        bronce: "Seguir las reglas del juego. Mantener el tanteador. Cantar las pelotas (buenas/malas) con total honestidad.",
-        plata: "Ser honesto al cantar las pelotas sobre las líneas. Ante cualquier duda, la pelota siempre se canta 'buena'.",
-        oro: "Aprender a manejar estos conceptos de juego limpio incluso en la adversidad o bajo mucha presión."
-      },
-      equipo: {
-        bronce: "Ser un jugador de equipo. Turnarse y cooperar para que todos mejoren. Ser útil al profesor y compañeros.",
-        plata: "Animar a sus compañeros y reconocer la mejora del otro. Hablar en dobles. Alentar independientemente del marcador.",
-        oro: "Cuidar a su equipo. Ayudar a otros a que mejoren. Usar palabras de aliento constantes ('¡Vos podés hacerlo!')."
-      },
-      responsabilidad: {
-        bronce: "Cuidar sus pertenencias (llevar su raqueta). Llegar a tiempo. Venir listo para jugar y recoger el material al salir.",
-        plata: "Prepararse para el partido (raqueta, toalla, agua). Traer dos pelotas al sacar. Estar listo para ser su propio árbitro.",
-        oro: "Analizar sus propias fortalezas y debilidades. Preguntarse constantemente: '¿Qué puedo hacer mejor?'."
-      },
-      esfuerzo: {
-        bronce: "Hacer su mejor esfuerzo. Decirse a sí mismo 'Yo puedo'. Nunca rendirse (aprender lleva tiempo y paciencia).",
-        plata: "Dar su mejor versión en cada práctica. Ser determinado y dar el máximo incluso cuando las tareas son muy difíciles.",
-        oro: "Nunca darse por vencido con el marcador en contra. Recuperarse tras una derrota dura. Adaptarse cuando algo no sale bien."
-      },
-      independencia: {
-        bronce: "Preparar su propio bolso y raquetero para realizar la clase sin ayuda.",
-        plata: "Aprender las reglas. Corregir sus propios errores. Programar su tiempo de práctica fuera de clase. Ser su propio profesor.",
-        oro: "Tomar decisiones y buscar soluciones por su cuenta. Establecer metas. Ser un estudioso y curioso del juego."
-      }
-    };
+    let currentManualStroke = 'drive';
+    let currentManualLevel = '5';
 
     let students = {
-      Ayson: { name: "Ayson", avatar: "🦁", house: "Leones", streak: 2, skillLevels: {"m1_1":3, "m1_2":3}, spentStars: 0, cards: ["xxs1_1"], warmupDone: [], bonusStars: 0, usedCards: [] },
-      Milove: { name: "Milove", avatar: "🦅", house: "Águilas", streak: 0, skillLevels: {"m1_1":3}, spentStars: 0, cards: ["xxs2_3"], warmupDone: [], bonusStars: 0, usedCards: [] },
-      Milu: { name: "Milu", avatar: "🐻", house: "Osos", streak: 1, skillLevels: {}, spentStars: 0, cards: ["xxs2_2"], warmupDone: [], bonusStars: 0, usedCards: [] },
-      Mia: { name: "Mia", avatar: "🐉", house: "Dragones", streak: 0, skillLevels: {}, spentStars: 0, cards: ["xxs3_2"], warmupDone: [], bonusStars: 0, usedCards: [] }
+      Ayson: { name: "Ayson", avatar: "🦁", house: "Leones", streak: 2, skillLevels: {"m1_1":3, "m1_2":3}, spentStars: 0, cards: ["xxs1_1"], warmupDone: [], bonusStars: 0, honor: {respeto:0, honestidad:0, equipo:0, responsabilidad:0, esfuerzo:0, independencia:0} },
+      Milove: { name: "Milove", avatar: "🦅", house: "Águilas", streak: 0, skillLevels: {"m1_1":3}, spentStars: 0, cards: ["xxs2_3"], warmupDone: [], bonusStars: 0, honor: {respeto:0, honestidad:0, equipo:0, responsabilidad:0, esfuerzo:0, independencia:0} },
+      Milu: { name: "Milu", avatar: "🐻", house: "Osos", streak: 1, skillLevels: {}, spentStars: 0, cards: ["xxs2_2"], warmupDone: [], bonusStars: 0, honor: {respeto:0, honestidad:0, equipo:0, responsabilidad:0, esfuerzo:0, independencia:0} },
+      Mia: { name: "Mia", avatar: "🐉", house: "Dragones", streak: 0, skillLevels: {}, spentStars: 0, cards: ["xxs3_2"], warmupDone: [], bonusStars: 0, honor: {respeto:0, honestidad:0, equipo:0, responsabilidad:0, esfuerzo:0, independencia:0} }
     };
 
-    // ESCUDO PROTECTOR PARA ALUMNOS VIEJOS
     function ensureStudentData(st) {
         if (!st) return;
         if (!st.honor) st.honor = {respeto:0, honestidad:0, equipo:0, responsabilidad:0, esfuerzo:0, independencia:0};
@@ -549,14 +564,14 @@
     }
 
     try { 
-      const ld = localStorage.getItem('dt_final_v65'); 
-      if (ld) { 
-        let pd = JSON.parse(ld); 
-        if(pd && Object.keys(pd).length > 0) {
-            Object.keys(pd).forEach(k => ensureStudentData(pd[k]));
-            students = pd; 
-        }
-      } 
+        const ld = localStorage.getItem('dt_final_v65'); 
+        if (ld) { 
+            let pd = JSON.parse(ld); 
+            if(pd && Object.keys(pd).length > 0) {
+                Object.keys(pd).forEach(k => ensureStudentData(pd[k]));
+                students = pd; 
+            }
+        } 
     } catch (e) {}
     
     function saveState() { try { localStorage.setItem('dt_final_v65', JSON.stringify(students)); } catch (e) {} updateCardCount(); }
@@ -582,7 +597,7 @@
     }
 
     window.clickCocarda = function(itemId) {
-      if (currentMode === 'family') return showAlert("Modo Familia: Solo de lectura.");
+      if (currentMode === 'family') return showAlert("🔒 Modo Familia Activado: El celular está en Modo de Solo Lectura. No se pueden modificar estadísticas.");
       const st = students[activeStudent]; ensureStudentData(st);
       let val = st.skillLevels[itemId] || 0; val = (val + 1) % 4; st.skillLevels[itemId] = val;
       let mul = (st.streak >= 3) ? 2 : 1; if (itemId === retoDelDiaId) mul *= 2;
@@ -590,19 +605,66 @@
       saveState(); renderActivities();
     };
 
-    // --- NUEVA ECONOMÍA DE LA TIENDA ---
     const tiendaDB = {
-      virtuales: [ 
-        { id: "v1", name: "Elegir Juego de Cierre", cost: 30, icon: "🎮", sponsor: "Virtual" }, 
-        { id: "v2", name: "Saque Extra (Torneo)", cost: 50, icon: "🎾", sponsor: "Virtual" }, 
-        { id: "v3", name: "Capitán de Batalla Naval", cost: 80, icon: "⚓", sponsor: "Virtual" } 
-      ],
-      fisicos: [ 
-        { id: "f1", name: "Antivibrador Pro", cost: 150, icon: "🎯", sponsor: "Wilson" }, 
-        { id: "f2", name: "Cubregrip Extra Tacky", cost: 200, icon: "🩹", sponsor: "Wilson" }, 
-        { id: "f3", name: "Tubo de Pelotas (3)", cost: 350, icon: "🟡", sponsor: "Babolat" }, 
-        { id: "f4", name: "Remera Divertitenis", cost: 500, icon: "👕", sponsor: "Divertitenis" } 
-      ]
+      virtuales: [ { id: "v1", name: "Elegir Juego de Cierre", cost: 30, icon: "🎮" }, { id: "v2", name: "Saque Extra (Torneo)", cost: 50, icon: "🎾" }, { id: "v3", name: "Capitán de Batalla Naval", cost: 80, icon: "⚓" } ],
+      fisicos: [ { id: "f1", name: "Antivibrador Pro", cost: 150, icon: "🎯", sponsor: "Wilson" }, { id: "f2", name: "Cubregrip Extra Tacky", cost: 200, icon: "🩹", sponsor: "Wilson" }, { id: "f3", name: "Tubo de Pelotas (3)", cost: 350, icon: "🟡", sponsor: "Babolat" }, { id: "f4", name: "Remera Oficial Divertitenis", cost: 500, icon: "👕", sponsor: "Divertitenis" } ]
+    };
+
+    /* BASE DE DATOS DEL MANUAL TÉCNICO */
+    const manualDB = {
+       drive: {
+          5: ["Tener la raqueta con las 2 manos al comienzo del peloteo.", "Sostener la raqueta del final del grip.", "Golpear la pelota delante del cuerpo."],
+          4: ["Golpear la pelota con las diferentes caras de la raqueta.", "Apoyos semiabiertos.", "Apoyos cerrados.", "Salir de la línea de las trayectorias.", "La recuperación de la cancha después del impacto."],
+          3: ["Actitud de alerta con la mano libre en el corazón de la raqueta.", "Unidad de giro.", "Apoyos semiabiertos en los envíos.", "Soltar la pelota hacia arriba y golpearla hacia adelante.", "Detener la pelota delante del cuerpo.", "Golpear la pelota delante del cuerpo.", "Mantiene y cambia las trayectorias."],
+          2: ["Actitud de atención dinámica.", "Poner el cuerpo en atención a través del golpe del contrario.", "Disociación de la parte alta y baja del cuerpo.", "Orientación precoz de los hombros.", "Posición equilibrada.", "Acción de mano / antebrazo atravesando la pelota.", "Amplitud del backswing reducida sobre la devolución sobre el 1er saque."],
+          1: ["Sostener la raqueta con las 2 manos entre cada golpe.", "Cronología de la técnica hacia la pelota abierta y en la recuperación.", "Nivelación de la cabeza de la raqueta más baja para el efecto topspin.", "Apertura y empuje de las piernas para una buena base.", "Cronología de la técnica hacia la pelota corta golpear avanzando (pierna derecha hacia adelante).", "Apoyos abiertos sobre la devolución de 1ros saques al drive.", "Diferentes terminaciones del gesto del drive."]
+       },
+       reves: {
+          5: ["Empuñadura de revés a una o dos manos.", "Jugar de revés a una mano.", "Jugar de revés a dos manos.", "Actitud de la mano libre en el corazón de la raqueta.", "Unidad de giro de revés a dos manos."],
+          4: ["Golpear la pelota delante del cuerpo.", "La recuperación de la cancha después del impacto.", "Golpear y devolver en equilibrio."],
+          3: ["Golpear la pelota delante del cuerpo.", "Actitud de atención dinámica con hombros y brazos relajados.", "Sostener la raqueta con las 2 manos entre cada golpe."],
+          2: ["Apoyos orientados hacia el golpe.", "Diferentes formas de ubicarse y recuperación.", "Preparación del revés donde las cuerdas van hacia atrás pasando por encima de las manos.", "Disociación de la parte alta y baja del cuerpo.", "Patinar sobre polvo de ladrillo.", "Fin de la preparación por encima del punto de impacto."],
+          1: ["Atraviesa la pelota.", "Nivelación de la cabeza de la raqueta más baja para el efecto topspin.", "Apertura y empuje de las piernas.", "Cronología de la técnica hacia la pelota corta golpear avanzando (pierna izquierda hacia adelante).", "Devolución defensiva de revés a una mano.", "Apoyos abiertos sobre devoluciones de revés de dos manos 1ros saques.", "Diferentes terminaciones en el gesto del revés."]
+       },
+       volea: {
+          5: ["Empuñadura continental.", "Posición de alerta con un cono.", "Posición de alerta con raqueta."],
+          4: ["Presentación de la cara de la raqueta hacia la pelota de volea de revés.", "Presentación de la cara de la raqueta hacia la pelota de volea de drive."],
+          3: ["Actitud de atención dinámica.", "Golpear de volea de revés delante del cuerpo.", "Golpear de volea de drive delante del cuerpo."],
+          2: ["Golpear delante del cuerpo mientras avanza.", "Empuñadura de la volea de drive.", "Empuñadura de la volea de revés.", "Preparación corta del gesto de la volea de drive.", "Preparación corta del gesto de la volea de revés."],
+          1: ["Cortar las trayectorias para la volea de drive.", "Cortar las trayectorias para la volea de revés.", "Secuencia del golpe de volea."]
+       },
+       smash: {
+          5: ["Apoyos semiabiertos para el golpe.", "Raqueta tomada del final del grip.", "Lanzamiento de la pelota por encima de su cabeza.", "Actitud de atención dinámica."],
+          4: ["Actitud de alerta dinámica con hombros.", "Posición de armado.", "Golpear por encima de la cabeza."],
+          3: ["Actitud de alerta.", "Subir simultáneamente los dos brazos.", "Golpear por encima de su cabeza."],
+          2: ["Postura rápida de perfil con apertura de brazos en forma conjunta.", "Empuñadura Continental.", "Desplazamientos de perfil."],
+          1: ["Empuñadura continental.", "Desplazamientos de perfil.", "Utilización del brazo libre.", "Bucle y extensión del antebrazo.", "Pronación del antebrazo.", "Flexión de la muñeca.", "Reubicación en la red según la dirección del golpe."]
+       },
+       saque: {
+          5: ["Lanzamiento desde la posición armado.", "Apoyos semiabiertos detrás de la línea.", "Empuñadura semicerrada del drive.", "Lanzamiento de la pelota con la mano inhábil por encima de su cabeza."],
+          4: ["A partir de la mitad de la cancha celeste, lanza la pelota por arriba de su cabeza y golpearla.", "Inicio del movimiento del saque desde la mitad del cuerpo sosteniendo la raqueta del final del grip.", "Ambos brazos suben simétricamente hasta la posición de armado.", "Golpear por encima de la cabeza.", "Saca desde la posición de armado desde un lado de la cancha en el terreno opuesto."],
+          3: ["Lanzamiento hacia arriba de la pelota coordinado con lanzamiento hacia adelante.", "Posición de inicio del saque con raqueta sostenido por las dos manos.", "Regularidad y precisión del lanzamiento, búsqueda del punto de contacto ideal.", "Pronación del antebrazo.", "Golpear la pelota extendiendo el antebrazo.", "Flexión de la muñeca."],
+          2: ["Hacia el impacto de la pelota con extensión del cuerpo.", "Armado con más Orientación de los hombros hacia mayor torque.", "Ritmo del golpe del saque."],
+          1: ["Proyección del codo.", "Apoyos en línea, elevación coordinada de los brazos.", "Bucle con proyección del codo.", "Acción de flexión moderada de las piernas.", "Raspar la pelota de abajo hacia arriba y de izquierda a derecha (Top/Slice/Plano).", "Flexión de la muñeca.", "Lanzamiento de pelotas adaptado a los diferentes efectos.", "Transferencia y recuperación en equilibrio luego del impacto."]
+       }
+    };
+
+    const honorPillars = [
+        { id: 'respeto', icon: '🤝', title: 'Respeto' },
+        { id: 'honestidad', icon: '⚖️', title: 'Honestidad' },
+        { id: 'equipo', icon: '👥', title: 'Equipo' },
+        { id: 'responsabilidad', icon: '🎒', title: 'Responsabilidad' },
+        { id: 'esfuerzo', icon: '💪', title: 'Esfuerzo' },
+        { id: 'independencia', icon: '🧭', title: 'Indep.' }
+    ];
+
+    const honorCriteria = {
+      respeto: { bronce: "Presentarse al rival. Mirar a los ojos al estrechar la mano. Ser agradecido por jugar. Tratar a todos por igual.", plata: "Anunciar la puntuación al sacar. Devolver las pelotas rápidamente. Agradecer a profesores y árbitros. Mantener la calma.", oro: "Honrar el juego. Ser justo, honesto y fiel a sus palabras y acciones. Estar agradecido por competir." },
+      honestidad: { bronce: "Seguir las reglas del juego. Mantener el tanteador. Cantar las pelotas (buenas/malas) con total honestidad.", plata: "Ser honesto al cantar las pelotas sobre las líneas. Ante cualquier duda, la pelota siempre se canta 'buena'.", oro: "Aprender a manejar estos conceptos de juego limpio incluso en la adversidad o bajo mucha presión." },
+      equipo: { bronce: "Ser un jugador de equipo. Turnarse y cooperar para que todos mejoren. Ser útil al profesor y compañeros.", plata: "Animar a sus compañeros y reconocer la mejora del otro. Hablar en dobles. Alentar independientemente del marcador.", oro: "Cuidar a su equipo. Ayudar a otros a que mejoren. Usar palabras de aliento constantes ('¡Vos podés hacerlo!')." },
+      responsabilidad: { bronce: "Cuidar sus pertenencias (llevar su raqueta). Llegar a tiempo. Venir listo para jugar y recoger el material al salir.", plata: "Prepararse para el partido (raqueta, toalla, agua). Traer dos pelotas al sacar. Estar listo para ser su propio árbitro.", oro: "Analizar sus propias fortalezas y debilidades. Preguntarse constantemente: '¿Qué puedo hacer mejor?'." },
+      esfuerzo: { bronce: "Hacer su mejor esfuerzo. Decirse a sí mismo 'Yo puedo'. Nunca rendirse (aprender lleva tiempo y paciencia).", plata: "Dar su mejor versión en cada práctica. Ser determinado y dar el máximo incluso cuando las tareas son muy difíciles.", oro: "Nunca darse por vencido con el marcador en contra. Recuperarse tras una derrota dura. Adaptarse cuando algo no sale bien." },
+      independencia: { bronce: "Preparar su propio bolso y raquetero para realizar la clase sin ayuda.", plata: "Aprender las reglas. Corregir sus propios errores. Programar su tiempo de práctica fuera de clase. Ser su propio profesor.", oro: "Tomar decisiones y buscar soluciones por su cuenta. Establecer metas. Ser un estudioso y curioso del juego." }
     };
 
     const warmupDatabase = {
@@ -851,7 +913,7 @@
     }
 
     function addStreak() {
-      if(currentMode !== 'profe') return showAlert("Solo el profe puede tomar asistencia.");
+      if(currentMode === 'family') return showAlert("🔒 Modo Familia Activado.");
       students[activeStudent].streak = (students[activeStudent].streak || 0) + 1;
       saveState(); initStudentSelector(); renderActivities();
       showAlert(`¡Racha aumentada! Asistencias seguidas de ${students[activeStudent].name}: ${students[activeStudent].streak}`);
@@ -925,35 +987,30 @@
       document.getElementById('tri-stat-proy').textContent = `${proyDone} 🌟`;
     }
 
-    // --- RENDERIZAR ESCUDO DE HONOR Y MODAL DE CRITERIOS ---
+    // --- RENDERIZAR ESCUDO DE HONOR ---
     window.openCriteriaModal = function() {
       document.getElementById('criteriaModal').style.display = 'flex';
       updateCriteriaView();
     };
-
-    window.closeCriteriaModal = function() {
-      document.getElementById('criteriaModal').style.display = 'none';
-    };
+    window.closeCriteriaModal = function() { document.getElementById('criteriaModal').style.display = 'none'; };
 
     window.updateCriteriaView = function() {
       const pilarKey = document.getElementById('criteriaSelect').value;
       const data = honorCriteria[pilarKey];
       const content = document.getElementById('criteriaContent');
-      
       if(!data) return;
-
       content.innerHTML = `
-        <div class="crit-box" style="background: #FFF7ED; border-color: #FDBA74; color: #9A3412;">
-          <h4 style="color: #C2410C;">🥉 Nivel Bronce (Rojo/Celeste)</h4>
-          <p>${data.bronce}</p>
+        <div style="padding:10px; background:#FFF7ED; border:2px solid #FDBA74; border-left-width:5px; border-radius:10px; margin-bottom:8px;">
+          <h4 style="color:#C2410C; font-size:12px; font-weight:900; margin-bottom:4px;">🥉 Bronce (Rojo/Celeste)</h4>
+          <p style="font-size:12px; font-weight:700;">${data.bronce}</p>
         </div>
-        <div class="crit-box" style="background: #F8FAFC; border-color: #CBD5E1; color: #334155;">
-          <h4 style="color: #475569;">🥈 Nivel Plata (Naranja)</h4>
-          <p>${data.plata}</p>
+        <div style="padding:10px; background:#F8FAFC; border:2px solid #CBD5E1; border-left-width:5px; border-radius:10px; margin-bottom:8px;">
+          <h4 style="color:#475569; font-size:12px; font-weight:900; margin-bottom:4px;">🥈 Plata (Naranja)</h4>
+          <p style="font-size:12px; font-weight:700;">${data.plata}</p>
         </div>
-        <div class="crit-box" style="background: #FEFCE8; border-color: #FDE047; color: #854D0E;">
-          <h4 style="color: #A16207;">🥇 Nivel Oro (Verde/Amarillo)</h4>
-          <p>${data.oro}</p>
+        <div style="padding:10px; background:#FEFCE8; border:2px solid #FDE047; border-left-width:5px; border-radius:10px;">
+          <h4 style="color:#A16207; font-size:12px; font-weight:900; margin-bottom:4px;">🥇 Oro (Verde/Amarilla)</h4>
+          <p style="font-size:12px; font-weight:700;">${data.oro}</p>
         </div>
       `;
     };
@@ -965,27 +1022,20 @@
         ensureStudentData(st);
         
         grid.innerHTML = '';
-        
         honorPillars.forEach(pillar => {
             let currentLevel = st.honor[pillar.id] || 0;
             const badge = document.createElement('div');
             badge.className = `honor-badge h-nivel-${currentLevel}`;
-            badge.innerHTML = `
-                <div class="honor-icon">${pillar.icon}</div>
-                <div class="honor-title">${pillar.title}</div>
-            `;
-            
+            badge.innerHTML = `<div class="honor-icon">${pillar.icon}</div><div class="honor-title">${pillar.title}</div>`;
             badge.onclick = () => { awardHonorBadge(pillar.id, pillar.title, currentLevel) };
             grid.appendChild(badge);
         });
     }
 
     function awardHonorBadge(pillarId, pillarTitle, currentLevel) {
-        if (currentMode === 'family') return showAlert("Modo Familia: Solo lectura.");
-        
+        if (currentMode === 'family') return showAlert("🔒 Modo Familia Activado: Los padres solo pueden observar el Escudo de Honor.");
         let btnArea = document.getElementById('customAlertBtnArea');
         let nextLvlName = currentLevel === 0 ? 'BRONCE (Rojo)' : currentLevel === 1 ? 'PLATA (Naranja)' : 'ORO (Verde)';
-        
         let msg = `Opciones para ${pillarTitle}:\n(Nivel actual: ${currentLevel})`;
         let html = '';
         
@@ -1008,6 +1058,131 @@
         saveState();
         renderHonorShield();
         updateTotalsDisplay();
+    }
+
+    // --- MANUAL TÉCNICO ---
+    window.setManualStroke = function(stroke) {
+       currentManualStroke = stroke;
+       document.querySelectorAll('.mtab-btn').forEach(b => b.classList.remove('active'));
+       event.currentTarget.classList.add('active');
+       renderManual();
+    }
+    
+    window.setManualLevel = function(lvl) {
+       currentManualLevel = lvl;
+       document.querySelectorAll('.mlevel-btn').forEach(b => b.classList.remove('active'));
+       event.currentTarget.classList.add('active');
+       renderManual();
+    }
+
+    window.clickCocardaManual = function(itemId) {
+      if (currentMode === 'family') return showAlert("🔒 Modo Familia Activado: El celular está en Modo de Solo Lectura. No se pueden modificar estadísticas.");
+      const st = students[activeStudent]; ensureStudentData(st);
+      let val = st.skillLevels[itemId] || 0; 
+      val = (val + 1) % 4; 
+      st.skillLevels[itemId] = val;
+      
+      let mul = (st.streak >= 3) ? 2 : 1; 
+      if (val === 3 && mul > 1) { 
+        st.bonusStars = (st.bonusStars || 0) + (mul - 1); 
+        showAlert('¡Combo Fuego x' + mul + ' en el Manual!'); 
+      }
+      
+      saveState(); 
+      renderManual();
+      updateTotalsDisplay();
+    };
+
+    function renderManual() {
+       const list = document.getElementById('manualContentList');
+       list.innerHTML = '';
+       const data = manualDB[currentManualStroke];
+       if(!data || !data[currentManualLevel]) {
+           list.innerHTML = '<p style="text-align:center; font-size:13px; font-weight:bold; color:#64748B;">No hay datos para este nivel.</p>';
+           return;
+       }
+       const items = data[currentManualLevel];
+       const st = students[activeStudent];
+       ensureStudentData(st);
+       
+       const manualImages = {
+           "drive_5": "https://i.postimg.cc/fL9Qw8dQ/Diapositiva2.jpg",
+           "drive_4": "https://i.postimg.cc/kGxQdRvb/cont-1-drive-nivel-4-1-2-3-4-5.jpg",
+           "drive_3": "https://i.postimg.cc/GthLbZkj/cont-1-Drive-nivel-3-1-2-3-4-5-6-7.jpg",
+           "drive_2": "https://i.postimg.cc/7L3w0xXq/cont-1-drive-nivel-2-1-2-3-4-5-6-7.jpg",
+           "drive_1": "https://i.postimg.cc/52vVWxhF/cont-1-drive-nivel-1-1-2-3-4-5-6-7.jpg",
+           "reves_5": "https://i.postimg.cc/9F7d0c3Z/cont-2-reves-nivel-5-1-2-3-4-5.jpg",
+           "reves_4": "https://i.postimg.cc/fLydjG6d/cont-2-reves-nivel-4-1-2-3.jpg",
+           "reves_3": "https://i.postimg.cc/MHWsHncm/cont-2-reves-nivel-3-1-2-3.jpg",
+           "reves_2": "https://i.postimg.cc/6pjF63z9/cont-2-reves-nivel-2-1-2-3-4-5-6.jpg",
+           "reves_1": "https://i.postimg.cc/prgQd6y9/cont-2-reves-nivel-1-1-2-3-4-5-6-7.jpg",
+           "volea_5": "https://i.postimg.cc/qvh7tL6S/cont-3-voleas-nivel-5-1-2-3.jpg",
+           "volea_4": "https://i.postimg.cc/dtzMym94/cont-3-voleas-nivel-4-1-2.jpg",
+           "volea_3": "https://i.postimg.cc/9fh82t0T/cont-3-voleas-nivel-3-1-2-3.jpg",
+           "volea_2": "https://i.postimg.cc/Vv88qM5k/cont-3-voleas-nivel-2-1-2-3-4-5.jpg",
+           "volea_1": "https://i.postimg.cc/g0K5t5d5/cont-3-voleas-nivel-1-1-2-3.jpg",
+           "smash_5": "https://i.postimg.cc/pT3Y3Z0w/cont-4-smash-nivel-5-1-2-3-4.jpg",
+           "smash_4": "https://i.postimg.cc/brZpTSYJ/cont-4-smash-nivel-4-1-2-3.jpg",
+           "smash_3": "https://i.postimg.cc/bvnTzK7r/cont-4-smash-nivel-3-1-2-3.jpg",
+           "smash_2": "https://i.postimg.cc/J0bLtt3Z/cont-4-smash-nivel-2-1-2-3.jpg",
+           "smash_1": "https://i.postimg.cc/YSpqF10G/cont-4-smash-nivel-1-1-2-3-4-5-6-7.jpg"
+       };
+
+       let imgKey = `${currentManualStroke}_${currentManualLevel}`;
+       let imgSrc = manualImages[imgKey] || `https://placehold.co/600x250/E2E8F0/475569?font=montserrat&text=FOTO+${currentManualStroke.toUpperCase()}+NIVEL+${currentManualLevel}`;
+       
+       list.innerHTML += `
+          <div style="width: 100%; border-radius: 12px; overflow: hidden; border: 3px solid #CBD5E1; background: #FFFFFF; margin-bottom: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+             <img src="${imgSrc}" alt="Foto Técnica" style="width: 100%; height: auto; display: block; object-fit: cover;" onerror="this.src='https://placehold.co/600x250/FEE2E2/991B1B?text=Falta+Imagen'">
+          </div>
+       `;
+
+       items.forEach((txt, idx) => {
+           let itemKey = `man_${currentManualStroke}_${currentManualLevel}_${idx}`;
+           let state = st.skillLevels[itemKey] || 0;
+           let isDone = (state === 3);
+           let multiplicador = (st.streak >= 3) ? 2 : 1;
+
+           const bgColors = ['#F8FAFC', '#EF4444', '#EAB308', '#10B981'];
+           const borderColors = ['#CBD5E1', '#991B1B', '#A16207', '#047857'];
+           const textColors = ['#94A3B8', '#FFFFFF', '#FFFFFF', '#FFFFFF'];
+           const icons = ['➕', '🔴', '🟡', '🌟'];
+
+           let statusText = '';
+           if (state === 1) statusText = '<span style="color:#EF4444; font-size:11px; background:#FEF2F2; padding:3px 6px; border-radius:6px; margin-left:6px; font-weight:900;">TE FALTA</span>'; 
+           else if (state === 2) statusText = '<span style="color:#D97706; font-size:11px; background:#FFFBEB; padding:3px 6px; border-radius:6px; margin-left:6px; font-weight:900;">CASI LA TENÉS</span>';
+           else if (state === 3) statusText = '<span style="color:#10B981; font-size:11px; background:#ECFDF5; padding:3px 6px; border-radius:6px; margin-left:6px; font-weight:900;">¡LOGRADO!</span>';
+
+           const row = document.createElement('div'); 
+           row.className = 'activity-row ' + (isDone ? 'done ' : '');
+
+           const btnCheck = document.createElement('div');
+           btnCheck.className = 'cocarda-btn';
+           btnCheck.style.backgroundColor = bgColors[state]; 
+           btnCheck.style.borderColor = borderColors[state]; 
+           btnCheck.style.color = textColors[state];
+           btnCheck.innerHTML = icons[state]; 
+           btnCheck.setAttribute('onclick', `clickCocardaManual('${itemKey}')`);
+
+           const content = document.createElement('div'); 
+           content.className = 'act-content';
+           content.innerHTML = `
+              <div class="act-top">
+                <div>
+                  <span class="manual-list-num" style="display:inline-flex; transform: scale(0.85); vertical-align: middle; margin-right: 4px;">${idx + 1}</span>
+                  <span class="act-title" style="text-transform: uppercase;">${currentManualStroke} ${currentManualLevel}.${idx + 1}</span>
+                  ${statusText}
+                </div>
+                <span class="act-xp" style="${isDone ? 'background:#10B981; color:white; border-color:#059669;' : ''}">${multiplicador} 🌟</span>
+              </div>
+              <div class="act-tech" style="font-size: 13.5px; font-weight: 800; color: #1E293B; margin-top: 6px;">${txt}</div>
+              ${state > 0 && currentMode === 'profe' ? `<button class="btn-share" onclick="notifyFamily('${st.name}', '${txt.replace(/'/g, "\\'")}',${state})">📲 Avisar a familia</button>` : ''}
+           `;
+
+           row.appendChild(btnCheck); 
+           row.appendChild(content); 
+           list.appendChild(row);
+       });
     }
 
     function renderActivities() {
@@ -1049,7 +1224,7 @@
           <div class="act-meta">${item.meta}</div>
           <div class="act-tech">${item.tech}</div>
           <div class="act-pedagogy">${item.pedagogy || ''}</div>
-          ${state > 0 ? `<button class="btn-share" onclick="notifyFamily('${st.name}', '${item.kid}',${state})">📲 Avisar</button>` : ''}
+          ${state > 0 && currentMode === 'profe' ? `<button class="btn-share" onclick="notifyFamily('${st.name}', '${item.kid}',${state})">📲 Avisar</button>` : ''}
         `;
 
         row.appendChild(btnCheck); row.appendChild(content); list.appendChild(row);
@@ -1066,6 +1241,7 @@
       if (document.getElementById('viewWarmup').style.display !== 'none') renderWarmupDetails();
       if (document.getElementById('viewCards').style.display !== 'none') setCardFilter('inventory');
       if (document.getElementById('viewValores').style.display !== 'none') renderHonorShield();
+      if (document.getElementById('viewManual').style.display !== 'none') renderManual();
     }
 
     function updateCardCount() {
@@ -1077,6 +1253,7 @@
     }
 
     window.toggleNavalCell = function(el) {
+      if(currentMode === 'family') return;
       if (!el.classList.contains('ship') && !el.classList.contains('hit')) {
           el.classList.add('ship');
           el.innerHTML = '🚢';
@@ -1141,7 +1318,7 @@
     }
 
     window.winNaval = function(teamNum) {
-      if (currentMode === 'family') return showAlert("Modo Familia: Solo lectura.");
+      if (currentMode === 'family') return showAlert("🔒 Modo Familia Activado.");
       const listId = teamNum === 1 ? 'team1List' : 'team2List';
       const checkboxes = document.querySelectorAll(`#${listId} input:checked`);
       
@@ -1166,7 +1343,6 @@
       dibujarBatallaNaval();
     }
 
-    // --- NUEVA ESCALA DE PONDERACIÓN (500 y 2000) ---
     function renderClasificaciones() {
       const indContainer = document.getElementById('rankingIndividual');
       const groupContainer = document.getElementById('rankingCasas');
@@ -1174,7 +1350,7 @@
       
       indContainer.innerHTML = ''; groupContainer.innerHTML = '';
 
-      let maxIndividual = 500; // Meta Anual "Leyenda"
+      let maxIndividual = 500; 
       let casasData = { 'Águilas': 0, 'Leones': 0, 'Osos': 0, 'Dragones': 0 };
 
       Object.keys(students).forEach(stKey => {
@@ -1194,7 +1370,7 @@
         `;
       });
 
-      let maxGrupal = 2000; // Meta Anual Casas
+      let maxGrupal = 2000; 
       Object.keys(casasData).forEach(casa => {
         let pts = casasData[casa];
         let pct = Math.min((pts / maxGrupal) * 100, 100);
@@ -1225,9 +1401,7 @@
     }
 
     function sortearCartaJusta() {
-      // CANDADO MODO FAMILIA AÑADIDO
-      if (currentMode === 'family') return showAlert("Modo Familia: Solo lectura. Solo el Profesor puede sortear cartas oficiales.");
-      
+      if (currentMode === 'family') return showAlert("🔒 Modo Familia Activado.");
       const st = students[activeStudent];
       const stCards = st.cards || [];
       if(stCards.length === 0) {
@@ -1252,7 +1426,7 @@
     }
 
     window.consumeCard = function(cardId, cardName) {
-      if (currentMode === 'family') return showAlert("Solo lectura en modo familia.");
+      if (currentMode === 'family') return showAlert("🔒 Modo Familia: Solo lectura. No podés gastar las cartas.");
       showConfirm(`¿Estás seguro de GASTAR la carta "${cardName}"?\n\nHará su efecto en este juego y DESAPARECERÁ del mazo de ${students[activeStudent].name}.`, function() {
         const st = students[activeStudent];
         if (st.cards) {
@@ -1271,15 +1445,16 @@
     function renderCardsGrid() {
       const grid = document.getElementById('cardsGrid'); grid.innerHTML = '';
       const st = students[activeStudent]; ensureStudentData(st);
-      const stCards = st.cards || []; const isFamily = (currentMode === 'family');
+      const stCards = st.cards || []; 
+      const isFamily = (currentMode === 'family');
       let list = extremeCardsDB;
       if (activeCardFilter === 'inventory') list = extremeCardsDB.filter(c => stCards.includes(c.id));
       else if (activeCardFilter !== 'all') list = extremeCardsDB.filter(c => c.id.startsWith(activeCardFilter));
 
       list.forEach(c => {
         const isOwned = stCards.includes(c.id);
+        if(isFamily && !isOwned && activeCardFilter === 'inventory') return; 
         
-        if(!isFamily && !isOwned && activeCardFilter === 'inventory') return; 
         const cardEl = document.createElement('div'); 
         cardEl.className = 'comic-card ' + (!isOwned && isFamily ? 'locked-card ' : '');
         
@@ -1301,14 +1476,14 @@
               <button class="btn-card-give" style="background: #EF4444; border-bottom-color: #991B1B;" onclick="consumeCard('${c.id}', '${c.name}')">💥 GASTAR</button>
             </div>
           ` : ''}
-          ${currentMode === 'profe' && !isOwned ? `<button class="btn-card-give" onclick="awardCardToStudent('${c.id}')">🎁 Entregar Carta</button>` : ''}
+          ${!isFamily && !isOwned ? `<button class="btn-card-give" onclick="awardCardToStudent('${c.id}')">🎁 Entregar Carta</button>` : ''}
         `;
         grid.appendChild(cardEl);
       });
     }
 
     function awardCardToStudent(cardId) {
-      if (currentMode === 'family') return showAlert("Solo lectura en modo familia.");
+      if (currentMode === 'family') return showAlert("🔒 Modo Familia Activado.");
       const st = students[activeStudent]; ensureStudentData(st);
       if (!st.cards.includes(cardId)) { st.cards.push(cardId); saveState(); showAlert(`🎉 ¡Carta agregada al mazo de ${st.name}!`); renderCardsGrid(); }
     }
@@ -1323,7 +1498,7 @@
     function closeCardModal() { document.getElementById('cardModal').style.display = 'none'; }
 
     window.abrirSobre = function(cantidad, costo) {
-      if (currentMode === 'family') return showAlert("Solo lectura en modo familia.");
+      if (currentMode === 'family') return showAlert("🔒 Modo Familia: Solo lectura. Entregá el celular al profesor para abrir sobres.");
       const st = students[activeStudent]; ensureStudentData(st);
       if (costo > 0) {
         if (getStudentBalance(activeStudent) < costo) {
@@ -1352,16 +1527,13 @@
     }
 
     window.openTradeModal = function() {
-      if (currentMode === 'family') return showAlert("Solo lectura en modo familia.");
+      if (currentMode === 'family') return showAlert("🔒 Modo Familia: Los trueques los debe autorizar el Profesor.");
       const st = students[activeStudent]; ensureStudentData(st);
-      if(!st.cards || st.cards.length === 0) {
-         return showAlert(`❌ ${st.name} no tiene cartas para ofrecer en un trueque.`);
-      }
+      if(!st.cards || st.cards.length === 0) return showAlert(`❌ ${st.name} no tiene cartas para ofrecer en un trueque.`);
       document.getElementById('tradeActiveName').innerText = st.name;
       document.getElementById('tradeModal').style.display = 'flex';
       updateTradeDropdowns();
     }
-
     window.closeTradeModal = function() { document.getElementById('tradeModal').style.display = 'none'; }
 
     window.updateTradeDropdowns = function() {
@@ -1374,7 +1546,7 @@
        });
 
        const selectStudentB = document.getElementById('tradeStudentB');
-       selectStudentB.innerHTML = '<option value="">Selecciona alumno para intercambiar...</option>';
+       selectStudentB.innerHTML = '<option value="">Selecciona alumno...</option>';
        Object.keys(students).forEach(k => {
            ensureStudentData(students[k]);
            if(k !== activeStudent && students[k].cards && students[k].cards.length > 0) {
@@ -1402,55 +1574,41 @@
        const cardB = document.getElementById('tradeCardB').value;
        
        if(!cardA || !cardB) return showAlert("Faltan cartas por seleccionar.");
-
        const stA = students[activeStudent];
        const stB = students[stBKey];
 
-       stA.cards = stA.cards.filter(c => c !== cardA);
-       stA.cards.push(cardB);
-
-       stB.cards = stB.cards.filter(c => c !== cardB);
-       stB.cards.push(cardA);
-
-       saveState();
-       renderCardsGrid();
-       closeTradeModal();
+       stA.cards = stA.cards.filter(c => c !== cardA); stA.cards.push(cardB);
+       stB.cards = stB.cards.filter(c => c !== cardB); stB.cards.push(cardA);
+       saveState(); renderCardsGrid(); closeTradeModal();
        showAlert(`🤝 ¡TRUEQUE DIGITAL EXITOSO!\n\n${stA.name} y ${stB.name} han intercambiado sus cartas perfectamente.`);
     }
 
     window.openDuelModal = function() {
-      if (currentMode === 'family') return showAlert("Solo lectura en modo familia.");
+      if (currentMode === 'family') return showAlert("🔒 Modo Familia Activado.");
       const st = students[activeStudent]; ensureStudentData(st);
       if(!st.cards || st.cards.length === 0) return showAlert(`❌ ${st.name} no tiene cartas para arriesgar en el duelo.`);
       document.getElementById('duelModal').style.display = 'flex';
-      const selectDuel = document.getElementById('duelCard');
-      selectDuel.innerHTML = '';
+      const selectDuel = document.getElementById('duelCard'); selectDuel.innerHTML = '';
       st.cards.forEach(cId => {
            let cObj = extremeCardsDB.find(c => c.id === cId);
            if(cObj) selectDuel.innerHTML += `<option value="${cId}">${cObj.icon} ${cObj.name}</option>`;
       });
     }
-
     window.closeDuelModal = function() { document.getElementById('duelModal').style.display = 'none'; }
 
     window.executeDuel = function() {
       const cardToRisk = document.getElementById('duelCard').value;
       if(!cardToRisk) return;
-
       const st = students[activeStudent];
       st.cards = st.cards.filter(c => c !== cardToRisk); 
-
       let available = extremeCardsDB.filter(c => !(st.cards || []).includes(c.id));
       if (available.length > 0) {
           let rnd = available[Math.floor(Math.random() * available.length)];
           st.cards.push(rnd.id);
-          saveState();
-          renderCardsGrid();
-          closeDuelModal();
+          saveState(); renderCardsGrid(); closeDuelModal();
           showAlert(`⚡ ¡DUELO COMPLETADO!\n\n${st.name} arriesgó su carta al mazo y obtuvo a cambio:\n\n✨ ${rnd.icon} ${rnd.name}`);
       } else {
-          st.cards.push(cardToRisk); 
-          showAlert("No hay más cartas libres en el mazo para realizar el duelo.");
+          st.cards.push(cardToRisk); showAlert("No hay más cartas libres en el mazo para realizar el duelo.");
       }
     }
 
@@ -1484,11 +1642,10 @@
         btnCheck.style.backgroundColor = isDone ? '#10B981' : '#F8FAFC'; btnCheck.style.color = isDone ? 'white' : '#94A3B8';
         btnCheck.innerText = isDone ? '✓' : '';
         btnCheck.onclick = () => {
-          if (currentMode === 'family') return showAlert("Solo lectura.");
+          if (currentMode === 'family') return showAlert("🔒 Modo Familia: Solo lectura.");
           if (isDone) stWarmups.splice(stWarmups.indexOf(itemId), 1); else stWarmups.push(itemId);
           students[activeStudent].warmupDone = stWarmups; saveState(); renderWarmupDetails();
         };
-
         const content = document.createElement('div'); content.className = 'act-content';
         content.innerHTML = `<div class="act-top"><span class="act-title">Variante #${it.letter}</span><span class="act-xp" style="color: #B91C1C; background: #FEF2F2; font-weight:900;">Activación</span></div><div class="act-tech" style="font-size: 13px; font-weight: 700; color: #1E293B;">${it.desc}</div>`;
         row.appendChild(btnCheck); row.appendChild(content); list.appendChild(row);
@@ -1508,7 +1665,7 @@
           div.innerHTML = `<div class="tienda-icon">${item.icon}</div><div class="tienda-title">${item.name}</div>
             ${item.sponsor ? `<div class="tienda-sponsor">${item.sponsor}</div>` : ''}
             <div style="font-size:16px; font-weight:900; color:#D97706; margin-top:4px;">${item.cost} 🌟</div>
-            ${currentMode === 'profe' || currentMode === 'family' ? `<button class="btn-buy" onclick="buyItem('${item.id}', ${item.cost}, '${item.name}')">Canjear Premio</button>` : ''}`;
+            ${currentMode === 'profe' ? `<button class="btn-buy" onclick="buyItem('${item.id}', ${item.cost}, '${item.name}')">Canjear Premio</button>` : ''}`;
           grid.appendChild(div);
         });
       };
@@ -1517,7 +1674,7 @@
     }
 
     function buyItem(id, cost, name) {
-      if(currentMode !== 'profe') return showAlert("Los canjes deben realizarse con el Profesor presente.");
+      if(currentMode === 'family') return showAlert("🔒 Los canjes deben realizarse con el Profesor presente.");
       const saldo = getStudentBalance(activeStudent);
       if(saldo >= cost) {
         showConfirm(`¿Estás seguro de canjear ${cost}🌟 por: ${name}?`, function() {
@@ -1528,10 +1685,48 @@
       } else { showAlert(`❌ Faltan ${cost - saldo}🌟 para este premio. ¡A seguir esforzándose!`); }
     }
 
+    window.openRuleta = function() {
+      if (currentMode === 'family') return showAlert("🔒 Modo Familia Activado: Solicitale al Profesor que habilite el sorteo.");
+      const saldo = getStudentBalance(activeStudent);
+      if (saldo < 10) return showAlert("❌ Necesitas al menos 10 🌟 disponibles para girar la ruleta.");
+      document.getElementById('ruletaModal').style.display = 'flex';
+      document.getElementById('ruletaResult').innerHTML = "❓";
+      document.getElementById('btnSpinRuleta').style.display = 'block';
+      document.getElementById('btnSpinRuleta').innerText = "¡Girar por 10 🌟!";
+    }
+
+    window.executeRuleta = function() {
+      const st = students[activeStudent];
+      st.spentStars = (st.spentStars || 0) + 10; saveState(); renderTienda(); updateTotalsDisplay();
+      document.getElementById('btnSpinRuleta').style.display = 'none';
+      let resultDiv = document.getElementById('ruletaResult');
+      let faces = ["🎁", "🌟", "🃏", "⚡", "🎾", "🏆", "🌀"];
+      let spins = 0;
+      let interval = setInterval(() => {
+        resultDiv.innerHTML = `<div style="font-size: 70px;">${faces[spins % faces.length]}</div>`;
+        spins++;
+        if (spins > 15) { clearInterval(interval); determineRuletaOutcome(); }
+      }, 100);
+    }
+
+    function determineRuletaOutcome() {
+       let rand = Math.random(); let msg = ""; let icon = ""; const st = students[activeStudent];
+       if (rand < 0.30) {
+          let available = extremeCardsDB.filter(c => !(st.cards || []).includes(c.id));
+          if (available.length > 0) { let carta = available[Math.floor(Math.random() * available.length)]; st.cards.push(carta.id); icon = "🃏"; msg = `¡GANASTE UNA CARTA!\n${carta.icon} ${carta.name}`; } 
+          else { st.bonusStars = (st.bonusStars || 0) + 15; icon = "🌟"; msg = `¡JACKPOT!\nGanaste 15 Estrellas (Ya tenés todas las cartas)`; }
+       } else if (rand < 0.50) { st.bonusStars = (st.bonusStars || 0) + 15; icon = "🌟"; msg = "¡JACKPOT!\nGanaste 15 Estrellas (Recuperás tus 10 y ganás 5 extra)";
+       } else if (rand < 0.80) { st.bonusStars = (st.bonusStars || 0) + 5; icon = "✨"; msg = "¡PREMIO CONSUELO!\nRecuperás 5 estrellitas. ¡La próxima habrá más suerte!";
+       } else { icon = "🎾"; msg = "¡PREMIO SORPRESA VIRTUAL!\nTe ganaste el derecho a elegir la entrada en calor de hoy."; }
+       saveState(); updateTotalsDisplay(); renderTienda();
+       document.getElementById('ruletaResult').innerHTML = `<div style="font-size: 70px;">${icon}</div><div style="font-size: 14px; color: #1E293B; margin-top: 10px; font-weight: 800;">${msg}</div>`;
+       let btn = document.getElementById('btnSpinRuleta'); btn.style.display = 'block'; btn.innerText = "Girar de nuevo (10 🌟)";
+    }
+
     function renderCopa() {
       const grid = document.getElementById('copaRankingGrid'); grid.innerHTML = '';
       const casas = { 'Águilas': { icon: '🦅', points: 0, color: '#0284C7', bg: '#F0F9FF', name: 'Águilas' }, 'Leones': { icon: '🦁', points: 0, color: '#DC2626', bg: '#FEF2F2', name: 'Leones' }, 'Osos': { icon: '🐻', points: 0, color: '#D97706', bg: '#FFFBEB', name: 'Osos' }, 'Dragones': { icon: '🐉', points: 0, color: '#059669', bg: '#ECFDF5', name: 'Dragones' } };
-      Object.keys(students).forEach(stKey => { const st = students[stKey]; ensureStudentData(st); if(!st.house) return; const houseKey = Object.keys(casas).find(k => st.house.includes(k)); if(houseKey) casas[houseKey].points += getStudentEarnedStars(st); });
+      Object.keys(students).forEach(stKey => { const st = students[stKey]; if(!st.house) return; const houseKey = Object.keys(casas).find(k => st.house.includes(k)); if(houseKey) casas[houseKey].points += getStudentEarnedStars(st); });
       Object.values(casas).sort((a,b) => b.points - a.points).forEach((c, i) => {
         let medalla = i===0 ? '🥇 1º' : i===1 ? '🥈 2º' : i===2 ? '🥉 3º' : '🏅 4º';
         grid.innerHTML += `<div style="background: ${c.bg}; border: 3px solid ${c.color}; border-radius: 16px; padding: 20px; text-align: center; position: relative;"><div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #1E293B; color: white; font-size: 11px; font-weight: 900; padding: 4px 10px; border-radius: 10px;">${medalla}</div><div style="font-size: 48px; margin-top: 10px; margin-bottom: 8px;">${c.icon}</div><div style="font-size: 18px; font-weight: 900; color: ${c.color}; text-transform: uppercase;">Casa de los ${c.name}</div><div style="font-size: 32px; font-weight: 1000; color: #0F172A; margin-top: 8px;">${c.points} 🌟</div></div>`;
@@ -1539,7 +1734,7 @@
     }
 
     function toggleGroupRoundMode() {
-      if (currentMode === 'family') return showAlert("Modo Familia: Solo lectura.");
+      if (currentMode === 'family') return showAlert("🔒 Modo Familia Activado.");
       isGroupRoundMode = !isGroupRoundMode;
       const btn = document.getElementById('btnToggleGroupMode');
       if (isGroupRoundMode) {
@@ -1574,12 +1769,14 @@
     }
 
     function toggleStudentDrillInRound(stKey, drillId) {
+      if (currentMode === 'family') return showAlert("🔒 Modo Familia Activado.");
       if (!students[stKey].skillLevels) students[stKey].skillLevels = {};
       students[stKey].skillLevels[drillId] = (students[stKey].skillLevels[drillId] === 3) ? 0 : 3;
       saveState(); renderGroupStudentsGrid();
     }
 
     function markRoundAllDone() {
+      if (currentMode === 'family') return showAlert("🔒 Modo Familia Activado.");
       Object.keys(students).forEach(stKey => { if (!students[stKey].skillLevels) students[stKey].skillLevels = {}; students[stKey].skillLevels[currentRoundDrillId] = 3; });
       saveState(); renderGroupStudentsGrid();
     }
@@ -1587,49 +1784,45 @@
     function openNewStudentModal() { document.getElementById('newStudentModal').style.display = 'flex'; }
     function closeNewStudentModal() { document.getElementById('newStudentModal').style.display = 'none'; }
     function saveNewStudent() {
-      if (currentMode === 'family') return showAlert("Modo Familia: Solo lectura.");
+      if (currentMode === 'family') return showAlert("🔒 Modo Familia Activado.");
       const name = document.getElementById('newStudentName').value.trim(); const avatar = document.getElementById('newStudentAvatar').value; const house = document.getElementById('newStudentHouse').value;
       if (!name) return showAlert("Ingresa un nombre."); const key = name.replace(/\s+/g, '_'); if (students[key]) return showAlert("Ya existe un alumno con ese nombre.");
-      students[key] = { name, avatar, house, skillLevels: {}, warmupDone: [], cards: [], spentStars: 0, streak: 0, bonusStars: 0, usedCards: [], honor: {respeto:0, honestidad:0, equipo:0, responsabilidad:0, esfuerzo:0, independencia:0} };
+      students[key] = { name, avatar, house, skillLevels: {}, warmupDone: [], cards: [], spentStars: 0, streak: 0, bonusStars: 0, honor: {respeto:0, honestidad:0, equipo:0, responsabilidad:0, esfuerzo:0, independencia:0} };
       saveState(); activeStudent = key; closeNewStudentModal(); initStudentSelector();
     }
 
     function setMasterMode(mode) {
       currentMode = mode;
       document.querySelectorAll('.master-btn').forEach(btn => btn.classList.remove('active'));
+      
+      // Control de Interfaz de Candado Familiar
+      if (mode === 'family') {
+          document.getElementById('btnModeFamily').classList.add('active'); 
+          showAlert("🔒 MODO FAMILIA ACTIVADO\n\nEl celular está en Modo de Solo Lectura. Los padres pueden navegar por las pestañas inferiores para ver el progreso, pero no pueden modificar ni gastar nada.");
+          document.getElementById('btnNewStudent').style.display = 'none';
+          document.getElementById('btnStreak').style.display = 'none';
+          document.getElementById('btnToggleGroupMode').style.display = 'none';
+          if(isGroupRoundMode) toggleGroupRoundMode(); // Sale de grupo si estaba
+      } else {
+          document.getElementById('btnNewStudent').style.display = 'inline-block';
+          document.getElementById('btnStreak').style.display = 'inline-block';
+          document.getElementById('btnToggleGroupMode').style.display = 'inline-block';
+      }
+
       document.querySelectorAll('.screen-content').forEach(el => el.style.display = 'none');
       
-      // Mostrar barras por defecto
+      // Mostrar barras superiores por defecto (¡AQUÍ ESTABA EL PROBLEMA CON LA BARRA DE ALUMNO, AHORA SIEMPRE SE VE!)
       document.getElementById('heroBar').style.display = 'flex';
       document.getElementById('masterWarmupBar').style.display = 'flex';
       document.getElementById('progressionStrip').style.display = 'flex';
 
-      // Si un padre toma el celular y estabas en Ronda Grupal, salir de ese modo automáticamente
-      if (mode === 'family' && isGroupRoundMode) {
-          toggleGroupRoundMode(); 
-      }
-
-      // En modo familia, ocultar los botones de Racha, Nuevo Alumno y Ronda Grupal
-      if (mode === 'family') {
-          document.getElementById('btnToggleGroupMode').style.display = 'none';
-          document.querySelector('.btn-new-student').style.display = 'none';
-          document.querySelector('.btn-streak').style.display = 'none';
-      } else {
-          document.getElementById('btnToggleGroupMode').style.display = 'inline-block';
-          document.querySelector('.btn-new-student').style.display = 'inline-block';
-          document.querySelector('.btn-streak').style.display = 'inline-block';
-      }
-
-      if(mode === 'profe') {
-        document.getElementById('btnModeProfe').classList.add('active'); 
-        document.getElementById('viewTechnical').style.display = 'flex';
-      } else if(mode === 'family') {
-        document.getElementById('btnModeFamily').classList.add('active'); 
+      if(mode === 'profe' || mode === 'family') {
+        if(mode==='profe') document.getElementById('btnModeProfe').classList.add('active');
         document.getElementById('viewTechnical').style.display = 'flex';
       } else if(mode === 'valores') {
-        document.getElementById('btnModeValores').classList.add('active'); 
-        document.getElementById('masterWarmupBar').style.display = 'none'; // OCULTAMOS LA BOTONERA DE CALENTAMIENTO Y CARTAS
-        document.getElementById('progressionStrip').style.display = 'none'; // OCULTAMOS LAS ETAPAS BLANCA, CELESTE, ETC.
+        document.getElementById('btnModeValores').classList.add('active');
+        document.getElementById('masterWarmupBar').style.display = 'none'; 
+        document.getElementById('progressionStrip').style.display = 'none'; 
         document.getElementById('viewValores').style.display = 'flex';
         renderHonorShield();
       } else if(mode === 'desafios') {
@@ -1652,6 +1845,13 @@
         document.getElementById('progressionStrip').style.display = 'none'; 
         document.getElementById('viewTienda').style.display = 'flex'; 
         renderTienda();
+      } else if(mode === 'manual') {
+        document.getElementById('btnModeManual').classList.add('active'); 
+        // ACÁ BORRÉ LA LÍNEA QUE OCULTABA EL 'heroBar'. AHORA LA BARRA DEL ALUMNO SE VE SIEMPRE EN EL MANUAL.
+        document.getElementById('masterWarmupBar').style.display = 'none'; 
+        document.getElementById('progressionStrip').style.display = 'none'; 
+        document.getElementById('viewManual').style.display = 'flex'; 
+        renderManual(); // Renderiza la primer vista del manual
       }
     }
 
